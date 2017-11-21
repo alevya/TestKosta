@@ -36,7 +36,6 @@
             this.pEmployeeDetails = new System.Windows.Forms.Panel();
             this.pEmployee = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,11 +46,14 @@
             this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
+            this.tbDateOfBirth = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.pEmployeeDetails.SuspendLayout();
             this.pEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -106,10 +108,12 @@
             // 
             // pEmployeeDetails
             // 
+            this.pEmployeeDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pEmployeeDetails.Controls.Add(this.tbDateOfBirth);
             this.pEmployeeDetails.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pEmployeeDetails.Location = new System.Drawing.Point(3, 289);
+            this.pEmployeeDetails.Location = new System.Drawing.Point(3, 273);
             this.pEmployeeDetails.Name = "pEmployeeDetails";
-            this.pEmployeeDetails.Size = new System.Drawing.Size(818, 156);
+            this.pEmployeeDetails.Size = new System.Drawing.Size(818, 172);
             this.pEmployeeDetails.TabIndex = 1;
             // 
             // pEmployee
@@ -118,7 +122,7 @@
             this.pEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pEmployee.Location = new System.Drawing.Point(3, 3);
             this.pEmployee.Name = "pEmployee";
-            this.pEmployee.Size = new System.Drawing.Size(818, 286);
+            this.pEmployee.Size = new System.Drawing.Size(818, 270);
             this.pEmployee.TabIndex = 2;
             // 
             // dataGridView1
@@ -141,12 +145,8 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(818, 286);
+            this.dataGridView1.Size = new System.Drawing.Size(818, 270);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -213,6 +213,19 @@
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
+            // 
+            // tbDateOfBirth
+            // 
+            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.entityDataSource1, "Employees.DateOfBirth", true));
+            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DateOfBirth", true));
+            this.tbDateOfBirth.Location = new System.Drawing.Point(63, 20);
+            this.tbDateOfBirth.Name = "tbDateOfBirth";
+            this.tbDateOfBirth.Size = new System.Drawing.Size(100, 20);
+            this.tbDateOfBirth.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +239,8 @@
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.pEmployeeDetails.ResumeLayout(false);
+            this.pEmployeeDetails.PerformLayout();
             this.pEmployee.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -252,6 +267,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn docNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox tbDateOfBirth;
     }
 }
 
