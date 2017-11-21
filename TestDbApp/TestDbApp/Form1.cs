@@ -16,5 +16,21 @@ namespace TestDbApp
         {
             InitializeComponent();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            entityDataSource1.SaveChanges();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            entityDataSource1.CancelChanges();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            entityDataSource1.Refresh();
+
+        }
     }
 }

@@ -35,6 +35,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pEmployeeDetails = new System.Windows.Forms.Panel();
             this.pEmployee = new System.Windows.Forms.Panel();
+            this.tbDateOfBirth = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,9 +48,12 @@
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
-            this.tbDateOfBirth = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -69,6 +73,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnRefresh);
+            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
+            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Size = new System.Drawing.Size(832, 538);
             this.splitContainer1.SplitterDistance = 474;
             this.splitContainer1.TabIndex = 0;
@@ -124,6 +134,15 @@
             this.pEmployee.Name = "pEmployee";
             this.pEmployee.Size = new System.Drawing.Size(818, 270);
             this.pEmployee.TabIndex = 2;
+            // 
+            // tbDateOfBirth
+            // 
+            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.entityDataSource1, "Employees.DateOfBirth", true));
+            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DateOfBirth", true));
+            this.tbDateOfBirth.Location = new System.Drawing.Point(63, 20);
+            this.tbDateOfBirth.Name = "tbDateOfBirth";
+            this.tbDateOfBirth.Size = new System.Drawing.Size(100, 20);
+            this.tbDateOfBirth.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -217,14 +236,35 @@
             // 
             this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
-            // tbDateOfBirth
+            // btnSave
             // 
-            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.entityDataSource1, "Employees.DateOfBirth", true));
-            this.tbDateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DateOfBirth", true));
-            this.tbDateOfBirth.Location = new System.Drawing.Point(63, 20);
-            this.tbDateOfBirth.Name = "tbDateOfBirth";
-            this.tbDateOfBirth.Size = new System.Drawing.Size(100, 20);
-            this.tbDateOfBirth.TabIndex = 0;
+            this.btnSave.Location = new System.Drawing.Point(501, 25);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(604, 25);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Отменить";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(709, 25);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // Form1
             // 
@@ -235,6 +275,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -268,6 +309,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox tbDateOfBirth;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
