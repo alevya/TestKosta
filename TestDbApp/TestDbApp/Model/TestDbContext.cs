@@ -18,5 +18,8 @@ namespace TestDbApp.Model
         }
 
 
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+
     }
 }
