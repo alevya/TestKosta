@@ -53,12 +53,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityFrameworkBinding\DbContextTypeConverter.cs" />
+    <Compile Include="EntityFrameworkBinding\EntityBindingList.cs" />
     <Compile Include="EntityFrameworkBinding\EntityDataSource.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EntityFrameworkBinding\EntityDataSource.Designer.cs">
       <DependentUpon>EntityDataSource.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameworkBinding\EntityEnumerable.cs" />
+    <Compile Include="EntityFrameworkBinding\EntitySetTypeDescriptor.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
