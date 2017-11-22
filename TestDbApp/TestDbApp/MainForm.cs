@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestDbApp.Model;
 
@@ -25,30 +26,37 @@ namespace TestDbApp
 
             var l = entityDataSource1.EntitySets["Departments"].Cast<Department>().ToList();
             
-            _getEmployees(employees, selDepartment, l);
-            var bl = entityDataSource1.CreateView(employees);
-            dgv_EmployeeToDepartment.DataSource = bl;
+            GetEmployees(employees, selDepartment, l);
+            var bindingList = entityDataSource1.CreateView(employees);
+            bindingSource1.DataSource = bindingList;
+            dgv_EmployeeToDepartment.DataSource = bindingSource1; //bindingList;
+            
         }
 
-        private void _getEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
+        private static void GetEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
         {
-            var ds = (from Department d in departments
-                         where d.ParentDepartmentID == dep.ID
-                         select d);
-
+            var ds = from Department d in departments
+                where d.ParentDepartmentID == dep.ID
+                select d;
 
             employees.AddRange(dep.Employees);
             foreach (var item in ds)
             {
-                _getEmployees(employees, item, departments);
+                GetEmployees(employees, item, departments);
             }
         }
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
+            
             var bind = new Binding("Tag", entityDataSource1, "Departments");
             tv_Department.DataBindings.Add(bind);
             _populateTreeView();
+
+            if (tv_Department.Nodes.Count > 0)
+                tv_Department.SelectedNode = tv_Department.Nodes[0];
+            //editBase1.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
+            //textBox7.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
         }
 
         private void _populateTreeView()
@@ -61,13 +69,13 @@ namespace TestDbApp
                                                             department.ParentDepartmentID == null);
             foreach (var rootNode in rootNodes)
             {
-                var node = _getTreeNode(rootNode, departments);
+                var node = GetTreeNode(rootNode, departments);
                 node.Expand();
                 tv_Department.Nodes.Add(node);
             }
         }
 
-        private TreeNode _getTreeNode(Department row, IEnumerable<Department> list)
+        private static TreeNode GetTreeNode(Department row, IEnumerable<Department> list)
         {
             Guid.TryParse(row.ID.ToString(), out Guid nodeID);
             var node = new TreeNode
@@ -78,7 +86,7 @@ namespace TestDbApp
             var res = list.Where(department => department.ParentDepartmentID == nodeID);
             foreach (var item in res)
             {
-                var chNode = _getTreeNode(item, list);
+                var chNode = GetTreeNode(item, list);
                 chNode.Text = Convert.ToString(item.Name);
                 node.Nodes.Add(chNode);
             }
