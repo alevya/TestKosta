@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Diagnostics.SymbolStore;
 using System.Linq;
-using System.Security.Policy;
 using System.Windows.Forms;
 using TestDbApp.Model;
-using EntitySet = TestDbApp.EntityFrameworkBinding.EntitySet;
 
 namespace TestDbApp
 {
