@@ -23,29 +23,30 @@ namespace TestDbApp.Model
         public string DocSeries { get; set; }
         public string DocNumber { get; set; }
         public string Position { get; set; }
+        public virtual Department Department { get; set; }
 
-        public Department Department
-        {
-            get => _department;
-            set
-            {
-                if (value != _department)
-                {
-                    Department originalDepartment = _department;
-                    _department = value;
+        //public Department Department
+        //{
+        //    get => _department;
+        //    set
+        //    {
+        //        if (value != _department)
+        //        {
+        //            Department originalDepartment = _department;
+        //            _department = value;
 
-                    if (originalDepartment != null && originalDepartment.Employees.Contains(this))
-                    {
-                        originalDepartment.Employees.Remove(this);
-                    }
+        //            if (originalDepartment != null && originalDepartment.Employees.Contains(this))
+        //            {
+        //                originalDepartment.Employees.Remove(this);
+        //            }
 
-                    // Add to new collection
-                    if (value != null && !value.Employees.Contains(this))
-                    {
-                        value.Employees.Add(this);
-                    }
-                }
-            }
-        }
+        //            // Add to new collection
+        //            if (value != null && !value.Employees.Contains(this))
+        //            {
+        //                value.Employees.Add(this);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

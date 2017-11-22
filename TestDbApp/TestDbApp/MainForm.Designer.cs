@@ -437,6 +437,7 @@
             this.cb_Position.Name = "cb_Position";
             this.cb_Position.Size = new System.Drawing.Size(142, 21);
             this.cb_Position.TabIndex = 13;
+            this.cb_Position.ValueMember = "Employees.Department";
             // 
             // MainForm
             // 

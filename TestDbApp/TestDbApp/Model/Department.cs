@@ -11,32 +11,34 @@ namespace TestDbApp.Model
     {
         public Department()
         {
-            var emps = new ObservableCollection<Employee>();
-            Employees = emps;
-            emps.CollectionChanged += (sender, e) =>
-            {
-                if (e.NewItems != null)
-                {
-                    foreach (Employee item in e.NewItems)
-                    {
-                        if (item.Department != this)
-                        {
-                            item.Department = this;
-                        }
-                    }
-                }
+            //var emps = new ObservableCollection<Employee>();
+            //Employees = emps;
+            //emps.CollectionChanged += (sender, e) =>
+            //{
+            //    if (e.NewItems != null)
+            //    {
+            //        foreach (Employee item in e.NewItems)
+            //        {
+            //            if (item.Department != this)
+            //            {
+            //                item.Department = this;
+            //            }
+            //        }
+            //    }
 
-                if (e.OldItems == null) return;
+            //    if (e.OldItems == null) return;
 
-                foreach (Employee item in e.OldItems)
-                {
-                    if (item.Department == this)
-                    {
-                        item.Department = null;
-                    }
-                }
+            //    foreach (Employee item in e.OldItems)
+            //    {
+            //        if (item.Department == this)
+            //        {
+            //            item.Department = null;
+            //        }
+            //    }
 
-            };
+            //};
+
+            Employees = new HashSet<Employee>();
         }
 
         public Guid ID { get; set; }
