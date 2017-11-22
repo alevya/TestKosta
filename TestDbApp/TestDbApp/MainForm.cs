@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
+using System.Security.Policy;
 using System.Windows.Forms;
 using TestDbApp.Model;
+using EntitySet = TestDbApp.EntityFrameworkBinding.EntitySet;
 
 namespace TestDbApp
 {
@@ -18,6 +23,30 @@ namespace TestDbApp
         private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
         {
             var selectedNode = tv_Department.SelectedNode;
+            Department selDepartment = selectedNode.Tag as Department;
+            if(selDepartment == null) return;
+
+            var employees = new List<Employee>();
+
+            var l = entityDataSource1.EntitySets["Departments"].Cast<Department>().ToList();
+            
+            _getEmployees(employees, selDepartment, l);
+            var bl = entityDataSource1.CreateView(employees);
+            dgv_EmployeeToDepartment.DataSource = bl;
+        }
+
+        private void _getEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
+        {
+            var ds = (from Department d in departments
+                         where d.ParentDepartmentID == dep.ID
+                         select d);
+
+
+            employees.AddRange(dep.Employees);
+            foreach (var item in ds)
+            {
+                _getEmployees(employees, item, departments);
+            }
         }
 
         private void OnLoad(object sender, EventArgs eventArgs)

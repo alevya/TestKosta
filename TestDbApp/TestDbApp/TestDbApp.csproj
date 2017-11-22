@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="EntityFrameworkBinding\EntityEnumerable.cs" />
     <Compile Include="EntityFrameworkBinding\EntitySetTypeDescriptor.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

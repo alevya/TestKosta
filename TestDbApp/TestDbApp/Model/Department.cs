@@ -11,6 +11,7 @@ namespace TestDbApp.Model
     [Table("Department")]
     public class Department
     {
+        private readonly HashSet<Employee> _employees;
         public Department()
         {
             //var emps = new ObservableCollection<Employee>();
@@ -40,7 +41,7 @@ namespace TestDbApp.Model
 
             //};
 
-            Employees = new HashSet<Employee>();
+            _employees = new HashSet<Employee>();
         }
 
         public Guid ID { get; set; }
@@ -49,6 +50,13 @@ namespace TestDbApp.Model
         public string Code { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Employee> Employees { get; }
+        public ICollection<Employee> Employees
+        {
+            get
+            {
+
+                return _employees;
+            }
+        }
     }
 }
