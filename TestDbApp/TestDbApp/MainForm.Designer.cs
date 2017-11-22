@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splCnt_Organization = new System.Windows.Forms.SplitContainer();
             this.tc_Organization = new System.Windows.Forms.TabControl();
             this.tp_Department = new System.Windows.Forms.TabPage();
             this.tp_Employee = new System.Windows.Forms.TabPage();
@@ -53,8 +53,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tb_Position = new System.Windows.Forms.TextBox();
-            this.p_EmployeeToDepartment = new System.Windows.Forms.Panel();
-            this.p_Department = new System.Windows.Forms.Panel();
             this.tv_Department = new System.Windows.Forms.TreeView();
             this.tb_Department = new System.Windows.Forms.TextBox();
             this.l_Department = new System.Windows.Forms.Label();
@@ -82,42 +80,45 @@
             this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.splCnt = new System.Windows.Forms.SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
+            this.splCnt_Organization.Panel1.SuspendLayout();
+            this.splCnt_Organization.Panel2.SuspendLayout();
+            this.splCnt_Organization.SuspendLayout();
             this.tc_Organization.SuspendLayout();
             this.tp_Department.SuspendLayout();
             this.tp_Employee.SuspendLayout();
             this.p_Employee.SuspendLayout();
             this.gb_EmployeeDetails.SuspendLayout();
             this.p_DocInfo.SuspendLayout();
-            this.p_EmployeeToDepartment.SuspendLayout();
-            this.p_Department.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splCnt)).BeginInit();
+            this.splCnt.Panel1.SuspendLayout();
+            this.splCnt.Panel2.SuspendLayout();
+            this.splCnt.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // splCnt_Organization
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splCnt_Organization.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splCnt_Organization.IsSplitterFixed = true;
+            this.splCnt_Organization.Location = new System.Drawing.Point(0, 0);
+            this.splCnt_Organization.Name = "splCnt_Organization";
+            this.splCnt_Organization.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splCnt_Organization.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.tc_Organization);
+            this.splCnt_Organization.Panel1.Controls.Add(this.tc_Organization);
             // 
-            // splitContainer1.Panel2
+            // splCnt_Organization.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnRefresh);
-            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(989, 650);
-            this.splitContainer1.SplitterDistance = 572;
-            this.splitContainer1.TabIndex = 0;
+            this.splCnt_Organization.Panel2.Controls.Add(this.btnRefresh);
+            this.splCnt_Organization.Panel2.Controls.Add(this.btnCancel);
+            this.splCnt_Organization.Panel2.Controls.Add(this.btnSave);
+            this.splCnt_Organization.Size = new System.Drawing.Size(989, 650);
+            this.splCnt_Organization.SplitterDistance = 572;
+            this.splCnt_Organization.TabIndex = 0;
             // 
             // tc_Organization
             // 
@@ -132,8 +133,7 @@
             // 
             // tp_Department
             // 
-            this.tp_Department.Controls.Add(this.p_Department);
-            this.tp_Department.Controls.Add(this.p_EmployeeToDepartment);
+            this.tp_Department.Controls.Add(this.splCnt);
             this.tp_Department.Location = new System.Drawing.Point(4, 22);
             this.tp_Department.Name = "tp_Department";
             this.tp_Department.Padding = new System.Windows.Forms.Padding(3);
@@ -149,7 +149,7 @@
             this.tp_Employee.Location = new System.Drawing.Point(4, 22);
             this.tp_Employee.Name = "tp_Employee";
             this.tp_Employee.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_Employee.Size = new System.Drawing.Size(879, 546);
+            this.tp_Employee.Size = new System.Drawing.Size(981, 546);
             this.tp_Employee.TabIndex = 1;
             this.tp_Employee.Text = "Сотрудники";
             this.tp_Employee.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@
             this.p_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Employee.Location = new System.Drawing.Point(3, 3);
             this.p_Employee.Name = "p_Employee";
-            this.p_Employee.Size = new System.Drawing.Size(597, 540);
+            this.p_Employee.Size = new System.Drawing.Size(699, 540);
             this.p_Employee.TabIndex = 2;
             // 
             // gb_EmployeeDetails
@@ -180,7 +180,7 @@
             this.gb_EmployeeDetails.Controls.Add(this.dtp_DateOfBirth);
             this.gb_EmployeeDetails.Dock = System.Windows.Forms.DockStyle.Right;
             this.gb_EmployeeDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gb_EmployeeDetails.Location = new System.Drawing.Point(600, 3);
+            this.gb_EmployeeDetails.Location = new System.Drawing.Point(702, 3);
             this.gb_EmployeeDetails.Name = "gb_EmployeeDetails";
             this.gb_EmployeeDetails.Size = new System.Drawing.Size(276, 540);
             this.gb_EmployeeDetails.TabIndex = 3;
@@ -370,32 +370,12 @@
             this.tb_Position.Size = new System.Drawing.Size(142, 20);
             this.tb_Position.TabIndex = 15;
             // 
-            // p_EmployeeToDepartment
-            // 
-            this.p_EmployeeToDepartment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.p_EmployeeToDepartment.Controls.Add(this.dgv_EmployeeToDepartment);
-            this.p_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Right;
-            this.p_EmployeeToDepartment.Location = new System.Drawing.Point(388, 3);
-            this.p_EmployeeToDepartment.Name = "p_EmployeeToDepartment";
-            this.p_EmployeeToDepartment.Size = new System.Drawing.Size(590, 540);
-            this.p_EmployeeToDepartment.TabIndex = 0;
-            // 
-            // p_Department
-            // 
-            this.p_Department.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.p_Department.Controls.Add(this.tv_Department);
-            this.p_Department.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p_Department.Location = new System.Drawing.Point(3, 3);
-            this.p_Department.Name = "p_Department";
-            this.p_Department.Size = new System.Drawing.Size(385, 540);
-            this.p_Department.TabIndex = 1;
-            // 
             // tv_Department
             // 
             this.tv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv_Department.Location = new System.Drawing.Point(0, 0);
             this.tv_Department.Name = "tv_Department";
-            this.tv_Department.Size = new System.Drawing.Size(383, 538);
+            this.tv_Department.Size = new System.Drawing.Size(344, 540);
             this.tv_Department.TabIndex = 0;
             // 
             // tb_Department
@@ -439,7 +419,7 @@
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 0);
             this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
-            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(588, 538);
+            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(627, 540);
             this.dgv_EmployeeToDepartment.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn1
@@ -537,7 +517,7 @@
             this.dgv_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Employee.Location = new System.Drawing.Point(0, 0);
             this.dgv_Employee.Name = "dgv_Employee";
-            this.dgv_Employee.Size = new System.Drawing.Size(597, 540);
+            this.dgv_Employee.Size = new System.Drawing.Size(699, 540);
             this.dgv_Employee.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn
@@ -605,20 +585,37 @@
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
             // 
+            // splCnt
+            // 
+            this.splCnt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splCnt.Location = new System.Drawing.Point(3, 3);
+            this.splCnt.Name = "splCnt";
+            // 
+            // splCnt.Panel1
+            // 
+            this.splCnt.Panel1.Controls.Add(this.tv_Department);
+            // 
+            // splCnt.Panel2
+            // 
+            this.splCnt.Panel2.Controls.Add(this.dgv_EmployeeToDepartment);
+            this.splCnt.Size = new System.Drawing.Size(975, 540);
+            this.splCnt.SplitterDistance = 344;
+            this.splCnt.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(989, 650);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splCnt_Organization);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Структура организации";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splCnt_Organization.Panel1.ResumeLayout(false);
+            this.splCnt_Organization.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).EndInit();
+            this.splCnt_Organization.ResumeLayout(false);
             this.tc_Organization.ResumeLayout(false);
             this.tp_Department.ResumeLayout(false);
             this.tp_Employee.ResumeLayout(false);
@@ -627,10 +624,12 @@
             this.gb_EmployeeDetails.PerformLayout();
             this.p_DocInfo.ResumeLayout(false);
             this.p_DocInfo.PerformLayout();
-            this.p_EmployeeToDepartment.ResumeLayout(false);
-            this.p_Department.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
+            this.splCnt.Panel1.ResumeLayout(false);
+            this.splCnt.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splCnt)).EndInit();
+            this.splCnt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -638,7 +637,7 @@
         #endregion
 
         private EntityFrameworkBinding.EntityDataSource entityDataSource1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splCnt_Organization;
         private System.Windows.Forms.TabControl tc_Organization;
         private System.Windows.Forms.TabPage tp_Department;
         private System.Windows.Forms.TabPage tp_Employee;
@@ -673,8 +672,6 @@
         private System.Windows.Forms.Label l_Position;
         private System.Windows.Forms.Panel p_DocInfo;
         private System.Windows.Forms.TextBox tb_Position;
-        private System.Windows.Forms.Panel p_Department;
-        private System.Windows.Forms.Panel p_EmployeeToDepartment;
         private System.Windows.Forms.TreeView tv_Department;
         private System.Windows.Forms.TextBox tb_Department;
         private System.Windows.Forms.Label l_Department;
@@ -690,6 +687,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.SplitContainer splCnt;
     }
 }
 
