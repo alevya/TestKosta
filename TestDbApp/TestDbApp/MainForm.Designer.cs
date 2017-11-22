@@ -58,6 +58,7 @@
             this.tv_Department = new System.Windows.Forms.TreeView();
             this.tb_Department = new System.Windows.Forms.TextBox();
             this.l_Department = new System.Windows.Forms.Label();
+            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +70,6 @@
             this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -403,6 +403,10 @@
             this.l_Department.Text = "Отдел";
             this.l_Department.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
+            // 
             // dgv_Employee
             // 
             this.dgv_Employee.AutoGenerateColumns = false;
@@ -490,10 +494,6 @@
             this.departmentDataGridViewTextBoxColumn.HeaderText = "Department";
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
             // MainForm
             // 

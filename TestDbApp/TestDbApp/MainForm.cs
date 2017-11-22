@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestDbApp.Model;
 
 namespace TestDbApp
 {
@@ -15,13 +11,56 @@ namespace TestDbApp
         public MainForm()
         {
             InitializeComponent();
-            tv_Department.HandleCreated += TvDepartmentOnHandleCreated;
+            Load += OnLoad;
+            tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
         }
 
-        private void TvDepartmentOnHandleCreated(object sender, EventArgs eventArgs)
+        private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
         {
-            Binding bind = new Binding("Tag", entityDataSource1, "Departments");
+            var selectedNode = tv_Department.SelectedNode;
         }
+
+        private void OnLoad(object sender, EventArgs eventArgs)
+        {
+            var bind = new Binding("Tag", entityDataSource1, "Departments");
+            tv_Department.DataBindings.Add(bind);
+            _populateTreeView();
+        }
+
+        private void _populateTreeView()
+        {
+            var list = tv_Department.Tag as IEnumerable<Department>;
+            if(list == null) return;
+
+            var departments = list as IList<Department> ?? list.ToList();
+            var rootNodes = departments.Where(department => department.ParentDepartmentID == Guid.Empty ||
+                                                            department.ParentDepartmentID == null);
+            foreach (var rootNode in rootNodes)
+            {
+                var node = _getTreeNode(rootNode, departments);
+                node.Expand();
+                tv_Department.Nodes.Add(node);
+            }
+        }
+
+        private TreeNode _getTreeNode(Department row, IEnumerable<Department> list)
+        {
+            Guid.TryParse(row.ID.ToString(), out Guid nodeID);
+            var node = new TreeNode
+            {
+                Text = Convert.ToString(row.Name),
+                Tag = row
+            };
+            var res = list.Where(department => department.ParentDepartmentID == nodeID);
+            foreach (var item in res)
+            {
+                var chNode = _getTreeNode(item, list);
+                chNode.Text = Convert.ToString(item.Name);
+                node.Nodes.Add(chNode);
+            }
+            return node;
+        }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
