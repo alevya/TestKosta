@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestDbApp.EntityFrameworkBinding
 {
@@ -18,46 +14,34 @@ namespace TestDbApp.EntityFrameworkBinding
     /// </remarks>
     internal class EntitySetTypeDescriptor : ICustomTypeDescriptor
     {
-        //----------------------------------------------------------------------------
-        #region ** fields
-
-        EntityDataSource _dataSource;
-        PropertyDescriptorCollection _pdc;
-
-        #endregion
-
-        //----------------------------------------------------------------------------
-        #region ** methods
+        private readonly EntityDataSource _dataSource;
+        private PropertyDescriptorCollection _pdc;
 
         internal EntitySetTypeDescriptor(EntityDataSource dataSource)
         {
-            this._dataSource = dataSource;
+            _dataSource = dataSource;
         }
         internal void Reset()
         {
-            this._pdc = null;
+            _pdc = null;
         }
 
-        #endregion
-
         //----------------------------------------------------------------------------
-        #region ** ICustomTypeDescriptor
+        #region ICustomTypeDescriptor Implements
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
-            if (this._pdc == null)
+            if (_pdc != null) return _pdc;
+            int count = _dataSource.EntitySets.Count;
+            var properties = new PropertyDescriptor[count];
+            for (int i = 0; i < count; i++)
             {
-                PropertyDescriptor[] properties = null;
-                int count = this._dataSource.EntitySets.Count;
-                properties = new PropertyDescriptor[count];
-                for (int i = 0; i < count; i++)
-                {
-                    properties[i] = new EntitySetPropertyDescriptor(this._dataSource.EntitySets[i]);
-                }
-                this._pdc = new PropertyDescriptorCollection(properties);
+                properties[i] = new EntitySetPropertyDescriptor(_dataSource.EntitySets[i]);
             }
-            return this._pdc;
+            _pdc = new PropertyDescriptorCollection(properties);
+            return _pdc;
         }
+
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) { return this; }
         AttributeCollection ICustomTypeDescriptor.GetAttributes() { return new AttributeCollection(null); }
         string ICustomTypeDescriptor.GetClassName() { return null; }
@@ -82,26 +66,14 @@ namespace TestDbApp.EntityFrameworkBinding
     /// </remarks>
     internal class EntitySetPropertyDescriptor : PropertyDescriptor
     {
-        //----------------------------------------------------------------------------
-        #region ** fields
+        private readonly EntitySet _view;
 
-        EntitySet _view;
-
-        #endregion
-
-        //----------------------------------------------------------------------------
-        #region ** ctor
-
-        internal EntitySetPropertyDescriptor(EntitySet view)
-            : base(view.Name, null)
+        internal EntitySetPropertyDescriptor(EntitySet view) : base(view.Name, null)
         {
             _view = view;
         }
 
-        #endregion
-
-        //----------------------------------------------------------------------------
-        #region ** overrides
+        #region Overrides
 
         public override bool CanResetValue(object component)
         {
@@ -109,16 +81,14 @@ namespace TestDbApp.EntityFrameworkBinding
         }
         public override bool Equals(object other)
         {
-            if (other is EntitySetPropertyDescriptor)
-            {
-                var descriptor = (EntitySetPropertyDescriptor)other;
-                return descriptor._view == this._view;
-            }
-            return false;
+            var propertyDescriptor = other as EntitySetPropertyDescriptor;
+            if (propertyDescriptor == null) return false;
+            var descriptor = propertyDescriptor;
+            return descriptor._view == _view;
         }
         public override int GetHashCode()
         {
-            return this._view.GetHashCode();
+            return _view.GetHashCode();
         }
         public override object GetValue(object component)
         {
@@ -127,9 +97,9 @@ namespace TestDbApp.EntityFrameworkBinding
         public override void ResetValue(object component) { }
         public override void SetValue(object component, object value) { }
         public override bool ShouldSerializeValue(object component) { return false; }
-        public override Type ComponentType { get { return typeof(EntitySet); } }
-        public override bool IsReadOnly { get { return false; } }
-        public override Type PropertyType { get { return typeof(IBindingList); } }
+        public override Type ComponentType => typeof(EntitySet);
+        public override bool IsReadOnly => false;
+        public override Type PropertyType => typeof(IBindingList);
 
         #endregion
     }

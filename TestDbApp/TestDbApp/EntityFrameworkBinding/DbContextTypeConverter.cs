@@ -20,23 +20,20 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             return true;
         }
+
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return true;
         }
+
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            List<Type> values = new List<Type>();
-
-            // value for no data source
-            values.Add(null);
-
-            // all types that derive from ObjectContext
+            var values = new List<Type> {null};
             values.AddRange(GetDbContextTypes(context));
 
-            // done
             return new StandardValuesCollection(values);
         }
+
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             return sourceType == typeof(string);

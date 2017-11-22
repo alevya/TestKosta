@@ -10,8 +10,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestDbApp.EntityFrameworkBinding
 {
@@ -22,24 +20,12 @@ namespace TestDbApp.EntityFrameworkBinding
     /// This class implements the IListSource interface and returns an IBindingList 
     /// built on top of the underlying DbSet.
     /// </remarks>
-    public class EntitySet :
-        IListSource,
-        IQueryable
+    public class EntitySet : IListSource, IQueryable
     {
-        //-------------------------------------------------------------------------
-        #region ** fields
-
-        EntityDataSource _ds;       // EntityDataSource that created this set
-        IQueryable _query;          // the value of the property
-        IEntityBindingList _list;   // default view for this set
-        PropertyInfo _pi;           // the property on the object context that gets the objects in this set
-        Type _elementType;          // the type of object in this set
-        ListDictionary _dctLookup;  // lookup dictionary (used to show and edit related entities in grid cells)
-
-        #endregion
-
-        //-------------------------------------------------------------------------
-        #region ** ctor
+        private IQueryable _query;          // the value of the property
+        private IEntityBindingList _list;   // default view for this set
+        private readonly PropertyInfo _pi;           // the property on the object context that gets the objects in this set
+        private ListDictionary _dctLookup;  // lookup dictionary (used to show and edit related entities in grid cells)
 
         /// <summary>
         /// Initializes a new instance of a <see cref="EntitySet"/>.
@@ -54,30 +40,23 @@ namespace TestDbApp.EntityFrameworkBinding
                 type.GetGenericTypeDefinition() == typeof(DbSet<>) &&
                 type.GetGenericArguments().Length == 1);
 
-            _ds = ds;
+            DataSource = ds;
             _pi = pi;
-            _elementType = type.GetGenericArguments()[0];
+            ElementType = type.GetGenericArguments()[0];
         }
 
-        #endregion
-
-        //-------------------------------------------------------------------------
-        #region ** object model
+        #region object model
 
         /// <summary>
         /// Gets the <see cref="EntityDataSource"/> that owns this entity set.
         /// </summary>
-        public EntityDataSource DataSource
-        {
-            get { return _ds; }
-        }
+        public EntityDataSource DataSource { get; }
+
         /// <summary>
         /// Gets the name of this entity set.
         /// </summary>
-        public string Name
-        {
-            get { return _pi != null ? _pi.Name : null; }
-        }
+        public string Name => _pi?.Name;
+
         /// <summary>
         /// Gets the type of entity in this entity set.
         /// </summary>
@@ -85,10 +64,8 @@ namespace TestDbApp.EntityFrameworkBinding
         /// Name chosen for consistency with EntitySet.ElementType 
         /// (EntityType would seem more appropriate).
         /// </remarks>
-        public Type ElementType
-        {
-            get { return _elementType; }
-        }
+        public Type ElementType { get; }
+
         /// <summary>
         /// Gets the <see cref="IQueryable"/> object that retrieves the entities in this set.
         /// </summary>
@@ -96,9 +73,9 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             get
             {
-                if (_query == null && _ds.DbContext != null && _pi != null)
+                if (_query == null && DataSource.DbContext != null && _pi != null)
                 {
-                    _query = _pi.GetValue(_ds.DbContext, null) as IQueryable;
+                    _query = _pi.GetValue(DataSource.DbContext, null) as IQueryable;
                 }
                 return _query;
             }
@@ -106,31 +83,26 @@ namespace TestDbApp.EntityFrameworkBinding
         /// <summary>
         /// Gets a list of the entities in the set that have not been deleted or detached.
         /// </summary>
-        public IEnumerable ActiveEntities
-        {
-            get { return GetActiveEntities(Query); }
-        }
+        public IEnumerable ActiveEntities => GetActiveEntities(Query);
+
         /// <summary>
         /// Gets a list of the entities in the set that have not been deleted or detached.
         /// </summary>
         internal static IEnumerable GetActiveEntities(IEnumerable query)
         {
-            if (query != null)
+            if (query == null) yield break;
+            foreach (var item in query)
             {
-                foreach (object item in query)
+                var o = item as EntityObject;
+                var state = o?.EntityState ?? EntityState.Unchanged;
+                switch (state)
                 {
-                    var state = item is EntityObject
-                        ? ((EntityObject)item).EntityState
-                        : EntityState.Unchanged;
-                    switch (state)
-                    {
-                        case EntityState.Deleted:
-                        case EntityState.Detached:
-                            break;
-                        default:
-                            yield return item;
-                            break;
-                    }
+                    case EntityState.Deleted:
+                    case EntityState.Detached:
+                        break;
+                    default:
+                        yield return item;
+                        break;
                 }
             }
         }
@@ -139,195 +111,165 @@ namespace TestDbApp.EntityFrameworkBinding
         /// </summary>
         internal void CancelChanges()
         {
-            if (_list != null && Query != null)
-            {
-                var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_ds.DbContext).ObjectContext;
-                ctx.Refresh(RefreshMode.StoreWins, Query);
-                _list.Refresh();
-            }
+            if (_list == null || Query == null) return;
+            var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)DataSource.DbContext).ObjectContext;
+            ctx.Refresh(RefreshMode.StoreWins, Query);
+            _list.Refresh();
         }
         /// <summary>
         /// Refreshes this set's view by re-loading from the database.
         /// </summary>
         public void RefreshView()
         {
-            if (_list != null && Query != null)
-            {
-                var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_ds.DbContext).ObjectContext;
-                ctx.Refresh(RefreshMode.ClientWins, Query);
-                _list.Refresh();
-            }
+            if (_list == null || Query == null) return;
+            var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)DataSource.DbContext).ObjectContext;
+            ctx.Refresh(RefreshMode.ClientWins, Query);
+            _list.Refresh();
         }
         /// <summary>
         /// Gets an <see cref="IBindingListView"/> that can be used as a data source for bound controls.
         /// </summary>
-        public IBindingListView List
-        {
-            get { return GetBindingList(); }
-        }
+        public IBindingListView List => GetBindingList();
+
         /// <summary>
         /// Gets a dictionary containing entities as keys and their string representation as values.
         /// </summary>
         /// <remarks>
         /// The data map is useful for displaying and editing entities in grid cells.
         /// </remarks>
-        public ListDictionary LookupDictionary
-        {
-            get
-            {
-                if (_dctLookup == null)
-                {
-                    _dctLookup = BuildLookupDictionary();
-                }
-                return _dctLookup;
-            }
-        }
+        public ListDictionary LookupDictionary => _dctLookup ?? (_dctLookup = BuildLookupDictionary());
+
         #endregion
 
         //-------------------------------------------------------------------------
-        #region ** IListSource
+        #region IListSource Implements
 
-        bool IListSource.ContainsListCollection
-        {
-            get { return false; }
-        }
+        bool IListSource.ContainsListCollection => false;
+
         IList IListSource.GetList()
         {
             return GetBindingList();
         }
 
-        #endregion
-
-        //-------------------------------------------------------------------------
-        #region ** implementation
-
         // gets an IBindingListView for this entity set
-        IBindingListView GetBindingList()
+        private IBindingListView GetBindingList()
         {
-            if (_list == null)
-            {
-                // create the list
-                var listType = typeof(EntityBindingList<>);
-                listType = listType.MakeGenericType(this.ElementType);
-                _list = (IEntityBindingList)Activator.CreateInstance(listType, _ds, this.Query, Guid.NewGuid().ToString());// this.Name);
+            if (_list != null) return _list;
+            // create the list
+            var listType = typeof(EntityBindingList<>);
+            listType = listType.MakeGenericType(ElementType);
+            _list = (IEntityBindingList)Activator.CreateInstance(listType, DataSource, Query, Guid.NewGuid().ToString());// this.Name);
 
-                // and listen to changes in the new list
-                _list.ListChanged += _list_ListChanged;
-            }
+            // and listen to changes in the new list
+            _list.ListChanged += _list_ListChanged;
             return _list;
         }
 
         // update data map when list changes
         void _list_ListChanged(object sender, ListChangedEventArgs e)
         {
-            if (_dctLookup != null)
-            {
-                // clear old dictionary
-                _dctLookup.Clear();
+            if (_dctLookup == null) return;
+            // clear old dictionary
+            _dctLookup.Clear();
 
-                // build new dictionary
-                var map = BuildLookupDictionary(_list);
-                foreach (var kvp in map)
-                {
-                    _dctLookup.Add(kvp.Key, kvp.Value);
-                }
+            // build new dictionary
+            var map = BuildLookupDictionary(_list);
+            foreach (var kvp in map)
+            {
+                _dctLookup.Add(kvp.Key, kvp.Value);
             }
         }
 
         // build a data map for this entity set
-        ListDictionary BuildLookupDictionary()
+        private ListDictionary BuildLookupDictionary()
         {
             return BuildLookupDictionary(ActiveEntities);
         }
-        ListDictionary BuildLookupDictionary(IEnumerable entities)
+
+        private ListDictionary BuildLookupDictionary(IEnumerable entities)
         {
             // if the entity implements "ToString", then use it
-            var mi = _elementType.GetMethod("ToString");
-            if (mi != null && mi.DeclaringType == _elementType)
+            var mi = ElementType.GetMethod("ToString");
+            if (mi != null && mi.DeclaringType == ElementType)
             {
-                var list = new List<KVPair>();
-                foreach (object item in entities)
+                var list = new List<KeyValuePair>();
+                foreach (var item in entities)
                 {
-                    list.Add(new KVPair(item, item.ToString()));
+                    list.Add(new KeyValuePair(item, item.ToString()));
                 }
                 return BuildLookupDictionary(list);
             }
 
             // use "DefaultProperty"
-            var atts = _elementType.GetCustomAttributes(typeof(DefaultPropertyAttribute), false);
-            if (atts != null && atts.Length > 0)
+            var atts = ElementType.GetCustomAttributes(typeof(DefaultPropertyAttribute), false);
+            if (atts.Length > 0)
             {
                 var dpa = atts[0] as DefaultPropertyAttribute;
-                var pi = _elementType.GetProperty(dpa.Name);
-                if (pi != null && pi.PropertyType == typeof(string))
+                if (dpa != null)
                 {
-                    var list = new List<KVPair>();
-                    foreach (object item in entities)
+                    var pi = ElementType.GetProperty(dpa.Name);
+                    if (pi != null && pi.PropertyType == typeof(string))
                     {
-                        list.Add(new KVPair(item, (string)pi.GetValue(item, null)));
-                    }
-                    return BuildLookupDictionary(list);
-                }
-            }
-
-            // no default property: look for properties of type string with 
-            // names that contain "Name" or "Description"
-            foreach (var pi in _elementType.GetProperties())
-            {
-                if (pi.PropertyType == typeof(string))
-                {
-                    if (pi.Name.IndexOf("Name", StringComparison.OrdinalIgnoreCase) > -1 ||
-                        pi.Name.IndexOf("Description", StringComparison.OrdinalIgnoreCase) > -1)
-                    {
-                        var list = new List<KVPair>();
-                        foreach (object item in entities)
+                        var list = new List<KeyValuePair>();
+                        foreach (var item in entities)
                         {
-                            list.Add(new KVPair(item, (string)pi.GetValue(item, null)));
+                            list.Add(new KeyValuePair(item, (string)pi.GetValue(item, null)));
                         }
                         return BuildLookupDictionary(list);
                     }
                 }
             }
 
-            // no dice
+            // no default property: look for properties of type string with 
+            // names that contain "Name" or "Description"
+            foreach (var pi in ElementType.GetProperties())
+            {
+                if (pi.PropertyType != typeof(string)) continue;
+                if (pi.Name.IndexOf("Name", StringComparison.OrdinalIgnoreCase) <= -1 &&
+                    pi.Name.IndexOf("Description", StringComparison.OrdinalIgnoreCase) <= -1) continue;
+
+                var list = new List<KeyValuePair>();
+                foreach (var item in entities)
+                {
+                    list.Add(new KeyValuePair(item, (string)pi.GetValue(item, null)));
+                }
+                return BuildLookupDictionary(list);
+            }
             return null;
         }
-        ListDictionary BuildLookupDictionary(List<KVPair> list)
-        {
-            // sort list display value
-            list.Sort();
 
-            // create data map
+        private static ListDictionary BuildLookupDictionary(List<KeyValuePair> list)
+        {
+            list.Sort();
             var map = new ListDictionary();
             foreach (var kvp in list)
             {
                 map.Add(kvp.Key, kvp.Value);
             }
 
-            // done
             return map;
         }
-        class KVPair : IComparable
+
+        private class KeyValuePair : IComparable
         {
-            public KVPair(object key, string value)
+            public KeyValuePair(object key, string value)
             {
                 Key = key;
                 Value = value;
             }
-            public object Key { get; set; }
-            public string Value { get; set; }
+            public object Key { get; }
+            public string Value { get; }
             int IComparable.CompareTo(object obj)
             {
-                return string.Compare(this.Value, ((KVPair)obj).Value, StringComparison.OrdinalIgnoreCase);
+                return string.Compare(this.Value, ((KeyValuePair)obj).Value, StringComparison.OrdinalIgnoreCase);
             }
         }
 
         #endregion
 
-        //-------------------------------------------------------------------------
-        #region ** IQueryable
+        #region  IQueryable Implements
 
-        Type IQueryable.ElementType => _elementType;
+        Type IQueryable.ElementType => ElementType;
 
         Expression IQueryable.Expression => Query.Expression;
 
@@ -340,6 +282,7 @@ namespace TestDbApp.EntityFrameworkBinding
 
         #endregion
     }
+
     /// <summary>
     /// Collection of EntitySet objects.
     /// </summary>
@@ -349,7 +292,7 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             get
             {
-                var index = this.IndexOf(name);
+                var index = IndexOf(name);
                 return index > -1 ? this[index] : null;
             }
         }
@@ -359,7 +302,7 @@ namespace TestDbApp.EntityFrameworkBinding
         }
         public int IndexOf(string name)
         {
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (this[i].Name == name)
                     return i;
@@ -372,18 +315,11 @@ namespace TestDbApp.EntityFrameworkBinding
     /// </summary>
     public class ListDictionary : Dictionary<object, string>, IListSource
     {
-        public bool ContainsListCollection
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public bool ContainsListCollection => throw new NotImplementedException();
+
         public IList GetList()
         {
-            var list = new List<KeyValuePair<object, string>>();
-            foreach (var item in this)
-            {
-                list.Add(item);
-            }
-            return list;
+            return this.ToList();
         }
     }
 

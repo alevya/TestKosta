@@ -32,9 +32,56 @@
             this.splCnt_Organization = new System.Windows.Forms.SplitContainer();
             this.tc_Organization = new System.Windows.Forms.TabControl();
             this.tp_Department = new System.Windows.Forms.TabPage();
+            this.splCnt = new System.Windows.Forms.SplitContainer();
+            this.tv_Department = new System.Windows.Forms.TreeView();
+            this.gb_Employee = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patronymicDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfBirthDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docSeriesDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_Employee = new System.Windows.Forms.TabPage();
             this.p_Employee = new System.Windows.Forms.Panel();
+            this.dgv_Employee = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docSeriesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_EmployeeDetails = new System.Windows.Forms.GroupBox();
+            this.tb_Department = new System.Windows.Forms.TextBox();
+            this.l_Department = new System.Windows.Forms.Label();
+            this.tb_Position = new System.Windows.Forms.TextBox();
             this.p_DocInfo = new System.Windows.Forms.Panel();
             this.l_DocNumber = new System.Windows.Forms.Label();
             this.l_DocSeries = new System.Windows.Forms.Label();
@@ -52,63 +99,12 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tb_Position = new System.Windows.Forms.TextBox();
-            this.tv_Department = new System.Windows.Forms.TreeView();
-            this.tb_Department = new System.Windows.Forms.TextBox();
-            this.l_Department = new System.Windows.Forms.Label();
-            this.splCnt = new System.Windows.Forms.SplitContainer();
-            this.gb_Employee = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
-            this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patronymicDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirthDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docSeriesDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Employee = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docSeriesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
             this.splCnt_Organization.SuspendLayout();
             this.tc_Organization.SuspendLayout();
             this.tp_Department.SuspendLayout();
-            this.tp_Employee.SuspendLayout();
-            this.p_Employee.SuspendLayout();
-            this.gb_EmployeeDetails.SuspendLayout();
-            this.p_DocInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt)).BeginInit();
             this.splCnt.Panel1.SuspendLayout();
             this.splCnt.Panel2.SuspendLayout();
@@ -116,7 +112,11 @@
             this.gb_Employee.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).BeginInit();
+            this.tp_Employee.SuspendLayout();
+            this.p_Employee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).BeginInit();
+            this.gb_EmployeeDetails.SuspendLayout();
+            this.p_DocInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // splCnt_Organization
@@ -136,7 +136,7 @@
             this.splCnt_Organization.Panel2.Controls.Add(this.btnRefresh);
             this.splCnt_Organization.Panel2.Controls.Add(this.btnCancel);
             this.splCnt_Organization.Panel2.Controls.Add(this.btnSave);
-            this.splCnt_Organization.Size = new System.Drawing.Size(1126, 650);
+            this.splCnt_Organization.Size = new System.Drawing.Size(1271, 650);
             this.splCnt_Organization.SplitterDistance = 572;
             this.splCnt_Organization.TabIndex = 0;
             // 
@@ -148,7 +148,7 @@
             this.tc_Organization.Location = new System.Drawing.Point(0, 0);
             this.tc_Organization.Name = "tc_Organization";
             this.tc_Organization.SelectedIndex = 0;
-            this.tc_Organization.Size = new System.Drawing.Size(1126, 572);
+            this.tc_Organization.Size = new System.Drawing.Size(1271, 572);
             this.tc_Organization.TabIndex = 0;
             // 
             // tp_Department
@@ -157,266 +157,10 @@
             this.tp_Department.Location = new System.Drawing.Point(4, 22);
             this.tp_Department.Name = "tp_Department";
             this.tp_Department.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_Department.Size = new System.Drawing.Size(1118, 546);
+            this.tp_Department.Size = new System.Drawing.Size(1263, 546);
             this.tp_Department.TabIndex = 0;
             this.tp_Department.Text = "Отделы";
             this.tp_Department.UseVisualStyleBackColor = true;
-            // 
-            // tp_Employee
-            // 
-            this.tp_Employee.Controls.Add(this.p_Employee);
-            this.tp_Employee.Controls.Add(this.gb_EmployeeDetails);
-            this.tp_Employee.Location = new System.Drawing.Point(4, 22);
-            this.tp_Employee.Name = "tp_Employee";
-            this.tp_Employee.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_Employee.Size = new System.Drawing.Size(1118, 546);
-            this.tp_Employee.TabIndex = 1;
-            this.tp_Employee.Text = "Сотрудники";
-            this.tp_Employee.UseVisualStyleBackColor = true;
-            // 
-            // p_Employee
-            // 
-            this.p_Employee.Controls.Add(this.dgv_Employee);
-            this.p_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p_Employee.Location = new System.Drawing.Point(3, 3);
-            this.p_Employee.Name = "p_Employee";
-            this.p_Employee.Size = new System.Drawing.Size(829, 540);
-            this.p_Employee.TabIndex = 2;
-            // 
-            // gb_EmployeeDetails
-            // 
-            this.gb_EmployeeDetails.Controls.Add(this.tb_Department);
-            this.gb_EmployeeDetails.Controls.Add(this.l_Department);
-            this.gb_EmployeeDetails.Controls.Add(this.tb_Position);
-            this.gb_EmployeeDetails.Controls.Add(this.p_DocInfo);
-            this.gb_EmployeeDetails.Controls.Add(this.l_Position);
-            this.gb_EmployeeDetails.Controls.Add(this.tb_Patronymic);
-            this.gb_EmployeeDetails.Controls.Add(this.l_Patronymic);
-            this.gb_EmployeeDetails.Controls.Add(this.tb_SurName);
-            this.gb_EmployeeDetails.Controls.Add(this.l_SurName);
-            this.gb_EmployeeDetails.Controls.Add(this.tb_FirstName);
-            this.gb_EmployeeDetails.Controls.Add(this.l_FirstName);
-            this.gb_EmployeeDetails.Controls.Add(this.l_DateOfBirth);
-            this.gb_EmployeeDetails.Controls.Add(this.dtp_DateOfBirth);
-            this.gb_EmployeeDetails.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gb_EmployeeDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gb_EmployeeDetails.Location = new System.Drawing.Point(832, 3);
-            this.gb_EmployeeDetails.Name = "gb_EmployeeDetails";
-            this.gb_EmployeeDetails.Size = new System.Drawing.Size(283, 540);
-            this.gb_EmployeeDetails.TabIndex = 3;
-            this.gb_EmployeeDetails.TabStop = false;
-            this.gb_EmployeeDetails.Text = "Данные сотрудника";
-            // 
-            // p_DocInfo
-            // 
-            this.p_DocInfo.BackColor = System.Drawing.SystemColors.Control;
-            this.p_DocInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.p_DocInfo.Controls.Add(this.l_DocNumber);
-            this.p_DocInfo.Controls.Add(this.l_DocSeries);
-            this.p_DocInfo.Controls.Add(this.tb_DocSeries);
-            this.p_DocInfo.Controls.Add(this.tb_DocNumber);
-            this.p_DocInfo.Location = new System.Drawing.Point(6, 197);
-            this.p_DocInfo.Name = "p_DocInfo";
-            this.p_DocInfo.Size = new System.Drawing.Size(261, 76);
-            this.p_DocInfo.TabIndex = 14;
-            // 
-            // l_DocNumber
-            // 
-            this.l_DocNumber.AutoSize = true;
-            this.l_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_DocNumber.Location = new System.Drawing.Point(12, 16);
-            this.l_DocNumber.Name = "l_DocNumber";
-            this.l_DocNumber.Size = new System.Drawing.Size(98, 13);
-            this.l_DocNumber.TabIndex = 10;
-            this.l_DocNumber.Text = "Номер документа";
-            this.l_DocNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // l_DocSeries
-            // 
-            this.l_DocSeries.AutoSize = true;
-            this.l_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_DocSeries.Location = new System.Drawing.Point(12, 42);
-            this.l_DocSeries.Name = "l_DocSeries";
-            this.l_DocSeries.Size = new System.Drawing.Size(95, 13);
-            this.l_DocSeries.TabIndex = 8;
-            this.l_DocSeries.Text = "Серия документа";
-            this.l_DocSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_DocSeries
-            // 
-            this.tb_DocSeries.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocNumber", true));
-            this.tb_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_DocSeries.Location = new System.Drawing.Point(114, 39);
-            this.tb_DocSeries.Name = "tb_DocSeries";
-            this.tb_DocSeries.Size = new System.Drawing.Size(142, 20);
-            this.tb_DocSeries.TabIndex = 9;
-            // 
-            // tb_DocNumber
-            // 
-            this.tb_DocNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocSeries", true));
-            this.tb_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_DocNumber.Location = new System.Drawing.Point(114, 13);
-            this.tb_DocNumber.Name = "tb_DocNumber";
-            this.tb_DocNumber.Size = new System.Drawing.Size(142, 20);
-            this.tb_DocNumber.TabIndex = 11;
-            // 
-            // l_Position
-            // 
-            this.l_Position.AutoSize = true;
-            this.l_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Position.Location = new System.Drawing.Point(23, 133);
-            this.l_Position.Name = "l_Position";
-            this.l_Position.Size = new System.Drawing.Size(65, 13);
-            this.l_Position.TabIndex = 12;
-            this.l_Position.Text = "Должность";
-            this.l_Position.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_Patronymic
-            // 
-            this.tb_Patronymic.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Patronymic", true));
-            this.tb_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Patronymic.Location = new System.Drawing.Point(125, 55);
-            this.tb_Patronymic.Name = "tb_Patronymic";
-            this.tb_Patronymic.Size = new System.Drawing.Size(142, 20);
-            this.tb_Patronymic.TabIndex = 7;
-            // 
-            // l_Patronymic
-            // 
-            this.l_Patronymic.AutoSize = true;
-            this.l_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Patronymic.Location = new System.Drawing.Point(23, 58);
-            this.l_Patronymic.Name = "l_Patronymic";
-            this.l_Patronymic.Size = new System.Drawing.Size(54, 13);
-            this.l_Patronymic.TabIndex = 6;
-            this.l_Patronymic.Text = "Отчество";
-            this.l_Patronymic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_SurName
-            // 
-            this.tb_SurName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.SurName", true));
-            this.tb_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_SurName.Location = new System.Drawing.Point(125, 82);
-            this.tb_SurName.Name = "tb_SurName";
-            this.tb_SurName.Size = new System.Drawing.Size(142, 20);
-            this.tb_SurName.TabIndex = 5;
-            // 
-            // l_SurName
-            // 
-            this.l_SurName.AutoSize = true;
-            this.l_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_SurName.Location = new System.Drawing.Point(21, 85);
-            this.l_SurName.Name = "l_SurName";
-            this.l_SurName.Size = new System.Drawing.Size(56, 13);
-            this.l_SurName.TabIndex = 4;
-            this.l_SurName.Text = "Фамилия";
-            this.l_SurName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tb_FirstName
-            // 
-            this.tb_FirstName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.FirstName", true));
-            this.tb_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_FirstName.Location = new System.Drawing.Point(125, 29);
-            this.tb_FirstName.Name = "tb_FirstName";
-            this.tb_FirstName.Size = new System.Drawing.Size(142, 20);
-            this.tb_FirstName.TabIndex = 3;
-            // 
-            // l_FirstName
-            // 
-            this.l_FirstName.AutoSize = true;
-            this.l_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_FirstName.Location = new System.Drawing.Point(23, 32);
-            this.l_FirstName.Name = "l_FirstName";
-            this.l_FirstName.Size = new System.Drawing.Size(29, 13);
-            this.l_FirstName.TabIndex = 2;
-            this.l_FirstName.Text = "Имя";
-            this.l_FirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // l_DateOfBirth
-            // 
-            this.l_DateOfBirth.AutoSize = true;
-            this.l_DateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_DateOfBirth.Location = new System.Drawing.Point(23, 108);
-            this.l_DateOfBirth.Name = "l_DateOfBirth";
-            this.l_DateOfBirth.Size = new System.Drawing.Size(86, 13);
-            this.l_DateOfBirth.TabIndex = 1;
-            this.l_DateOfBirth.Text = "Дата рождения";
-            this.l_DateOfBirth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtp_DateOfBirth
-            // 
-            this.dtp_DateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource1, "Employees.DateOfBirth", true));
-            this.dtp_DateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dtp_DateOfBirth.Location = new System.Drawing.Point(125, 108);
-            this.dtp_DateOfBirth.Name = "dtp_DateOfBirth";
-            this.dtp_DateOfBirth.Size = new System.Drawing.Size(142, 20);
-            this.dtp_DateOfBirth.TabIndex = 0;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(709, 25);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.Text = "Обновить";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(604, 25);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Отменить";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(501, 25);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // tb_Position
-            // 
-            this.tb_Position.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Position", true));
-            this.tb_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Position.Location = new System.Drawing.Point(125, 134);
-            this.tb_Position.Name = "tb_Position";
-            this.tb_Position.Size = new System.Drawing.Size(142, 20);
-            this.tb_Position.TabIndex = 15;
-            // 
-            // tv_Department
-            // 
-            this.tv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tv_Department.Location = new System.Drawing.Point(0, 0);
-            this.tv_Department.Name = "tv_Department";
-            this.tv_Department.Size = new System.Drawing.Size(392, 540);
-            this.tv_Department.TabIndex = 0;
-            // 
-            // tb_Department
-            // 
-            this.tb_Department.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DepartmentName", true));
-            this.tb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Department.Location = new System.Drawing.Point(125, 160);
-            this.tb_Department.Name = "tb_Department";
-            this.tb_Department.Size = new System.Drawing.Size(142, 20);
-            this.tb_Department.TabIndex = 17;
-            // 
-            // l_Department
-            // 
-            this.l_Department.AutoSize = true;
-            this.l_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Department.Location = new System.Drawing.Point(23, 159);
-            this.l_Department.Name = "l_Department";
-            this.l_Department.Size = new System.Drawing.Size(38, 13);
-            this.l_Department.TabIndex = 16;
-            this.l_Department.Text = "Отдел";
-            this.l_Department.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splCnt
             // 
@@ -432,9 +176,17 @@
             // 
             this.splCnt.Panel2.Controls.Add(this.gb_Employee);
             this.splCnt.Panel2.Controls.Add(this.dgv_EmployeeToDepartment);
-            this.splCnt.Size = new System.Drawing.Size(1112, 540);
-            this.splCnt.SplitterDistance = 392;
+            this.splCnt.Size = new System.Drawing.Size(1257, 540);
+            this.splCnt.SplitterDistance = 443;
             this.splCnt.TabIndex = 1;
+            // 
+            // tv_Department
+            // 
+            this.tv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tv_Department.Location = new System.Drawing.Point(0, 0);
+            this.tv_Department.Name = "tv_Department";
+            this.tv_Department.Size = new System.Drawing.Size(443, 540);
+            this.tv_Department.TabIndex = 0;
             // 
             // gb_Employee
             // 
@@ -455,7 +207,7 @@
             this.gb_Employee.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gb_Employee.Location = new System.Drawing.Point(0, 401);
             this.gb_Employee.Name = "gb_Employee";
-            this.gb_Employee.Size = new System.Drawing.Size(716, 139);
+            this.gb_Employee.Size = new System.Drawing.Size(810, 139);
             this.gb_Employee.TabIndex = 1;
             this.gb_Employee.TabStop = false;
             this.gb_Employee.Text = "Данные сотрудника";
@@ -464,18 +216,22 @@
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DepartmentName", true));
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(330, 50);
+            this.textBox1.Location = new System.Drawing.Point(363, 48);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
+            this.textBox1.Size = new System.Drawing.Size(142, 21);
             this.textBox1.TabIndex = 30;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(259, 50);
+            this.label1.Location = new System.Drawing.Point(278, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(49, 16);
             this.label1.TabIndex = 29;
             this.label1.Text = "Отдел";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -484,9 +240,9 @@
             // 
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Position", true));
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(330, 24);
+            this.textBox2.Location = new System.Drawing.Point(363, 23);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(142, 20);
+            this.textBox2.Size = new System.Drawing.Size(142, 21);
             this.textBox2.TabIndex = 28;
             // 
             // panel1
@@ -497,9 +253,9 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Location = new System.Drawing.Point(478, 24);
+            this.panel1.Location = new System.Drawing.Point(520, 23);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 76);
+            this.panel1.Size = new System.Drawing.Size(284, 76);
             this.panel1.TabIndex = 27;
             // 
             // label2
@@ -508,7 +264,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(12, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.Size = new System.Drawing.Size(125, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Номер документа";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -519,7 +275,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(12, 42);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
+            this.label3.Size = new System.Drawing.Size(122, 16);
             this.label3.TabIndex = 8;
             this.label3.Text = "Серия документа";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -528,27 +284,27 @@
             // 
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocNumber", true));
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(114, 39);
+            this.textBox3.Location = new System.Drawing.Point(143, 37);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 20);
+            this.textBox3.Size = new System.Drawing.Size(130, 21);
             this.textBox3.TabIndex = 9;
             // 
             // textBox4
             // 
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocSeries", true));
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(114, 13);
+            this.textBox4.Location = new System.Drawing.Point(143, 12);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(142, 20);
+            this.textBox4.Size = new System.Drawing.Size(130, 21);
             this.textBox4.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(259, 24);
+            this.label4.Location = new System.Drawing.Point(278, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.Size = new System.Drawing.Size(79, 16);
             this.label4.TabIndex = 26;
             this.label4.Text = "Должность";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -557,9 +313,9 @@
             // 
             this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Patronymic", true));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(108, 50);
+            this.textBox5.Location = new System.Drawing.Point(119, 52);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(142, 20);
+            this.textBox5.Size = new System.Drawing.Size(142, 21);
             this.textBox5.TabIndex = 25;
             // 
             // label5
@@ -568,7 +324,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(6, 53);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.Size = new System.Drawing.Size(71, 16);
             this.label5.TabIndex = 24;
             this.label5.Text = "Отчество";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -577,9 +333,9 @@
             // 
             this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.SurName", true));
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(108, 77);
+            this.textBox6.Location = new System.Drawing.Point(119, 77);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(142, 20);
+            this.textBox6.Size = new System.Drawing.Size(142, 21);
             this.textBox6.TabIndex = 23;
             // 
             // label6
@@ -588,7 +344,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(4, 80);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.Size = new System.Drawing.Size(67, 16);
             this.label6.TabIndex = 22;
             this.label6.Text = "Фамилия";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -597,9 +353,9 @@
             // 
             this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.FirstName", true));
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(108, 24);
+            this.textBox7.Location = new System.Drawing.Point(119, 24);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(142, 20);
+            this.textBox7.Size = new System.Drawing.Size(142, 21);
             this.textBox7.TabIndex = 21;
             // 
             // label7
@@ -608,7 +364,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.Location = new System.Drawing.Point(6, 27);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 13);
+            this.label7.Size = new System.Drawing.Size(34, 16);
             this.label7.TabIndex = 20;
             this.label7.Text = "Имя";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -619,7 +375,7 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.Location = new System.Drawing.Point(6, 103);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.Size = new System.Drawing.Size(107, 16);
             this.label8.TabIndex = 19;
             this.label8.Text = "Дата рождения";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -628,14 +384,10 @@
             // 
             this.dateTimePicker1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource1, "Employees.DateOfBirth", true));
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(108, 103);
+            this.dateTimePicker1.Location = new System.Drawing.Point(119, 104);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(142, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(142, 21);
             this.dateTimePicker1.TabIndex = 18;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
             // dgv_EmployeeToDepartment
             // 
@@ -658,7 +410,7 @@
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 0);
             this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
-            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(716, 540);
+            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(810, 540);
             this.dgv_EmployeeToDepartment.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn1
@@ -731,6 +483,27 @@
             this.departmentNameDataGridViewTextBoxColumn.DataPropertyName = "DepartmentName";
             this.departmentNameDataGridViewTextBoxColumn.HeaderText = "DepartmentName";
             this.departmentNameDataGridViewTextBoxColumn.Name = "departmentNameDataGridViewTextBoxColumn";
+            // 
+            // tp_Employee
+            // 
+            this.tp_Employee.Controls.Add(this.p_Employee);
+            this.tp_Employee.Controls.Add(this.gb_EmployeeDetails);
+            this.tp_Employee.Location = new System.Drawing.Point(4, 22);
+            this.tp_Employee.Name = "tp_Employee";
+            this.tp_Employee.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_Employee.Size = new System.Drawing.Size(1118, 546);
+            this.tp_Employee.TabIndex = 1;
+            this.tp_Employee.Text = "Сотрудники";
+            this.tp_Employee.UseVisualStyleBackColor = true;
+            // 
+            // p_Employee
+            // 
+            this.p_Employee.Controls.Add(this.dgv_Employee);
+            this.p_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.p_Employee.Location = new System.Drawing.Point(3, 3);
+            this.p_Employee.Name = "p_Employee";
+            this.p_Employee.Size = new System.Drawing.Size(829, 540);
+            this.p_Employee.TabIndex = 2;
             // 
             // dgv_Employee
             // 
@@ -820,11 +593,238 @@
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
             // 
+            // gb_EmployeeDetails
+            // 
+            this.gb_EmployeeDetails.Controls.Add(this.tb_Department);
+            this.gb_EmployeeDetails.Controls.Add(this.l_Department);
+            this.gb_EmployeeDetails.Controls.Add(this.tb_Position);
+            this.gb_EmployeeDetails.Controls.Add(this.p_DocInfo);
+            this.gb_EmployeeDetails.Controls.Add(this.l_Position);
+            this.gb_EmployeeDetails.Controls.Add(this.tb_Patronymic);
+            this.gb_EmployeeDetails.Controls.Add(this.l_Patronymic);
+            this.gb_EmployeeDetails.Controls.Add(this.tb_SurName);
+            this.gb_EmployeeDetails.Controls.Add(this.l_SurName);
+            this.gb_EmployeeDetails.Controls.Add(this.tb_FirstName);
+            this.gb_EmployeeDetails.Controls.Add(this.l_FirstName);
+            this.gb_EmployeeDetails.Controls.Add(this.l_DateOfBirth);
+            this.gb_EmployeeDetails.Controls.Add(this.dtp_DateOfBirth);
+            this.gb_EmployeeDetails.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gb_EmployeeDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gb_EmployeeDetails.Location = new System.Drawing.Point(832, 3);
+            this.gb_EmployeeDetails.Name = "gb_EmployeeDetails";
+            this.gb_EmployeeDetails.Size = new System.Drawing.Size(283, 540);
+            this.gb_EmployeeDetails.TabIndex = 3;
+            this.gb_EmployeeDetails.TabStop = false;
+            this.gb_EmployeeDetails.Text = "Данные сотрудника";
+            // 
+            // tb_Department
+            // 
+            this.tb_Department.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DepartmentName", true));
+            this.tb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Department.Location = new System.Drawing.Point(125, 160);
+            this.tb_Department.Name = "tb_Department";
+            this.tb_Department.Size = new System.Drawing.Size(142, 21);
+            this.tb_Department.TabIndex = 17;
+            // 
+            // l_Department
+            // 
+            this.l_Department.AutoSize = true;
+            this.l_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_Department.Location = new System.Drawing.Point(23, 159);
+            this.l_Department.Name = "l_Department";
+            this.l_Department.Size = new System.Drawing.Size(49, 16);
+            this.l_Department.TabIndex = 16;
+            this.l_Department.Text = "Отдел";
+            this.l_Department.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_Position
+            // 
+            this.tb_Position.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Position", true));
+            this.tb_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Position.Location = new System.Drawing.Point(125, 134);
+            this.tb_Position.Name = "tb_Position";
+            this.tb_Position.Size = new System.Drawing.Size(142, 21);
+            this.tb_Position.TabIndex = 15;
+            // 
+            // p_DocInfo
+            // 
+            this.p_DocInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.p_DocInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.p_DocInfo.Controls.Add(this.l_DocNumber);
+            this.p_DocInfo.Controls.Add(this.l_DocSeries);
+            this.p_DocInfo.Controls.Add(this.tb_DocSeries);
+            this.p_DocInfo.Controls.Add(this.tb_DocNumber);
+            this.p_DocInfo.Location = new System.Drawing.Point(6, 197);
+            this.p_DocInfo.Name = "p_DocInfo";
+            this.p_DocInfo.Size = new System.Drawing.Size(261, 76);
+            this.p_DocInfo.TabIndex = 14;
+            // 
+            // l_DocNumber
+            // 
+            this.l_DocNumber.AutoSize = true;
+            this.l_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_DocNumber.Location = new System.Drawing.Point(12, 16);
+            this.l_DocNumber.Name = "l_DocNumber";
+            this.l_DocNumber.Size = new System.Drawing.Size(125, 16);
+            this.l_DocNumber.TabIndex = 10;
+            this.l_DocNumber.Text = "Номер документа";
+            this.l_DocNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // l_DocSeries
+            // 
+            this.l_DocSeries.AutoSize = true;
+            this.l_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_DocSeries.Location = new System.Drawing.Point(12, 42);
+            this.l_DocSeries.Name = "l_DocSeries";
+            this.l_DocSeries.Size = new System.Drawing.Size(122, 16);
+            this.l_DocSeries.TabIndex = 8;
+            this.l_DocSeries.Text = "Серия документа";
+            this.l_DocSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DocSeries
+            // 
+            this.tb_DocSeries.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocNumber", true));
+            this.tb_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_DocSeries.Location = new System.Drawing.Point(114, 39);
+            this.tb_DocSeries.Name = "tb_DocSeries";
+            this.tb_DocSeries.Size = new System.Drawing.Size(142, 21);
+            this.tb_DocSeries.TabIndex = 9;
+            // 
+            // tb_DocNumber
+            // 
+            this.tb_DocNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DocSeries", true));
+            this.tb_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_DocNumber.Location = new System.Drawing.Point(114, 13);
+            this.tb_DocNumber.Name = "tb_DocNumber";
+            this.tb_DocNumber.Size = new System.Drawing.Size(142, 21);
+            this.tb_DocNumber.TabIndex = 11;
+            // 
+            // l_Position
+            // 
+            this.l_Position.AutoSize = true;
+            this.l_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_Position.Location = new System.Drawing.Point(23, 133);
+            this.l_Position.Name = "l_Position";
+            this.l_Position.Size = new System.Drawing.Size(79, 16);
+            this.l_Position.TabIndex = 12;
+            this.l_Position.Text = "Должность";
+            this.l_Position.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_Patronymic
+            // 
+            this.tb_Patronymic.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Patronymic", true));
+            this.tb_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Patronymic.Location = new System.Drawing.Point(125, 55);
+            this.tb_Patronymic.Name = "tb_Patronymic";
+            this.tb_Patronymic.Size = new System.Drawing.Size(142, 21);
+            this.tb_Patronymic.TabIndex = 7;
+            // 
+            // l_Patronymic
+            // 
+            this.l_Patronymic.AutoSize = true;
+            this.l_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_Patronymic.Location = new System.Drawing.Point(23, 58);
+            this.l_Patronymic.Name = "l_Patronymic";
+            this.l_Patronymic.Size = new System.Drawing.Size(71, 16);
+            this.l_Patronymic.TabIndex = 6;
+            this.l_Patronymic.Text = "Отчество";
+            this.l_Patronymic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_SurName
+            // 
+            this.tb_SurName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.SurName", true));
+            this.tb_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_SurName.Location = new System.Drawing.Point(125, 82);
+            this.tb_SurName.Name = "tb_SurName";
+            this.tb_SurName.Size = new System.Drawing.Size(142, 21);
+            this.tb_SurName.TabIndex = 5;
+            // 
+            // l_SurName
+            // 
+            this.l_SurName.AutoSize = true;
+            this.l_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_SurName.Location = new System.Drawing.Point(21, 85);
+            this.l_SurName.Name = "l_SurName";
+            this.l_SurName.Size = new System.Drawing.Size(67, 16);
+            this.l_SurName.TabIndex = 4;
+            this.l_SurName.Text = "Фамилия";
+            this.l_SurName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_FirstName
+            // 
+            this.tb_FirstName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.FirstName", true));
+            this.tb_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_FirstName.Location = new System.Drawing.Point(125, 29);
+            this.tb_FirstName.Name = "tb_FirstName";
+            this.tb_FirstName.Size = new System.Drawing.Size(142, 21);
+            this.tb_FirstName.TabIndex = 3;
+            // 
+            // l_FirstName
+            // 
+            this.l_FirstName.AutoSize = true;
+            this.l_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_FirstName.Location = new System.Drawing.Point(23, 32);
+            this.l_FirstName.Name = "l_FirstName";
+            this.l_FirstName.Size = new System.Drawing.Size(34, 16);
+            this.l_FirstName.TabIndex = 2;
+            this.l_FirstName.Text = "Имя";
+            this.l_FirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // l_DateOfBirth
+            // 
+            this.l_DateOfBirth.AutoSize = true;
+            this.l_DateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_DateOfBirth.Location = new System.Drawing.Point(23, 108);
+            this.l_DateOfBirth.Name = "l_DateOfBirth";
+            this.l_DateOfBirth.Size = new System.Drawing.Size(107, 16);
+            this.l_DateOfBirth.TabIndex = 1;
+            this.l_DateOfBirth.Text = "Дата рождения";
+            this.l_DateOfBirth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dtp_DateOfBirth
+            // 
+            this.dtp_DateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource1, "Employees.DateOfBirth", true));
+            this.dtp_DateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtp_DateOfBirth.Location = new System.Drawing.Point(125, 108);
+            this.dtp_DateOfBirth.Name = "dtp_DateOfBirth";
+            this.dtp_DateOfBirth.Size = new System.Drawing.Size(142, 21);
+            this.dtp_DateOfBirth.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(709, 25);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(604, 25);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Отменить";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(501, 25);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 650);
+            this.ClientSize = new System.Drawing.Size(1271, 650);
             this.Controls.Add(this.splCnt_Organization);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -836,12 +836,6 @@
             this.splCnt_Organization.ResumeLayout(false);
             this.tc_Organization.ResumeLayout(false);
             this.tp_Department.ResumeLayout(false);
-            this.tp_Employee.ResumeLayout(false);
-            this.p_Employee.ResumeLayout(false);
-            this.gb_EmployeeDetails.ResumeLayout(false);
-            this.gb_EmployeeDetails.PerformLayout();
-            this.p_DocInfo.ResumeLayout(false);
-            this.p_DocInfo.PerformLayout();
             this.splCnt.Panel1.ResumeLayout(false);
             this.splCnt.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splCnt)).EndInit();
@@ -851,7 +845,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).EndInit();
+            this.tp_Employee.ResumeLayout(false);
+            this.p_Employee.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
+            this.gb_EmployeeDetails.ResumeLayout(false);
+            this.gb_EmployeeDetails.PerformLayout();
+            this.p_DocInfo.ResumeLayout(false);
+            this.p_DocInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }

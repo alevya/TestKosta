@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -14,8 +12,8 @@ namespace TestDbApp.EntityFrameworkBinding
     public partial class EntityDataSource : Component, IListSource, IExtenderProvider
     {
         private DbContext _ctx;
-        EntitySetCollection _entSets = new EntitySetCollection();
-        Type _ctxType; // to support design-time
+        private readonly EntitySetCollection _entSets = new EntitySetCollection();
+        private Type _ctxType; // to support design-time
 
         public EntityDataSource()
         {
@@ -29,7 +27,7 @@ namespace TestDbApp.EntityFrameworkBinding
             InitializeComponent();
         }
 
-        #region object model
+        #region Object model
 
         /// <summary>
         /// Gets or sets the type of DbContext to use as a data source.
@@ -38,116 +36,86 @@ namespace TestDbApp.EntityFrameworkBinding
         /// This property is normally set at design time. Once it is set, the 
         /// component will automatically create an DbContext of the appropriate type.
         /// </remarks>
-        [
-            TypeConverter(typeof(DbContextTypeConverter)),
-        ]
+        [TypeConverter(typeof(DbContextTypeConverter))]
         public Type DbContextType
         {
-            get { return _ctxType; }
+            get => _ctxType;
             set
             {
-                if (value != _ctxType)
-                {
-                    // notify
-                    OnDbContextTypeChanging(EventArgs.Empty);
+                if (value == _ctxType) return;
+                OnDbContextTypeChanging(EventArgs.Empty);
+                _ctx = null;
+                _ctxType = value;
 
-                    // clear existing object context
-                    _ctx = null;
+                // generate object sets (will re-create object context if appropriate)
+                GenerateEntitySets(_ctxType);
 
-                    // set new object context type 
-                    _ctxType = value;
-
-                    // generate object sets (will re-create object context if appropriate)
-                    GenerateEntitySets(_ctxType);
-
-                    // notify
-                    OnDbContextTypeChanged(EventArgs.Empty);
-                }
+                OnDbContextTypeChanged(EventArgs.Empty);
             }
         }
+
         /// <summary>
         /// Gets or sets the DbContext used as a data source.
         /// </summary>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false),DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbContext DbContext
         {
             get
             {
-                if (_ctx == null && _ctxType != null && !DesignMode)
+                if (_ctx != null || _ctxType == null || DesignMode) return _ctx;
+                try
                 {
-                    try
-                    {
-                        DbContext = Activator.CreateInstance((Type)_ctxType) as DbContext;
-                    }
-                    catch { }
+                    DbContext = Activator.CreateInstance(_ctxType) as DbContext;
                 }
+                catch { }
                 return _ctx;
             }
             set
             {
-                if (_ctx != value)
-                {
-                    // notify
-                    OnDbContextChanging(EventArgs.Empty);
+                if (Equals(_ctx, value)) return;
+               
+                OnDbContextChanging(EventArgs.Empty);
 
-                    // save the new context
-                    _ctx = value;
+                _ctx = value;
+                _ctxType = _ctx?.GetType();
+                // generate object sets
+                GenerateEntitySets(_ctxType);
 
-                    // update the context type
-                    _ctxType = _ctx != null ? _ctx.GetType() : null;
-
-                    // generate object sets
-                    GenerateEntitySets(_ctxType);
-
-                    // notify
-                    OnDbContextChanged(EventArgs.Empty);
-                }
+                OnDbContextChanged(EventArgs.Empty);
             }
         }
         /// <summary>
         /// Gets the collection of EntitySets available in this EntityDataSource.
         /// </summary>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public EntitySetCollection EntitySets
-        {
-            get { return _entSets; }
-        }
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public EntitySetCollection EntitySets => _entSets;
+
         /// <summary>
         /// Saves all changes made to all entity sets back to the database.
         /// </summary>
         public int SaveChanges()
         {
-            // notify
             var e = new CancelEventArgs();
             OnSavingChanges(e);
 
             // save the changes
             int count = 0;
-            if (!e.Cancel)
+            if (e.Cancel) return count;
+            try
             {
-                try
-                {
-                    count = _ctx.SaveChanges();
-                    Debug.WriteLine(string.Format("Done. {0} changes saved.", count));
+                count = _ctx.SaveChanges();
+                Debug.WriteLine($"Done. {count} changes saved.");
 
-                    // notify
-                    OnSavedChanges(e);
-                }
-                catch (Exception x)
-                {
-                    OnDataError(new DataErrorEventArgs(x));
-                }
+                OnSavedChanges(e);
+            }
+            catch (Exception x)
+            {
+                OnDataError(new DataErrorEventArgs(x));
             }
 
-            // done
             return count;
         }
+
         /// <summary>
         /// Cancels all changes made to all entity sets.
         /// </summary>
@@ -172,39 +140,36 @@ namespace TestDbApp.EntityFrameworkBinding
                     OnDataError(new DataErrorEventArgs(x));
                 }
 
-                // notify
                 OnCanceledChanges(EventArgs.Empty);
             }
             Debug.WriteLine("Done. All changes canceled.");
         }
+
         /// <summary>
         /// Refreshes all views by loading their data from the database.
         /// </summary>
         public void Refresh()
         {
-            // notify
             var e = new CancelEventArgs();
             OnRefreshing(e);
 
-            if (!e.Cancel)
+            if (e.Cancel) return;
+            try
             {
-                try
+                foreach (var entSet in EntitySets)
                 {
-                    foreach (var entSet in EntitySets)
-                    {
-                        entSet.RefreshView();
-                    }
+                    entSet.RefreshView();
                 }
-                catch (Exception x)
-                {
-                    OnDataError(new DataErrorEventArgs(x));
-                }
-
-                // notify
-                OnRefreshed(EventArgs.Empty);
-                Debug.WriteLine("Done. All views refreshed.");
             }
+            catch (Exception x)
+            {
+                OnDataError(new DataErrorEventArgs(x));
+            }
+
+            OnRefreshed(EventArgs.Empty);
+            Debug.WriteLine("Done. All views refreshed.");
         }
+
         /// <summary>
         /// Gets a lookup dictionary for a given element type.
         /// </summary>
@@ -217,16 +182,6 @@ namespace TestDbApp.EntityFrameworkBinding
         /// the lookup dictionary is used to provide the sorting order. For example, if you sort a 
         /// list of products by category, the data map associated with the Categories list determines 
         /// the order in which the categories are compared while sorting.</para>
-        /// <para>Lookup dictionaries are especially useful for setting the DataMap property on the 
-        /// columns of a C1FlexGrid control. For example, if a C1FlexGrid is bound to a list of products,
-        /// and the Product entity contains references to other entities (e.g. Category or Supplier),
-        /// then the grid uses the lookup dictionary to provide a useful string representation of the 
-        /// related entities (e.g. category name). The grid also uses the data map to provide combo boxes 
-        /// for editing the cell values.</para>
-        /// <para>If you add a C1FlexGrid control to a form that contains a 
-        /// <see cref="EntityDataSource"/>, the data source will provide an extender property 
-        /// called <b>AutoLookup</b> that may be set on the grids to create and assign lookup 
-        /// dictionaries to their columns automatically.</para>
         /// </remarks>
         public ListDictionary GetLookupDictionary(Type elementType)
         {
@@ -239,6 +194,7 @@ namespace TestDbApp.EntityFrameworkBinding
             }
             return null;
         }
+
         /// <summary>
         /// Creates an IBindingList based on a given query.
         /// </summary>
@@ -247,7 +203,7 @@ namespace TestDbApp.EntityFrameworkBinding
         public IBindingList CreateView(IEnumerable query)
         {
             // get the query type
-            Type type = typeof(object);
+            var type = typeof(object);
             foreach (var item in query)
             {
                 type = item.GetType();
@@ -263,121 +219,115 @@ namespace TestDbApp.EntityFrameworkBinding
         /// <summary>
         /// Gets a value that determines whether the component is in design mode.
         /// </summary>
-        new internal protected bool DesignMode
-        {
-            get { return base.DesignMode; }
-        }
-        #endregion
+        protected internal new bool DesignMode => base.DesignMode;
 
-        //-------------------------------------------------------------------------
-        #region ** implementation
+        #endregion
 
         /// <summary>
         /// Populates the EntitySets collection from the current DomainContext.
         /// </summary>
-        void GenerateEntitySets(Type ctxType)
+        private void GenerateEntitySets(Type ctxType)
         {
             _entSets.Clear();
-            if (ctxType != null)
+            if (ctxType == null) return;
+            foreach (var pi in ctxType.GetProperties())
             {
-                var ctx = DbContext;
-                foreach (var pi in ctxType.GetProperties())
-                {
-                    var type = pi.PropertyType;
-                    if (type.IsGenericType &&
-                        type.GetGenericTypeDefinition() == typeof(DbSet<>) &&
-                        type.GetGenericArguments().Length == 1)
-                    {
-                        var objSet = new EntitySet(this, pi);
-                        _entSets.Add(objSet);
-                    }
-                }
+                var type = pi.PropertyType;
+                if (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(DbSet<>) ||
+                    type.GetGenericArguments().Length != 1) continue;
+
+                var objSet = new EntitySet(this, pi);
+                _entSets.Add(objSet);
             }
         }
 
-        #endregion
-
         //-------------------------------------------------------------------------
-        #region ** events
+        #region Events
 
         /// <summary>
         /// Occurs before the value of the <see cref="DbContextType"/> property changes.
         /// </summary>
         public event EventHandler DbContextTypeChanging;
+
         /// <summary>
         /// Raises the <see cref="DbContextTypeChanging"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextTypeChanging(EventArgs e)
         {
-            if (DbContextTypeChanging != null)
-                DbContextTypeChanging(this, e);
+            DbContextTypeChanging?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs after the value of the <see cref="DbContextType"/> property changes.
         /// </summary>
         public event EventHandler DbContextTypeChanged;
+
         /// <summary>
         /// Raises the <see cref="DbContextTypeChanged"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextTypeChanged(EventArgs e)
         {
-            if (DbContextTypeChanged != null)
-                DbContextTypeChanged(this, e);
+            DbContextTypeChanged?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs before the value of the <see cref="DbContext"/> property changes.
         /// </summary>
         public event EventHandler DbContextChanging;
+
         /// <summary>
         /// Raises the <see cref="DbContextChanging"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextChanging(EventArgs e)
         {
-            if (DbContextChanging != null)
-                DbContextChanging(this, e);
+            DbContextChanging?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs after the value of the <see cref="DbContext"/> property changes.
         /// </summary>
         public event EventHandler DbContextChanged;
+
         /// <summary>
         /// Raises the <see cref="DbContextChanged"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextChanged(EventArgs e)
         {
-            if (DbContextChanged != null)
-                DbContextChanged(this, e);
+            DbContextChanged?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs before changes are saved to the database.
         /// </summary>
         public event CancelEventHandler SavingChanges;
+
         /// <summary>
         /// Raises the <see cref="SavingChanges"/> event.
         /// </summary>
         /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnSavingChanges(CancelEventArgs e)
         {
-            if (SavingChanges != null)
-                SavingChanges(this, e);
+            SavingChanges?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs after changes are saved to the database.
         /// </summary>
         public event EventHandler SavedChanges;
+
         /// <summary>
         /// Raises the <see cref="SavedChanges"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnSavedChanges(EventArgs e)
         {
-            if (SavedChanges != null)
-                SavedChanges(this, e);
+            SavedChanges?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs before changes are canceled and values are reloaded from the database.
         /// </summary>
@@ -386,64 +336,66 @@ namespace TestDbApp.EntityFrameworkBinding
         /// Raises the <see cref="CancelingChanges"/> event.
         /// </summary>
         /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
+        /// 
         protected virtual void OnCancelingChanges(CancelEventArgs e)
         {
-            if (CancelingChanges != null)
-                CancelingChanges(this, e);
+            CancelingChanges?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs after changes are canceled and values are reloaded from the database.
         /// </summary>
         public event EventHandler CanceledChanges;
+
         /// <summary>
         /// Raises the <see cref="CanceledChanges"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnCanceledChanges(EventArgs e)
         {
-            if (CanceledChanges != null)
-                CanceledChanges(this, e);
+            CanceledChanges?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs before values are refreshed from the database.
         /// </summary>
         public event CancelEventHandler Refreshing;
+
         /// <summary>
         /// Raises the <see cref="Refreshing"/> event.
         /// </summary>
         /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnRefreshing(CancelEventArgs e)
         {
-            if (Refreshing != null)
-                Refreshing(this, e);
+            Refreshing?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs after values are refreshed from the database.
         /// </summary>
         public event EventHandler Refreshed;
+
         /// <summary>
         /// Raises the <see cref="Refreshed"/> event.
         /// </summary>
         /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnRefreshed(EventArgs e)
         {
-            if (Refreshed != null)
-                Refreshed(this, e);
+            Refreshed?.Invoke(this, e);
         }
+
         /// <summary>
         /// Occurs when an error is detected while loading data from or saving data to the database.
         /// </summary>
         public event EventHandler<DataErrorEventArgs> DataError;
+
         /// <summary>
         /// Raises the <see cref="DataError"/> event.
         /// </summary>
         /// <param name="e"><see cref="DataErrorEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDataError(DataErrorEventArgs e)
         {
-            if (DataError != null)
-            {
-                DataError(this, e);
-            }
+            DataError?.Invoke(this, e);
             if (!e.Handled)
             {
                 throw e.Exception;
@@ -453,99 +405,79 @@ namespace TestDbApp.EntityFrameworkBinding
         #endregion
 
         //-------------------------------------------------------------------------
-        #region ** IListSource
+        #region IListSource Implements
 
-        bool IListSource.ContainsListCollection
-        {
-            get { return true; }
-        }
+        bool IListSource.ContainsListCollection => true;
+
         IList IListSource.GetList()
         {
-            // This method is completely undocumented in MSDN.
-            //
-            // Instead of returning a list of the lists available (nice and logical),
-            // you should return a list with ONE object, which exposes the lists available 
-            // as if they were properties of this ONE object. UGH!
-            //
-            var list = new List<EntitySetTypeDescriptor>();
-            list.Add(new EntitySetTypeDescriptor(this));
+            var list = new List<EntitySetTypeDescriptor> {new EntitySetTypeDescriptor(this)};
             return list;
         }
 
         #endregion
 
         //-------------------------------------------------------------------------
-        #region ** IExtenderProvider
+        #region  IExtenderProvider Implements
 
         /// <summary>
-        /// We can extend DataGridView and C1FlexGrid controls.
+        /// We can extend DataGridView control.
         /// </summary>
         /// <param name="extendee"></param>
         /// <returns></returns>
         bool IExtenderProvider.CanExtend(object extendee)
         {
-            if (extendee is Control)
+            if (!(extendee is Control)) return false;
+            for (var type = extendee.GetType(); type != null; type = type.BaseType)
             {
-                for (var type = extendee.GetType(); type != null; type = type.BaseType)
+                // DataGridView
+                if (type == typeof(DataGridView))
                 {
-                    // DataGridView
-                    if (type == typeof(DataGridView))
-                    {
-                        return true;
-                    }
-
-                    // C1FlexGrid
-                    var typeName = type.ToString();
-                    if (typeName.IndexOf("C1FlexGrid", StringComparison.Ordinal) > -1)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;
         }
+
         /// <summary>
-        /// Add or remove automatic data maps for the columns on a C1FlexGrid control.
+        /// Add or remove automatic data maps for the columns on a DataGridView control.
         /// </summary>
-        /// <param name="grid">DataGridView or C1FlexGrid control.</param>
+        /// <param name="grid">DataGridView control.</param>
         /// <param name="autoLookups">Whether to enable or disable automatic data maps for the columns on the <paramref name="grid"/> control.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetAutoLookup(Control grid, bool autoLookups)
         {
             var oldAutoLookups = _autoLookup.ContainsKey(grid);
-            if (oldAutoLookups != autoLookups)
+            if (oldAutoLookups == autoLookups) return;
+            if (autoLookups)
             {
-                if (autoLookups)
-                {
-                    _autoLookup.Add(grid, true);
-                }
-                else
-                {
-                    _autoLookup.Remove(grid);
-                }
-                if (!DesignMode)
-                {
-                    EnableAutoLookup(grid, autoLookups);
-                }
+                _autoLookup.Add(grid, true);
+            }
+            else
+            {
+                _autoLookup.Remove(grid);
+            }
+            if (!DesignMode)
+            {
+                EnableAutoLookup(grid, autoLookups);
             }
         }
+
         /// <summary>
-        /// Gets a value that determines whether automatic data maps are enabled for a given C1FlexGrid control.
+        /// Gets a value that determines whether automatic data maps are enabled for a given DataGridView control.
         /// </summary>
-        /// <param name="grid">DataGridView or C1FlexGrid control.</param>
+        /// <param name="grid">DataGridView control.</param>
         /// <returns>Whether automatic data maps are is enabled for the columns on the <paramref name="grid"/> control.</returns>
-        [
-            EditorBrowsable(EditorBrowsableState.Never),
-            DefaultValue(false),
-        ]
+        [EditorBrowsable(EditorBrowsableState.Never), DefaultValue(false)]
         public bool GetAutoLookup(Control grid)
         {
             return _autoLookup.ContainsKey(grid);
         }
 
         // enabled/disable automatic data maps for a control
-        Dictionary<Control, bool> _autoLookup = new Dictionary<Control, bool>();
-        static void EnableAutoLookup(Control control, bool map)
+        private readonly Dictionary<Control, bool> _autoLookup = new Dictionary<Control, bool>();
+
+        private static void EnableAutoLookup(Control control, bool map)
         {
             // get event handlers
             var ctlType = control.GetType();
@@ -574,132 +506,84 @@ namespace TestDbApp.EntityFrameworkBinding
                 bcChanged.RemoveEventHandler(control, handler);
             }
         }
-        static void control_DataSourceChanged(object sender, EventArgs e)
+
+        private static void control_DataSourceChanged(object sender, EventArgs e)
         {
             CustomizeGrid(sender as Control);
         }
 
-        // customize the columns of a DataGridView or C1FlexGrid control 
-        // use dynamic type for C1FlexGrid in order to avoid dependencies.
-        static void CustomizeGrid(Control ctl)
+        // customize the columns of a DataGridView control 
+        private static void CustomizeGrid(IDisposable ctl)
         {
             dynamic grid = ctl;
-            if (grid.DataSource != null && grid.BindingContext != null)
+            if (grid.DataSource == null || grid.BindingContext == null) return;
+            // get currency manager
+            CurrencyManager cm = null;
+            try
             {
-                // get currency manager
-                CurrencyManager cm = null;
-                try
-                {
-                    cm = grid.BindingContext[grid.DataSource, grid.DataMember] as CurrencyManager;
-                }
-                catch { }
+                cm = grid.BindingContext[grid.DataSource, grid.DataMember] as CurrencyManager;
+            }
+            catch { }
 
-                // get source list from currency manager bound directly to EntityDataSource
-                var list = cm != null ? cm.List as IEntityBindingList : null;
+            // get source list from currency manager bound directly to EntityDataSource
+            var list = cm?.List as IEntityBindingList;
 
-                // if failed, try binding via BindingSource component
-                if (list == null && cm.List is BindingSource)
-                {
-                    list = ((BindingSource)(cm.List)).List as IEntityBindingList;
-                }
+            // if failed, try binding via BindingSource component
+            if (cm != null && (list == null && cm.List is BindingSource))
+            {
+                list = ((BindingSource)(cm.List)).List as IEntityBindingList;
+            }
 
-                // customize the columns
-                if (list != null && list.DataSource != null)
-                {
-                    var entType = list.ElementType;
-                    var entDataSource = list.DataSource;
+            // customize the columns
+            if (list?.DataSource == null) return;
+            var entType = list.ElementType;
+            var entDataSource = list.DataSource;
 
-                    // customize grid columns
-                    var dgv = ctl as DataGridView;
-                    if (dgv != null)
-                    {
-                        // customize DataGridView
-                        CustomizeDataGridView(dgv, entType, entDataSource);
-                    }
-                    else
-                    {
-                        // customize C1FlexGrid
-                        CustomizeFlexGrid(ctl, entType, entDataSource);
-                    }
-                }
+            // customize grid columns
+            var dgv = ctl as DataGridView;
+            if (dgv != null)
+            {
+                // customize DataGridView
+                CustomizeDataGridView(dgv, entType, entDataSource);
             }
         }
 
         // customize the columns of a DataGridView
-        static void CustomizeDataGridView(DataGridView dgv, Type entType, EntityDataSource entDataSource)
+        private static void CustomizeDataGridView(DataGridView dgv, Type entType, EntityDataSource entDataSource)
         {
             // configure columns
             for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
             {
-                // get column
                 var c = dgv.Columns[colIndex];
 
-                // if the column is a key, make it read-only
                 var pi = entType.GetProperty(c.DataPropertyName);
-                if (pi != null)
+                if (pi == null) continue;
+                var atts = pi.GetCustomAttributes(typeof(EdmScalarPropertyAttribute), false);
+                if (atts.Length > 0)
                 {
-                    var atts = pi.GetCustomAttributes(typeof(EdmScalarPropertyAttribute), false);
-                    if (atts.Length > 0)
+                    var att = atts[0] as EdmScalarPropertyAttribute;
+                    if (att != null && att.EntityKeyProperty)
                     {
-                        var att = atts[0] as EdmScalarPropertyAttribute;
-                        if (att.EntityKeyProperty)
-                        {
-                            c.ReadOnly = true;
-                        }
-                    }
-
-                    // if the column holds entities, give it a data map
-                    var type = pi.PropertyType;
-                    if (!type.IsPrimitive)
-                        //if (typeof(EntityObject).IsAssignableFrom(type))
-                    {
-                        var map = entDataSource.GetLookupDictionary(type);
-                        if (map != null)
-                        {
-                            var col = new DataGridViewComboBoxColumn();
-                            col.HeaderText = c.HeaderText;
-                            col.DataPropertyName = c.DataPropertyName;
-                            col.Width = c.Width;
-                            col.DefaultCellStyle = c.DefaultCellStyle;
-                            col.DataSource = map;
-                            col.ValueMember = "Key";
-                            col.DisplayMember = "Value";
-                            dgv.Columns.RemoveAt(colIndex);
-                            dgv.Columns.Insert(colIndex, col);
-                        }
+                        c.ReadOnly = true;
                     }
                 }
-            }
-        }
 
-        // customize the columns of a C1FlexGrid control 
-        // use dynamic type in order to avoid dependencies.
-        static void CustomizeFlexGrid(dynamic flex, Type entType, EntityDataSource entDataSource)
-        {
-            // configure columns
-            foreach (dynamic c in flex.Cols)
-            {
-                // if the column is a key, make it read-only
-                var pi = entType.GetProperty(c.Name);
-                if (pi != null)
-                {
-                    var atts = pi.GetCustomAttributes(typeof(EdmScalarPropertyAttribute), false);
-                    if (atts.Length > 0)
-                    {
-                        var att = atts[0] as EdmScalarPropertyAttribute;
-                        if (att.EntityKeyProperty)
-                        {
-                            c.AllowEditing = false;
-                        }
-                    }
-
-                    // if the column holds entities, give it a data map
-                    var type = pi.PropertyType;
-                    if (!type.IsPrimitive)// typeof(EntityObject).IsAssignableFrom(type))
-                    {
-                        c.DataMap = entDataSource.GetLookupDictionary(type);
-                    }
-                }
+                var type = pi.PropertyType;
+                if (type.IsPrimitive) continue;
+                var map = entDataSource.GetLookupDictionary(type);
+                if (map == null) continue;
+                var col = new DataGridViewComboBoxColumn
+                          {
+                              HeaderText = c.HeaderText,
+                              DataPropertyName = c.DataPropertyName,
+                              Width = c.Width,
+                              DefaultCellStyle = c.DefaultCellStyle,
+                              DataSource = map,
+                              ValueMember = "Key",
+                              DisplayMember = "Value"
+                          };
+                dgv.Columns.RemoveAt(colIndex);
+                dgv.Columns.Insert(colIndex, col);
             }
         }
 
@@ -716,10 +600,12 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             Exception = x;
         }
+
         /// <summary>
         /// Gets or sets the <see cref="Exception"/> that triggered the event.
         /// </summary>
         public Exception Exception { get; set; }
+
         /// <summary>
         /// Whether the error was handled and the source exception should be ignored.
         /// </summary>
