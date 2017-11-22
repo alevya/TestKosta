@@ -53,6 +53,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tb_Position = new System.Windows.Forms.TextBox();
+            this.p_EmployeeToDepartment = new System.Windows.Forms.Panel();
+            this.p_Department = new System.Windows.Forms.Panel();
+            this.tv_Department = new System.Windows.Forms.TreeView();
+            this.tb_Department = new System.Windows.Forms.TextBox();
+            this.l_Department = new System.Windows.Forms.Label();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,10 +75,12 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tc_Organization.SuspendLayout();
+            this.tp_Department.SuspendLayout();
             this.tp_Employee.SuspendLayout();
             this.p_Employee.SuspendLayout();
             this.gb_EmployeeDetails.SuspendLayout();
             this.p_DocInfo.SuspendLayout();
+            this.p_Department.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +118,8 @@
             // 
             // tp_Department
             // 
+            this.tp_Department.Controls.Add(this.p_Department);
+            this.tp_Department.Controls.Add(this.p_EmployeeToDepartment);
             this.tp_Department.Location = new System.Drawing.Point(4, 22);
             this.tp_Department.Name = "tp_Department";
             this.tp_Department.Padding = new System.Windows.Forms.Padding(3);
@@ -142,6 +151,8 @@
             // 
             // gb_EmployeeDetails
             // 
+            this.gb_EmployeeDetails.Controls.Add(this.tb_Department);
+            this.gb_EmployeeDetails.Controls.Add(this.l_Department);
             this.gb_EmployeeDetails.Controls.Add(this.tb_Position);
             this.gb_EmployeeDetails.Controls.Add(this.p_DocInfo);
             this.gb_EmployeeDetails.Controls.Add(this.l_Position);
@@ -170,7 +181,7 @@
             this.p_DocInfo.Controls.Add(this.l_DocSeries);
             this.p_DocInfo.Controls.Add(this.tb_DocSeries);
             this.p_DocInfo.Controls.Add(this.tb_DocNumber);
-            this.p_DocInfo.Location = new System.Drawing.Point(6, 179);
+            this.p_DocInfo.Location = new System.Drawing.Point(6, 197);
             this.p_DocInfo.Name = "p_DocInfo";
             this.p_DocInfo.Size = new System.Drawing.Size(261, 76);
             this.p_DocInfo.TabIndex = 14;
@@ -345,6 +356,53 @@
             this.tb_Position.Size = new System.Drawing.Size(142, 20);
             this.tb_Position.TabIndex = 15;
             // 
+            // p_EmployeeToDepartment
+            // 
+            this.p_EmployeeToDepartment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.p_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Right;
+            this.p_EmployeeToDepartment.Location = new System.Drawing.Point(457, 3);
+            this.p_EmployeeToDepartment.Name = "p_EmployeeToDepartment";
+            this.p_EmployeeToDepartment.Size = new System.Drawing.Size(419, 540);
+            this.p_EmployeeToDepartment.TabIndex = 0;
+            // 
+            // p_Department
+            // 
+            this.p_Department.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.p_Department.Controls.Add(this.tv_Department);
+            this.p_Department.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.p_Department.Location = new System.Drawing.Point(3, 3);
+            this.p_Department.Name = "p_Department";
+            this.p_Department.Size = new System.Drawing.Size(454, 540);
+            this.p_Department.TabIndex = 1;
+            // 
+            // tv_Department
+            // 
+            this.tv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tv_Department.Location = new System.Drawing.Point(0, 0);
+            this.tv_Department.Name = "tv_Department";
+            this.tv_Department.Size = new System.Drawing.Size(452, 538);
+            this.tv_Department.TabIndex = 0;
+            // 
+            // tb_Department
+            // 
+            this.tb_Department.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.DepartmentName", true));
+            this.tb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Department.Location = new System.Drawing.Point(125, 160);
+            this.tb_Department.Name = "tb_Department";
+            this.tb_Department.Size = new System.Drawing.Size(142, 20);
+            this.tb_Department.TabIndex = 17;
+            // 
+            // l_Department
+            // 
+            this.l_Department.AutoSize = true;
+            this.l_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_Department.Location = new System.Drawing.Point(23, 159);
+            this.l_Department.Name = "l_Department";
+            this.l_Department.Size = new System.Drawing.Size(38, 13);
+            this.l_Department.TabIndex = 16;
+            this.l_Department.Text = "Отдел";
+            this.l_Department.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // dgv_Employee
             // 
             this.dgv_Employee.AutoGenerateColumns = false;
@@ -450,12 +508,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tc_Organization.ResumeLayout(false);
+            this.tp_Department.ResumeLayout(false);
             this.tp_Employee.ResumeLayout(false);
             this.p_Employee.ResumeLayout(false);
             this.gb_EmployeeDetails.ResumeLayout(false);
             this.gb_EmployeeDetails.PerformLayout();
             this.p_DocInfo.ResumeLayout(false);
             this.p_DocInfo.PerformLayout();
+            this.p_Department.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
             this.ResumeLayout(false);
 
@@ -499,6 +559,11 @@
         private System.Windows.Forms.Label l_Position;
         private System.Windows.Forms.Panel p_DocInfo;
         private System.Windows.Forms.TextBox tb_Position;
+        private System.Windows.Forms.Panel p_Department;
+        private System.Windows.Forms.Panel p_EmployeeToDepartment;
+        private System.Windows.Forms.TreeView tv_Department;
+        private System.Windows.Forms.TextBox tb_Department;
+        private System.Windows.Forms.Label l_Department;
     }
 }
 

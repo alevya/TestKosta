@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestDbApp.Model
 {
     [Table("Empoyee")]
     public class Employee
     {
-        private Department _department;
-
         public decimal ID { get; set; }
         public Guid DepartmentID { get; set; }
 
@@ -24,6 +18,13 @@ namespace TestDbApp.Model
         public string DocNumber { get; set; }
         public string Position { get; set; }
         public virtual Department Department { get; set; }
+
+        [NotMapped]
+        public string DepartmentName
+        {
+            get => Department.Name;
+            set { }
+        }
 
         //public Department Department
         //{

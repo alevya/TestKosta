@@ -15,6 +15,12 @@ namespace TestDbApp
         public MainForm()
         {
             InitializeComponent();
+            tv_Department.HandleCreated += TvDepartmentOnHandleCreated;
+        }
+
+        private void TvDepartmentOnHandleCreated(object sender, EventArgs eventArgs)
+        {
+            Binding bind = new Binding("Tag", entityDataSource1, "Departments");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
