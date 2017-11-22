@@ -54,9 +54,25 @@ namespace TestDbApp
             _populateTreeView();
 
             if (tv_Department.Nodes.Count > 0)
+            {
                 tv_Department.SelectedNode = tv_Department.Nodes[0];
+                _bindingEmployeeDetails();
+            }
+                
             //editBase1.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
             //textBox7.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
+        }
+
+        private void _bindingEmployeeDetails()
+        {
+            eb_FirstName.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
+            eb_SurName.DataBindings.Add(new Binding("Text", bindingSource1, "SurName"));
+            eb_Patronymic.DataBindings.Add(new Binding("Text", bindingSource1, "Patronymic"));
+            eb_Department.DataBindings.Add(new Binding("Text", bindingSource1, "DepartmentName"));
+            eb_Position.DataBindings.Add(new Binding("Text", bindingSource1, "Position"));
+            eb_DocNumber.DataBindings.Add(new Binding("Text", bindingSource1, "DocNumber"));
+            eb_DocSeries.DataBindings.Add(new Binding("Text", bindingSource1, "DocSeries"));
+            dtp_DateBirth.DataBindings.Add(new Binding("Text", bindingSource1, "DateOfBirth"));
         }
 
         private void _populateTreeView()
