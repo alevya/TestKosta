@@ -52,6 +52,7 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.tb_Position = new System.Windows.Forms.TextBox();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +65,6 @@
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource1 = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
-            this.cb_Position = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -142,8 +142,8 @@
             // 
             // gb_EmployeeDetails
             // 
+            this.gb_EmployeeDetails.Controls.Add(this.tb_Position);
             this.gb_EmployeeDetails.Controls.Add(this.p_DocInfo);
-            this.gb_EmployeeDetails.Controls.Add(this.cb_Position);
             this.gb_EmployeeDetails.Controls.Add(this.l_Position);
             this.gb_EmployeeDetails.Controls.Add(this.tb_Patronymic);
             this.gb_EmployeeDetails.Controls.Add(this.l_Patronymic);
@@ -336,6 +336,15 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // tb_Position
+            // 
+            this.tb_Position.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "Employees.Position", true));
+            this.tb_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Position.Location = new System.Drawing.Point(125, 134);
+            this.tb_Position.Name = "tb_Position";
+            this.tb_Position.Size = new System.Drawing.Size(142, 20);
+            this.tb_Position.TabIndex = 15;
+            // 
             // dgv_Employee
             // 
             this.dgv_Employee.AutoGenerateColumns = false;
@@ -428,17 +437,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(TestDbApp.Model.TestDbContext);
             // 
-            // cb_Position
-            // 
-            this.cb_Position.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.entityDataSource1, "Employees.Department", true));
-            this.cb_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cb_Position.FormattingEnabled = true;
-            this.cb_Position.Location = new System.Drawing.Point(125, 133);
-            this.cb_Position.Name = "cb_Position";
-            this.cb_Position.Size = new System.Drawing.Size(142, 21);
-            this.cb_Position.TabIndex = 13;
-            this.cb_Position.ValueMember = "Employees.Department";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,9 +496,9 @@
         private System.Windows.Forms.Label l_DocNumber;
         private System.Windows.Forms.TextBox tb_DocSeries;
         private System.Windows.Forms.Label l_DocSeries;
-        private System.Windows.Forms.ComboBox cb_Position;
         private System.Windows.Forms.Label l_Position;
         private System.Windows.Forms.Panel p_DocInfo;
+        private System.Windows.Forms.TextBox tb_Position;
     }
 }
 
