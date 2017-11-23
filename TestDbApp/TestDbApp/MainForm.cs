@@ -24,12 +24,12 @@ namespace TestDbApp
 
             var employees = new List<Employee>();
 
-            var l = entityDataSource1.EntitySets["Departments"].Cast<Department>().ToList();
+            var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
             
             GetEmployees(employees, selDepartment, l);
-            var bindingList = entityDataSource1.CreateView(employees);
-            bindingSource1.DataSource = bindingList;
-            dgv_EmployeeToDepartment.DataSource = bindingSource1; //bindingList;
+            var bindingList = entityDataSource_Org.CreateView(employees);
+            bindSrc_DepartmentToEmployee.DataSource = bindingList;
+            dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee; 
             
         }
 
@@ -49,7 +49,7 @@ namespace TestDbApp
         private void OnLoad(object sender, EventArgs eventArgs)
         {
             
-            var bind = new Binding("Tag", entityDataSource1, "Departments");
+            var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
             _populateTreeView();
 
@@ -58,21 +58,18 @@ namespace TestDbApp
                 tv_Department.SelectedNode = tv_Department.Nodes[0];
                 _bindingEmployeeDetails();
             }
-                
-            //editBase1.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
-            //textBox7.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
         }
 
         private void _bindingEmployeeDetails()
         {
-            eb_FirstName.DataBindings.Add(new Binding("Text", bindingSource1, "FirstName"));
-            eb_SurName.DataBindings.Add(new Binding("Text", bindingSource1, "SurName"));
-            eb_Patronymic.DataBindings.Add(new Binding("Text", bindingSource1, "Patronymic"));
-            eb_Department.DataBindings.Add(new Binding("Text", bindingSource1, "DepartmentName"));
-            eb_Position.DataBindings.Add(new Binding("Text", bindingSource1, "Position"));
-            eb_DocNumber.DataBindings.Add(new Binding("Text", bindingSource1, "DocNumber"));
-            eb_DocSeries.DataBindings.Add(new Binding("Text", bindingSource1, "DocSeries"));
-            dtp_DateBirth.DataBindings.Add(new Binding("Text", bindingSource1, "DateOfBirth"));
+            ec_FirstName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_FirstName.AttributeName));
+            ec_SurName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_SurName.AttributeName));
+            ec_Patronymic.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_Patronymic.AttributeName));
+            ec_DepartmentName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DepartmentName.AttributeName));
+            ec_Position.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_Position.AttributeName));
+            ec_DocNumber.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocNumber.AttributeName));
+            ec_DocSeries.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocSeries.AttributeName));
+            dtp_DateBirth.DataBindings.Add(new Binding("Text", bindSrc_DepartmentToEmployee, "DateOfBirth"));
         }
 
         private void _populateTreeView()
@@ -112,17 +109,17 @@ namespace TestDbApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            entityDataSource1.SaveChanges();
+            entityDataSource_Org.SaveChanges();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            entityDataSource1.CancelChanges();
+            entityDataSource_Org.CancelChanges();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            entityDataSource1.Refresh();
+            entityDataSource_Org.Refresh();
 
         }
 

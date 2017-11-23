@@ -1,15 +1,23 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace TestDbApp
 {
     public partial class EditControl : UserControl
     {
+        private string _attributeName;
+        private Type _dataSourceType;
+        private BindingSource _bindingSource;
+
         public EditControl()
         {
             InitializeComponent();
+            if(DesignMode)
+                return;
+
             tb_value.HandleCreated += TbValueOnHandleCreated;
             tb_value.HandleDestroyed += TbValueOnHandleDestroyed;
         }
@@ -23,19 +31,80 @@ namespace TestDbApp
             set => tb_value.Multiline = value;
         }
 
+        [Description("Имя поля для привязки к источнику данных")]
+        public string AttributeName
+        {
+            get => _attributeName;
+            set => _attributeName = value;
+        }
+
+        public object Value { get => tb_value.Text; set => tb_value.Text = value as string;
+        }
+
+        //[Description("Источник данных")]
+        //[Bindable(true)]
+        //[TypeConverter(typeof(BindingSource))]
+        //public Type DataSourceType
+        //{
+        //    get => _dataSourceType;
+        //    set
+        //    {
+        //        if(value == _dataSourceType) return;
+        //        OnDataSourceTypeChanging(EventArgs.Empty);
+        //        _bindingSource = null;
+        //        _dataSourceType = value;
+        //        OnDataSourceTypeChanged(EventArgs.Empty);
+        //    }
+        //}
+
+        //[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        //public BindingSource BindingSource
+        //{
+        //    get
+        //    {
+        //        if (_bindingSource != null || _dataSourceType == null || DesignMode) return _bindingSource;
+        //        try
+        //        {
+        //            BindingSource = Activator.CreateInstance(_dataSourceType) as BindingSource;
+        //        }
+        //        catch { }
+        //        return _bindingSource;
+        //    }
+        //    set
+        //    {
+        //        if (Equals(_bindingSource, value)) return;
+
+        //        OnBindingSourceChanging(EventArgs.Empty);
+
+        //        _bindingSource = value;
+        //        _dataSourceType = _bindingSource?.GetType();
+        //        // generate object sets
+        //        //GenerateEntitySets(_ctxType);
+
+        //        OnBindingSourceChanged(EventArgs.Empty);
+        //    }
+        //}
+
         #endregion
 
         #region Event handlers
 
         private void TbValueOnHandleCreated(object sender, EventArgs eventArgs)
         {
+            tb_value.TextChanged += TbValueOnTextChanged;
             tb_value.Validating += TbValueOnValidating;
             tb_value.KeyPress += TbValueOnKeyPress;
             tb_value.KeyUp += TbValueOnKeyUp;
         }
 
+        private void TbValueOnTextChanged(object sender, EventArgs eventArgs)
+        {
+            
+        }
+
         private void TbValueOnHandleDestroyed(object sender, EventArgs eventArgs)
         {
+            tb_value.TextChanged -= TbValueOnTextChanged;
             tb_value.Validating -= TbValueOnValidating;
             tb_value.KeyPress -= TbValueOnKeyPress;
             tb_value.KeyUp -= TbValueOnKeyUp;
@@ -43,7 +112,7 @@ namespace TestDbApp
 
         private void TbValueOnKeyPress(object sender, KeyPressEventArgs keyPressEventArgs)
         {
-            _key_press_validate(tb_value, keyPressEventArgs);
+            //_key_press_validate(tb_value, keyPressEventArgs);
         }
 
         private void TbValueOnKeyUp(object sender, KeyEventArgs keyEventArgs)
@@ -56,7 +125,61 @@ namespace TestDbApp
             _validate(cancelEventArgs, sender as Control);
         }
 
+        ///// <summary>
+        ///// Occurs before the value of the <see cref="DataSourceType"/> property changes.
+        ///// </summary>
+        //public event EventHandler DataSourceTypeChanging;
 
+        ///// <summary>
+        ///// Raises the <see cref="DataSourceTypeChanging"/> event.
+        ///// </summary>
+        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
+        //protected virtual void OnDataSourceTypeChanging(EventArgs e)
+        //{
+        //    DataSourceTypeChanging?.Invoke(this, e);
+        //}
+
+        ///// <summary>
+        ///// Occurs after the value of the <see cref=""/> property changes.
+        ///// </summary>
+        //public event EventHandler DataSourceTypeChanged;
+
+        ///// <summary>
+        ///// Raises the <see cref="DataSourceTypeChanged"/> event.
+        ///// </summary>
+        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
+        //protected virtual void OnDataSourceTypeChanged(EventArgs e)
+        //{
+        //    DataSourceTypeChanged?.Invoke(this, e);
+        //}
+
+        ///// <summary>
+        ///// Occurs before the value of the <see cref="BindingSource"/> property changes.
+        ///// </summary>
+        //public event EventHandler BindingSourceChanging;
+
+        ///// <summary>
+        ///// Raises the <see cref=" BindingSourceChanging"/> event.
+        ///// </summary>
+        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
+        //protected virtual void OnBindingSourceChanging(EventArgs e)
+        //{
+        //    BindingSourceChanging?.Invoke(this, e);
+        //}
+
+        ///// <summary>
+        ///// Occurs after the value of the <see cref="BindingSource"/> property changes.
+        ///// </summary>
+        //public event EventHandler BindingSourceChanged;
+
+        ///// <summary>
+        ///// Raises the <see cref="BindingSourceChanged"/> event.
+        ///// </summary>
+        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
+        //protected virtual void OnBindingSourceChanged(EventArgs e)
+        //{
+        //    BindingSourceChanged?.Invoke(this, e);
+        //}
 
         #endregion
 
