@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestDbApp.Model
 {
@@ -44,10 +41,12 @@ namespace TestDbApp.Model
             _employees = new HashSet<Employee>();
         }
 
+        [Required, Key]
         public Guid ID { get; set; }
         public Guid? ParentDepartmentID { get; set; }
 
         public string Code { get; set; }
+        [Required]
         public string Name { get; set; }
 
         public ICollection<Employee> Employees

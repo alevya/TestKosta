@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestDbApp.Model
@@ -6,16 +7,22 @@ namespace TestDbApp.Model
     [Table("Empoyee")]
     public class Employee
     {
+        [Required, Key]
         public decimal ID { get; set; }
+        [Required]
         public Guid DepartmentID { get; set; }
 
+        [Required, MaxLength(50)]
         public string SurName { get; set; }
+        [Required, MaxLength(50)]
         public string FirstName { get; set; }
+        [MaxLength(50)]
         public string Patronymic { get; set; }
         public DateTime DateOfBirth { get; set; }
 
         public string DocSeries { get; set; }
         public string DocNumber { get; set; }
+        [Required]
         public string Position { get; set; }
         public virtual Department Department { get; set; }
 
