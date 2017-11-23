@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestDbApp.Common;
 using TestDbApp.Model;
 
 namespace TestDbApp
@@ -14,13 +15,35 @@ namespace TestDbApp
             InitializeComponent();
             Load += OnLoad;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
-            bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
+            //bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
+            bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
+          
+            dtp_DateBirth.ValueChanged += DtpDateBirthOnValueChanged;
+
+            EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
+        }
+
+        private void BindSrcDepartmentToEmployeeOnCurrentItemChanged(object sender, EventArgs eventArgs)
+        {
+            
+        }
+
+        private void DtpDateBirthOnValueChanged(object sender, EventArgs eventArgs)
+        {
+            //var dtBirth = dtp_DateBirth.Value;
+            var diff = new DifferenceDate(dtp_DateBirth.Value, DateTime.Now);
+            tb_Age.Text = Convert.ToString(diff.Years);
         }
 
         private void BindSrcDepartmentToEmployeeOnCurrentChanged(object sender, EventArgs eventArgs)
         {
-            
+            var currentEmpl = bindSrc_DepartmentToEmployee.Current as Employee;
+            if(currentEmpl == null) return;
+
+            //var dtBirth = currentEmpl.DateOfBirth;
+            //var diff = new DifferenceDate(dtBirth, DateTime.Now);
+            //tb_Age.Text = Convert.ToString(diff.Years);
         }
 
         private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
@@ -30,9 +53,8 @@ namespace TestDbApp
             if(selDepartment == null) return;
 
             var employees = new List<Employee>();
-
             var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
-            
+
             GetEmployees(employees, selDepartment, l);
             var bindingList = entityDataSource_Org.CreateView(employees);
             bindSrc_DepartmentToEmployee.DataSource = bindingList;
@@ -76,6 +98,7 @@ namespace TestDbApp
             ec_DocNumber.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocNumber.AttributeName));
             ec_DocSeries.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocSeries.AttributeName));
             dtp_DateBirth.DataBindings.Add(new Binding("Text", bindSrc_DepartmentToEmployee, "DateOfBirth"));
+            bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
         }
 
         private void BindSrcDepartmentToEmployeeOnDataMemberChanged(object sender, EventArgs eventArgs)

@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DifferenceDate.cs" />
     <Compile Include="EditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +81,12 @@
     </Compile>
     <Compile Include="EntityFrameworkBinding\DbContextTypeConverter.cs" />
     <Compile Include="EntityFrameworkBinding\EntityBindingList.cs" />
+    <Compile Include="EntityFrameworkBinding\EntityBindingNavigator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EntityFrameworkBinding\EntityBindingNavigator.Designer.cs">
+      <DependentUpon>EntityBindingNavigator.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameworkBinding\EntityDataSource.cs">
       <SubType>Component</SubType>
     </Compile>

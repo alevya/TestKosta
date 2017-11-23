@@ -85,6 +85,7 @@
             this.departmentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
+            this.EmployeeOfDepatmentNavigator = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
             this.ec_DepartmentName = new TestDbApp.EditControl();
             this.ec_Position = new TestDbApp.EditControl();
             this.ec_Patronymic = new TestDbApp.EditControl();
@@ -180,6 +181,7 @@
             // splCnt.Panel2
             // 
             this.splCnt.Panel2.Controls.Add(this.dgv_EmployeeToDepartment);
+            this.splCnt.Panel2.Controls.Add(this.EmployeeOfDepatmentNavigator);
             this.splCnt.Panel2.Controls.Add(this.gb_Employee);
             this.splCnt.Size = new System.Drawing.Size(1257, 572);
             this.splCnt.SplitterDistance = 442;
@@ -624,10 +626,10 @@
             this.dgv_EmployeeToDepartment.DataMember = "Employees";
             this.dgv_EmployeeToDepartment.DataSource = this.entityDataSource_Org;
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 0);
+            this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
             this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
             this.dgv_EmployeeToDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(811, 420);
+            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(811, 395);
             this.dgv_EmployeeToDepartment.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn1
@@ -704,6 +706,14 @@
             // entityDataSource_Org
             // 
             this.entityDataSource_Org.DbContextType = typeof(TestDbApp.Model.TestDbContext);
+            // 
+            // EmployeeOfDepatmentNavigator
+            // 
+            this.EmployeeOfDepatmentNavigator.Location = new System.Drawing.Point(0, 0);
+            this.EmployeeOfDepatmentNavigator.Name = "EmployeeOfDepatmentNavigator";
+            this.EmployeeOfDepatmentNavigator.Size = new System.Drawing.Size(811, 25);
+            this.EmployeeOfDepatmentNavigator.TabIndex = 2;
+            this.EmployeeOfDepatmentNavigator.Text = "entityBindingNavigator1";
             // 
             // ec_DepartmentName
             // 
@@ -890,6 +900,7 @@
             this.tp_Department.ResumeLayout(false);
             this.splCnt.Panel1.ResumeLayout(false);
             this.splCnt.Panel2.ResumeLayout(false);
+            this.splCnt.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt)).EndInit();
             this.splCnt.ResumeLayout(false);
             this.gb_Employee.ResumeLayout(false);
@@ -986,6 +997,7 @@
         private EditControl ec_DocNumber;
         private System.Windows.Forms.TextBox tb_Age;
         private System.Windows.Forms.Label l_Age;
+        private EntityFrameworkBinding.EntityBindingNavigator EmployeeOfDepatmentNavigator;
     }
 }
 
