@@ -208,9 +208,9 @@
             this.gb_Employee.Controls.Add(this.dtp_DateBirth);
             this.gb_Employee.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gb_Employee.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gb_Employee.Location = new System.Drawing.Point(0, 433);
+            this.gb_Employee.Location = new System.Drawing.Point(0, 426);
             this.gb_Employee.Name = "gb_Employee";
-            this.gb_Employee.Size = new System.Drawing.Size(811, 139);
+            this.gb_Employee.Size = new System.Drawing.Size(811, 146);
             this.gb_Employee.TabIndex = 1;
             this.gb_Employee.TabStop = false;
             this.gb_Employee.Text = "Данные сотрудника";
@@ -223,7 +223,7 @@
             this.panel1.Controls.Add(this.ec_DocNumber);
             this.panel1.Controls.Add(this.lDocNumber);
             this.panel1.Controls.Add(this.lDocSeries);
-            this.panel1.Location = new System.Drawing.Point(527, 11);
+            this.panel1.Location = new System.Drawing.Point(527, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(278, 75);
             this.panel1.TabIndex = 27;
@@ -232,7 +232,7 @@
             // 
             this.lDateOfBirth.AutoSize = true;
             this.lDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDateOfBirth.Location = new System.Drawing.Point(16, 108);
+            this.lDateOfBirth.Location = new System.Drawing.Point(16, 120);
             this.lDateOfBirth.Name = "lDateOfBirth";
             this.lDateOfBirth.Size = new System.Drawing.Size(86, 13);
             this.lDateOfBirth.TabIndex = 19;
@@ -243,7 +243,7 @@
             // 
             this.dtp_DateBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource_Org, "Employees.DateOfBirth", true));
             this.dtp_DateBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dtp_DateBirth.Location = new System.Drawing.Point(112, 108);
+            this.dtp_DateBirth.Location = new System.Drawing.Point(112, 120);
             this.dtp_DateBirth.Name = "dtp_DateBirth";
             this.dtp_DateBirth.Size = new System.Drawing.Size(148, 20);
             this.dtp_DateBirth.TabIndex = 18;
@@ -511,7 +511,7 @@
             // 
             this.lFirstName.AutoSize = true;
             this.lFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lFirstName.Location = new System.Drawing.Point(16, 49);
+            this.lFirstName.Location = new System.Drawing.Point(16, 62);
             this.lFirstName.Name = "lFirstName";
             this.lFirstName.Size = new System.Drawing.Size(29, 13);
             this.lFirstName.TabIndex = 37;
@@ -522,7 +522,7 @@
             // 
             this.lPatronymic.AutoSize = true;
             this.lPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPatronymic.Location = new System.Drawing.Point(16, 73);
+            this.lPatronymic.Location = new System.Drawing.Point(16, 86);
             this.lPatronymic.Name = "lPatronymic";
             this.lPatronymic.Size = new System.Drawing.Size(54, 13);
             this.lPatronymic.TabIndex = 38;
@@ -533,7 +533,7 @@
             // 
             this.lSurName.AutoSize = true;
             this.lSurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lSurName.Location = new System.Drawing.Point(16, 23);
+            this.lSurName.Location = new System.Drawing.Point(16, 36);
             this.lSurName.Name = "lSurName";
             this.lSurName.Size = new System.Drawing.Size(56, 13);
             this.lSurName.TabIndex = 39;
@@ -544,7 +544,7 @@
             // 
             this.lPosition.AutoSize = true;
             this.lPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPosition.Location = new System.Drawing.Point(274, 23);
+            this.lPosition.Location = new System.Drawing.Point(274, 36);
             this.lPosition.Name = "lPosition";
             this.lPosition.Size = new System.Drawing.Size(65, 13);
             this.lPosition.TabIndex = 40;
@@ -555,7 +555,7 @@
             // 
             this.lDepartment.AutoSize = true;
             this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(274, 49);
+            this.lDepartment.Location = new System.Drawing.Point(274, 62);
             this.lDepartment.Name = "lDepartment";
             this.lDepartment.Size = new System.Drawing.Size(38, 13);
             this.lDepartment.TabIndex = 41;
@@ -588,7 +588,7 @@
             // 
             this.ec_DepartmentName.AttributeName = "DepartmentName";
             this.ec_DepartmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_DepartmentName.Location = new System.Drawing.Point(345, 42);
+            this.ec_DepartmentName.Location = new System.Drawing.Point(345, 55);
             this.ec_DepartmentName.Multiline = false;
             this.ec_DepartmentName.Name = "ec_DepartmentName";
             this.ec_DepartmentName.Size = new System.Drawing.Size(166, 22);
@@ -599,7 +599,7 @@
             // 
             this.ec_Position.AttributeName = "Position";
             this.ec_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Position.Location = new System.Drawing.Point(345, 16);
+            this.ec_Position.Location = new System.Drawing.Point(345, 29);
             this.ec_Position.Multiline = false;
             this.ec_Position.Name = "ec_Position";
             this.ec_Position.Size = new System.Drawing.Size(166, 22);
@@ -610,7 +610,7 @@
             // 
             this.ec_Patronymic.AttributeName = "Patronymic";
             this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Patronymic.Location = new System.Drawing.Point(112, 73);
+            this.ec_Patronymic.Location = new System.Drawing.Point(112, 86);
             this.ec_Patronymic.Multiline = false;
             this.ec_Patronymic.Name = "ec_Patronymic";
             this.ec_Patronymic.Size = new System.Drawing.Size(148, 22);
@@ -621,7 +621,7 @@
             // 
             this.ec_SurName.AttributeName = "SurName";
             this.ec_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_SurName.Location = new System.Drawing.Point(112, 16);
+            this.ec_SurName.Location = new System.Drawing.Point(112, 29);
             this.ec_SurName.Multiline = false;
             this.ec_SurName.Name = "ec_SurName";
             this.ec_SurName.Size = new System.Drawing.Size(148, 20);
@@ -632,7 +632,7 @@
             // 
             this.ec_FirstName.AttributeName = "FirstName";
             this.ec_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_FirstName.Location = new System.Drawing.Point(112, 42);
+            this.ec_FirstName.Location = new System.Drawing.Point(112, 55);
             this.ec_FirstName.Multiline = false;
             this.ec_FirstName.Name = "ec_FirstName";
             this.ec_FirstName.Size = new System.Drawing.Size(148, 20);
