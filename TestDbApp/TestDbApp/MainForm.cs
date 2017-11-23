@@ -14,6 +14,13 @@ namespace TestDbApp
             InitializeComponent();
             Load += OnLoad;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
+            bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
+            bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
+        }
+
+        private void BindSrcDepartmentToEmployeeOnCurrentChanged(object sender, EventArgs eventArgs)
+        {
+            
         }
 
         private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
@@ -48,7 +55,6 @@ namespace TestDbApp
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
-            
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
             _populateTreeView();
@@ -70,6 +76,11 @@ namespace TestDbApp
             ec_DocNumber.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocNumber.AttributeName));
             ec_DocSeries.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocSeries.AttributeName));
             dtp_DateBirth.DataBindings.Add(new Binding("Text", bindSrc_DepartmentToEmployee, "DateOfBirth"));
+        }
+
+        private void BindSrcDepartmentToEmployeeOnDataMemberChanged(object sender, EventArgs eventArgs)
+        {
+            
         }
 
         private void _populateTreeView()
