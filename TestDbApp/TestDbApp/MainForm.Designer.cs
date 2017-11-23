@@ -37,7 +37,16 @@ namespace TestDbApp
             this.splCnt = new System.Windows.Forms.SplitContainer();
             this.tv_Department = new System.Windows.Forms.TreeView();
             this.gb_Employee = new System.Windows.Forms.GroupBox();
+            this.tb_Age = new System.Windows.Forms.TextBox();
+            this.l_Age = new System.Windows.Forms.Label();
+            this.lDepartment = new System.Windows.Forms.Label();
+            this.lPosition = new System.Windows.Forms.Label();
+            this.lSurName = new System.Windows.Forms.Label();
+            this.lPatronymic = new System.Windows.Forms.Label();
+            this.lFirstName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lDocNumber = new System.Windows.Forms.Label();
+            this.lDocSeries = new System.Windows.Forms.Label();
             this.lDateOfBirth = new System.Windows.Forms.Label();
             this.dtp_DateBirth = new System.Windows.Forms.DateTimePicker();
             this.tp_Employee = new System.Windows.Forms.TabPage();
@@ -65,15 +74,6 @@ namespace TestDbApp
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
-            this.lFirstName = new System.Windows.Forms.Label();
-            this.lPatronymic = new System.Windows.Forms.Label();
-            this.lSurName = new System.Windows.Forms.Label();
-            this.lPosition = new System.Windows.Forms.Label();
-            this.lDepartment = new System.Windows.Forms.Label();
-            this.lDocNumber = new System.Windows.Forms.Label();
-            this.lDocSeries = new System.Windows.Forms.Label();
-            this.l_Age = new System.Windows.Forms.Label();
-            this.tb_Age = new System.Windows.Forms.TextBox();
             this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,13 +88,13 @@ namespace TestDbApp
             this.departmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.EmployeeOfDepatmentNavigator = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
-            this.ec_DepartmentName = new EditControl();
-            this.ec_Position = new EditControl();
-            this.ec_Patronymic = new EditControl();
-            this.ec_SurName = new EditControl();
-            this.ec_FirstName = new EditControl();
-            this.ec_DocSeries = new EditControl();
-            this.ec_DocNumber = new EditControl();
+            this.ec_DepartmentName = new TestDbApp.Common.EditControl();
+            this.ec_Position = new TestDbApp.Common.EditControl();
+            this.ec_Patronymic = new TestDbApp.Common.EditControl();
+            this.ec_SurName = new TestDbApp.Common.EditControl();
+            this.ec_FirstName = new TestDbApp.Common.EditControl();
+            this.ec_DocSeries = new TestDbApp.Common.EditControl();
+            this.ec_DocNumber = new TestDbApp.Common.EditControl();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,6 +106,7 @@ namespace TestDbApp
             this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityBindingNavigator1 = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -223,6 +224,80 @@ namespace TestDbApp
             this.gb_Employee.TabStop = false;
             this.gb_Employee.Text = "Данные сотрудника";
             // 
+            // tb_Age
+            // 
+            this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Age.Location = new System.Drawing.Point(395, 117);
+            this.tb_Age.Name = "tb_Age";
+            this.tb_Age.Size = new System.Drawing.Size(49, 20);
+            this.tb_Age.TabIndex = 47;
+            this.tb_Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // l_Age
+            // 
+            this.l_Age.AutoSize = true;
+            this.l_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.l_Age.Location = new System.Drawing.Point(274, 120);
+            this.l_Age.Name = "l_Age";
+            this.l_Age.Size = new System.Drawing.Size(115, 13);
+            this.l_Age.TabIndex = 46;
+            this.l_Age.Text = "Возраст (полных лет)";
+            // 
+            // lDepartment
+            // 
+            this.lDepartment.AutoSize = true;
+            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDepartment.Location = new System.Drawing.Point(274, 62);
+            this.lDepartment.Name = "lDepartment";
+            this.lDepartment.Size = new System.Drawing.Size(38, 13);
+            this.lDepartment.TabIndex = 41;
+            this.lDepartment.Text = "Отдел";
+            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lPosition
+            // 
+            this.lPosition.AutoSize = true;
+            this.lPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lPosition.Location = new System.Drawing.Point(274, 36);
+            this.lPosition.Name = "lPosition";
+            this.lPosition.Size = new System.Drawing.Size(65, 13);
+            this.lPosition.TabIndex = 40;
+            this.lPosition.Text = "Должность";
+            this.lPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lSurName
+            // 
+            this.lSurName.AutoSize = true;
+            this.lSurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lSurName.Location = new System.Drawing.Point(16, 36);
+            this.lSurName.Name = "lSurName";
+            this.lSurName.Size = new System.Drawing.Size(56, 13);
+            this.lSurName.TabIndex = 39;
+            this.lSurName.Text = "Фамилия";
+            this.lSurName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lPatronymic
+            // 
+            this.lPatronymic.AutoSize = true;
+            this.lPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lPatronymic.Location = new System.Drawing.Point(16, 86);
+            this.lPatronymic.Name = "lPatronymic";
+            this.lPatronymic.Size = new System.Drawing.Size(54, 13);
+            this.lPatronymic.TabIndex = 38;
+            this.lPatronymic.Text = "Отчество";
+            this.lPatronymic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lFirstName
+            // 
+            this.lFirstName.AutoSize = true;
+            this.lFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lFirstName.Location = new System.Drawing.Point(16, 62);
+            this.lFirstName.Name = "lFirstName";
+            this.lFirstName.Size = new System.Drawing.Size(29, 13);
+            this.lFirstName.TabIndex = 37;
+            this.lFirstName.Text = "Имя";
+            this.lFirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
@@ -235,6 +310,28 @@ namespace TestDbApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(278, 75);
             this.panel1.TabIndex = 27;
+            // 
+            // lDocNumber
+            // 
+            this.lDocNumber.AutoSize = true;
+            this.lDocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDocNumber.Location = new System.Drawing.Point(12, 11);
+            this.lDocNumber.Name = "lDocNumber";
+            this.lDocNumber.Size = new System.Drawing.Size(98, 13);
+            this.lDocNumber.TabIndex = 43;
+            this.lDocNumber.Text = "Номер документа";
+            this.lDocNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lDocSeries
+            // 
+            this.lDocSeries.AutoSize = true;
+            this.lDocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDocSeries.Location = new System.Drawing.Point(12, 44);
+            this.lDocSeries.Name = "lDocSeries";
+            this.lDocSeries.Size = new System.Drawing.Size(95, 13);
+            this.lDocSeries.TabIndex = 42;
+            this.lDocSeries.Text = "Серия документа";
+            this.lDocSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lDateOfBirth
             // 
@@ -271,6 +368,7 @@ namespace TestDbApp
             // p_Employee
             // 
             this.p_Employee.Controls.Add(this.dgv_Employee);
+            this.p_Employee.Controls.Add(this.entityBindingNavigator1);
             this.p_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Employee.Location = new System.Drawing.Point(3, 3);
             this.p_Employee.Name = "p_Employee";
@@ -515,102 +613,6 @@ namespace TestDbApp
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lFirstName
-            // 
-            this.lFirstName.AutoSize = true;
-            this.lFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lFirstName.Location = new System.Drawing.Point(16, 62);
-            this.lFirstName.Name = "lFirstName";
-            this.lFirstName.Size = new System.Drawing.Size(29, 13);
-            this.lFirstName.TabIndex = 37;
-            this.lFirstName.Text = "Имя";
-            this.lFirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lPatronymic
-            // 
-            this.lPatronymic.AutoSize = true;
-            this.lPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPatronymic.Location = new System.Drawing.Point(16, 86);
-            this.lPatronymic.Name = "lPatronymic";
-            this.lPatronymic.Size = new System.Drawing.Size(54, 13);
-            this.lPatronymic.TabIndex = 38;
-            this.lPatronymic.Text = "Отчество";
-            this.lPatronymic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lSurName
-            // 
-            this.lSurName.AutoSize = true;
-            this.lSurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lSurName.Location = new System.Drawing.Point(16, 36);
-            this.lSurName.Name = "lSurName";
-            this.lSurName.Size = new System.Drawing.Size(56, 13);
-            this.lSurName.TabIndex = 39;
-            this.lSurName.Text = "Фамилия";
-            this.lSurName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lPosition
-            // 
-            this.lPosition.AutoSize = true;
-            this.lPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPosition.Location = new System.Drawing.Point(274, 36);
-            this.lPosition.Name = "lPosition";
-            this.lPosition.Size = new System.Drawing.Size(65, 13);
-            this.lPosition.TabIndex = 40;
-            this.lPosition.Text = "Должность";
-            this.lPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lDepartment
-            // 
-            this.lDepartment.AutoSize = true;
-            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(274, 62);
-            this.lDepartment.Name = "lDepartment";
-            this.lDepartment.Size = new System.Drawing.Size(38, 13);
-            this.lDepartment.TabIndex = 41;
-            this.lDepartment.Text = "Отдел";
-            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lDocNumber
-            // 
-            this.lDocNumber.AutoSize = true;
-            this.lDocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDocNumber.Location = new System.Drawing.Point(12, 11);
-            this.lDocNumber.Name = "lDocNumber";
-            this.lDocNumber.Size = new System.Drawing.Size(98, 13);
-            this.lDocNumber.TabIndex = 43;
-            this.lDocNumber.Text = "Номер документа";
-            this.lDocNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lDocSeries
-            // 
-            this.lDocSeries.AutoSize = true;
-            this.lDocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDocSeries.Location = new System.Drawing.Point(12, 44);
-            this.lDocSeries.Name = "lDocSeries";
-            this.lDocSeries.Size = new System.Drawing.Size(95, 13);
-            this.lDocSeries.TabIndex = 42;
-            this.lDocSeries.Text = "Серия документа";
-            this.lDocSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // l_Age
-            // 
-            this.l_Age.AutoSize = true;
-            this.l_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Age.Location = new System.Drawing.Point(274, 120);
-            this.l_Age.Name = "l_Age";
-            this.l_Age.Size = new System.Drawing.Size(115, 13);
-            this.l_Age.TabIndex = 46;
-            this.l_Age.Text = "Возраст (полных лет)";
-            // 
-            // tb_Age
-            // 
-            this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Age.Location = new System.Drawing.Point(395, 117);
-            this.tb_Age.Name = "tb_Age";
-            this.tb_Age.Size = new System.Drawing.Size(49, 20);
-            this.tb_Age.TabIndex = 47;
-            this.tb_Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // dgv_EmployeeToDepartment
             // 
             this.dgv_EmployeeToDepartment.AutoGenerateColumns = false;
@@ -816,9 +818,9 @@ namespace TestDbApp
             this.dgv_Employee.DataMember = "Employees";
             this.dgv_Employee.DataSource = this.entityDataSource_Org;
             this.dgv_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_Employee.Location = new System.Drawing.Point(0, 0);
+            this.dgv_Employee.Location = new System.Drawing.Point(0, 25);
             this.dgv_Employee.Name = "dgv_Employee";
-            this.dgv_Employee.Size = new System.Drawing.Size(974, 572);
+            this.dgv_Employee.Size = new System.Drawing.Size(974, 547);
             this.dgv_Employee.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn
@@ -886,6 +888,16 @@ namespace TestDbApp
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
             // 
+            // entityBindingNavigator1
+            // 
+            this.entityBindingNavigator1.DataMember = "Employees";
+            this.entityBindingNavigator1.DataSource = this.entityDataSource_Org;
+            this.entityBindingNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.entityBindingNavigator1.Name = "entityBindingNavigator1";
+            this.entityBindingNavigator1.Size = new System.Drawing.Size(974, 25);
+            this.entityBindingNavigator1.TabIndex = 1;
+            this.entityBindingNavigator1.Text = "entityBindingNavigator1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,6 +925,7 @@ namespace TestDbApp
             this.panel1.PerformLayout();
             this.tp_Employee.ResumeLayout(false);
             this.p_Employee.ResumeLayout(false);
+            this.p_Employee.PerformLayout();
             this.gb_EmployeeDetails.ResumeLayout(false);
             this.gb_EmployeeDetails.PerformLayout();
             this.p_DocInfo.ResumeLayout(false);
@@ -1002,6 +1015,7 @@ namespace TestDbApp
         private System.Windows.Forms.TextBox tb_Age;
         private System.Windows.Forms.Label l_Age;
         private EntityFrameworkBinding.EntityBindingNavigator EmployeeOfDepatmentNavigator;
+        private EntityFrameworkBinding.EntityBindingNavigator entityBindingNavigator1;
     }
 }
 
