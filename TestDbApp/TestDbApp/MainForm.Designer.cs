@@ -602,10 +602,12 @@
             // 
             // tb_Age
             // 
+            this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_Age.Location = new System.Drawing.Point(395, 117);
             this.tb_Age.Name = "tb_Age";
-            this.tb_Age.Size = new System.Drawing.Size(59, 20);
+            this.tb_Age.Size = new System.Drawing.Size(49, 20);
             this.tb_Age.TabIndex = 47;
+            this.tb_Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dgv_EmployeeToDepartment
             // 
