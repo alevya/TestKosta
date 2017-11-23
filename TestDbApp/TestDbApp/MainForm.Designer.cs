@@ -1,4 +1,6 @@
-﻿namespace TestDbApp
+﻿using TestDbApp.Common;
+
+namespace TestDbApp
 {
     partial class MainForm
     {
@@ -86,13 +88,13 @@
             this.departmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.EmployeeOfDepatmentNavigator = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
-            this.ec_DepartmentName = new TestDbApp.EditControl();
-            this.ec_Position = new TestDbApp.EditControl();
-            this.ec_Patronymic = new TestDbApp.EditControl();
-            this.ec_SurName = new TestDbApp.EditControl();
-            this.ec_FirstName = new TestDbApp.EditControl();
-            this.ec_DocSeries = new TestDbApp.EditControl();
-            this.ec_DocNumber = new TestDbApp.EditControl();
+            this.ec_DepartmentName = new EditControl();
+            this.ec_Position = new EditControl();
+            this.ec_Patronymic = new EditControl();
+            this.ec_SurName = new EditControl();
+            this.ec_FirstName = new EditControl();
+            this.ec_DocSeries = new EditControl();
+            this.ec_DocNumber = new EditControl();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();

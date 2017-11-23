@@ -1,4 +1,4 @@
-﻿namespace TestDbApp
+﻿namespace TestDbApp.Common
 {
     partial class EditControl
     {

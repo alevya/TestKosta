@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
-namespace TestDbApp
+namespace TestDbApp.Common
 {
     public partial class EditControl : UserControl
     {

@@ -73,10 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DifferenceDate.cs" />
-    <Compile Include="EditControl.cs">
+    <Compile Include="Common\EditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditControl.Designer.cs">
+    <Compile Include="Common\EditControl.Designer.cs">
       <DependentUpon>EditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameworkBinding\DbContextTypeConverter.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Model\TestDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EditControl.resx">
+    <EmbeddedResource Include="Common\EditControl.resx">
       <DependentUpon>EditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
