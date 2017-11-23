@@ -7,6 +7,8 @@ namespace TestDbApp.Model
     [Table("Empoyee")]
     public class Employee
     {
+        public Employee() { }
+
         [Required, Key]
         public decimal ID { get; set; }
         [Required]

@@ -56,8 +56,8 @@ namespace TestDbApp
             var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
 
             GetEmployees(employees, selDepartment, l);
-            var bindingList = entityDataSource_Org.CreateView(employees);
-            bindSrc_DepartmentToEmployee.DataSource = bindingList;
+            //var bindingList = entityDataSource_Org.CreateView(employees);
+            bindSrc_DepartmentToEmployee.DataSource = employees;//bindingList;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee; 
             
         }
