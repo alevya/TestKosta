@@ -78,6 +78,12 @@
     <Compile Include="EditBase.Designer.cs">
       <DependentUpon>EditBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditControl.Designer.cs">
+      <DependentUpon>EditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameworkBinding\DbContextTypeConverter.cs" />
     <Compile Include="EntityFrameworkBinding\EntityBindingList.cs" />
     <Compile Include="EntityFrameworkBinding\EntityDataSource.cs">
@@ -101,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EditBase.resx">
       <DependentUpon>EditBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditControl.resx">
+      <DependentUpon>EditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
