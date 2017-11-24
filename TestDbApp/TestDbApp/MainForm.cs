@@ -15,7 +15,7 @@ namespace TestDbApp
             InitializeComponent();
             Load += OnLoad;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
-            //bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
+            bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
             bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
           
@@ -56,10 +56,12 @@ namespace TestDbApp
             var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
 
             GetEmployees(employees, selDepartment, l);
-            //var bindingList = entityDataSource_Org.CreateView(employees);
+            var bindingList = entityDataSource_Org.CreateView(employees);
+            var dl = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
             bindSrc_DepartmentToEmployee.DataSource = employees;//bindingList;
-            dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee; 
-            
+            dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
+            //dgv_EmployeeToDepartment.DataMember = "Employee";
+
         }
 
         private static void GetEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
@@ -84,20 +86,21 @@ namespace TestDbApp
             if (tv_Department.Nodes.Count > 0)
             {
                 tv_Department.SelectedNode = tv_Department.Nodes[0];
-                _bindingEmployeeDetails();
+                _bindingEmployeeDetails(bindSrc_DepartmentToEmployee);
             }
         }
 
-        private void _bindingEmployeeDetails()
+        private void _bindingEmployeeDetails(object dataSource)
         {
-            ec_FirstName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_FirstName.AttributeName));
-            ec_SurName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_SurName.AttributeName));
-            ec_Patronymic.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_Patronymic.AttributeName));
-            ec_DepartmentName.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DepartmentName.AttributeName));
-            ec_Position.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_Position.AttributeName));
-            ec_DocNumber.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocNumber.AttributeName));
-            ec_DocSeries.DataBindings.Add(new Binding("Value", bindSrc_DepartmentToEmployee, ec_DocSeries.AttributeName));
-            dtp_DateBirth.DataBindings.Add(new Binding("Text", bindSrc_DepartmentToEmployee, "DateOfBirth"));
+            if(dataSource == null) return;
+            ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName));
+            ec_SurName.DataBindings.Add(new Binding("Value", dataSource, ec_SurName.AttributeName));
+            ec_Patronymic.DataBindings.Add(new Binding("Value", dataSource, ec_Patronymic.AttributeName));
+            ec_DepartmentName.DataBindings.Add(new Binding("Value", dataSource, ec_DepartmentName.AttributeName));
+            ec_Position.DataBindings.Add(new Binding("Value", dataSource, ec_Position.AttributeName));
+            ec_DocNumber.DataBindings.Add(new Binding("Value", dataSource, ec_DocNumber.AttributeName));
+            ec_DocSeries.DataBindings.Add(new Binding("Value", dataSource, ec_DocSeries.AttributeName));
+            dtp_DateBirth.DataBindings.Add(new Binding("Text", dataSource, "DateOfBirth"));
             bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
         }
 
