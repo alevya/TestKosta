@@ -57,7 +57,8 @@ namespace TestDbApp
 
             GetEmployees(employees, selDepartment, l);
             var bindingList = entityDataSource_Org.CreateView(employees);
-            var dl = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
+            var dlEmployee = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
+            var dlDepartment = entityDataSource_Org.GetLookupDictionary(typeof(Department));
             bindSrc_DepartmentToEmployee.DataSource = employees;//bindingList;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
             //dgv_EmployeeToDepartment.DataMember = "Employee";
