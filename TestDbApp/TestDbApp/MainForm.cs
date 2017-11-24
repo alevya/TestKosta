@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestDbApp.Common;
+using TestDbApp.EntityFrameworkBinding;
 using TestDbApp.Model;
 
 namespace TestDbApp
@@ -14,6 +15,7 @@ namespace TestDbApp
         {
             InitializeComponent();
             Load += OnLoad;
+            entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
             bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
             bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
@@ -22,6 +24,23 @@ namespace TestDbApp
             dtp_DateBirth.ValueChanged += DtpDateBirthOnValueChanged;
 
             EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
+        }
+
+        private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
+        {
+            string msgError = string.Empty;
+            var inExc = args.Exception.InnerException;
+            if (inExc?.InnerException != null)
+            {
+                msgError = inExc.InnerException.Message;
+                
+            }
+            else
+            {
+                msgError = args.Exception.Message;
+            }
+            MessageBox.Show(this, msgError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            args.Handled = true;
         }
 
         private void BindSrcDepartmentToEmployeeOnCurrentItemChanged(object sender, EventArgs eventArgs)

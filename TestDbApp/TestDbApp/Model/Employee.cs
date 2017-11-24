@@ -10,6 +10,7 @@ namespace TestDbApp.Model
         public Employee() { }
 
         [Required, Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ID { get; set; }
         [Required]
         public Guid DepartmentID { get; set; }

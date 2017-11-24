@@ -42,6 +42,7 @@ namespace TestDbApp.Model
         }
 
         [Required, Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
         public Guid? ParentDepartmentID { get; set; }
 
