@@ -39,7 +39,6 @@ namespace TestDbApp
             this.gb_Employee = new System.Windows.Forms.GroupBox();
             this.tb_Age = new System.Windows.Forms.TextBox();
             this.l_Age = new System.Windows.Forms.Label();
-            this.lDepartment = new System.Windows.Forms.Label();
             this.lPosition = new System.Windows.Forms.Label();
             this.lSurName = new System.Windows.Forms.Label();
             this.lPatronymic = new System.Windows.Forms.Label();
@@ -88,7 +87,6 @@ namespace TestDbApp
             this.departmentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.EmployeeOfDepatmentNavigator = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
-            this.ec_DepartmentName = new TestDbApp.Common.EditControl();
             this.ec_Position = new TestDbApp.Common.EditControl();
             this.ec_Patronymic = new TestDbApp.Common.EditControl();
             this.ec_SurName = new TestDbApp.Common.EditControl();
@@ -113,6 +111,8 @@ namespace TestDbApp
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityBindNav_Employee = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
+            this.cbDepartment = new System.Windows.Forms.ComboBox();
+            this.lDepartment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -209,13 +209,13 @@ namespace TestDbApp
             // 
             // gb_Employee
             // 
+            this.gb_Employee.Controls.Add(this.cbDepartment);
+            this.gb_Employee.Controls.Add(this.lDepartment);
             this.gb_Employee.Controls.Add(this.tb_Age);
             this.gb_Employee.Controls.Add(this.l_Age);
-            this.gb_Employee.Controls.Add(this.ec_DepartmentName);
             this.gb_Employee.Controls.Add(this.ec_Position);
             this.gb_Employee.Controls.Add(this.ec_Patronymic);
             this.gb_Employee.Controls.Add(this.ec_SurName);
-            this.gb_Employee.Controls.Add(this.lDepartment);
             this.gb_Employee.Controls.Add(this.lPosition);
             this.gb_Employee.Controls.Add(this.lSurName);
             this.gb_Employee.Controls.Add(this.lPatronymic);
@@ -251,17 +251,6 @@ namespace TestDbApp
             this.l_Age.Size = new System.Drawing.Size(147, 16);
             this.l_Age.TabIndex = 46;
             this.l_Age.Text = "Возраст (полных лет)";
-            // 
-            // lDepartment
-            // 
-            this.lDepartment.AutoSize = true;
-            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(295, 59);
-            this.lDepartment.Name = "lDepartment";
-            this.lDepartment.Size = new System.Drawing.Size(49, 16);
-            this.lDepartment.TabIndex = 41;
-            this.lDepartment.Text = "Отдел";
-            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lPosition
             // 
@@ -732,17 +721,6 @@ namespace TestDbApp
             this.EmployeeOfDepatmentNavigator.TabIndex = 2;
             this.EmployeeOfDepatmentNavigator.Text = "entityBindingNavigator1";
             // 
-            // ec_DepartmentName
-            // 
-            this.ec_DepartmentName.AttributeName = "";
-            this.ec_DepartmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_DepartmentName.Location = new System.Drawing.Point(380, 52);
-            this.ec_DepartmentName.Multiline = false;
-            this.ec_DepartmentName.Name = "ec_DepartmentName";
-            this.ec_DepartmentName.Size = new System.Drawing.Size(166, 22);
-            this.ec_DepartmentName.TabIndex = 45;
-            this.ec_DepartmentName.Value = "";
-            // 
             // ec_Position
             // 
             this.ec_Position.AttributeName = "Position";
@@ -966,6 +944,24 @@ namespace TestDbApp
             this.entityBindNav_Employee.TabIndex = 1;
             this.entityBindNav_Employee.Text = "entityBindingNavigator1";
             // 
+            // cbDepartment
+            // 
+            this.cbDepartment.Location = new System.Drawing.Point(380, 55);
+            this.cbDepartment.Name = "cbDepartment";
+            this.cbDepartment.Size = new System.Drawing.Size(166, 23);
+            this.cbDepartment.TabIndex = 49;
+            // 
+            // lDepartment
+            // 
+            this.lDepartment.AutoSize = true;
+            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDepartment.Location = new System.Drawing.Point(296, 57);
+            this.lDepartment.Name = "lDepartment";
+            this.lDepartment.Size = new System.Drawing.Size(49, 16);
+            this.lDepartment.TabIndex = 48;
+            this.lDepartment.Text = "Отдел";
+            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1061,13 +1057,11 @@ namespace TestDbApp
         private System.Windows.Forms.Label lFirstName;
         private System.Windows.Forms.Label lSurName;
         private System.Windows.Forms.Label lPatronymic;
-        private System.Windows.Forms.Label lDepartment;
         private System.Windows.Forms.Label lPosition;
         private System.Windows.Forms.Label lDocNumber;
         private System.Windows.Forms.Label lDocSeries;
         private EditControl ec_SurName;
         private EditControl ec_Patronymic;
-        private EditControl ec_DepartmentName;
         private EditControl ec_Position;
         private EditControl ec_DocSeries;
         private EditControl ec_DocNumber;
@@ -1093,6 +1087,8 @@ namespace TestDbApp
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn1;
         private System.Windows.Forms.ComboBox cb_Department;
+        private System.Windows.Forms.ComboBox cbDepartment;
+        private System.Windows.Forms.Label lDepartment;
     }
 }
 
