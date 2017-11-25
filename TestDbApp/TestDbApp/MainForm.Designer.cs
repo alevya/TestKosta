@@ -74,6 +74,8 @@ namespace TestDbApp
             this.btnCancel = new System.Windows.Forms.Button();
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
             this.cb_Department = new System.Windows.Forms.ComboBox();
+            this.cbDepartment = new System.Windows.Forms.ComboBox();
+            this.lDepartment = new System.Windows.Forms.Label();
             this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,8 +113,6 @@ namespace TestDbApp
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityBindNav_Employee = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
-            this.cbDepartment = new System.Windows.Forms.ComboBox();
-            this.lDepartment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -619,14 +619,35 @@ namespace TestDbApp
             // 
             // cb_Department
             // 
+            this.cb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cb_Department.Location = new System.Drawing.Point(141, 159);
             this.cb_Department.Name = "cb_Department";
             this.cb_Department.Size = new System.Drawing.Size(158, 23);
             this.cb_Department.TabIndex = 18;
             // 
+            // cbDepartment
+            // 
+            this.cbDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbDepartment.Location = new System.Drawing.Point(380, 55);
+            this.cbDepartment.Name = "cbDepartment";
+            this.cbDepartment.Size = new System.Drawing.Size(166, 23);
+            this.cbDepartment.TabIndex = 49;
+            // 
+            // lDepartment
+            // 
+            this.lDepartment.AutoSize = true;
+            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDepartment.Location = new System.Drawing.Point(296, 57);
+            this.lDepartment.Name = "lDepartment";
+            this.lDepartment.Size = new System.Drawing.Size(49, 16);
+            this.lDepartment.TabIndex = 48;
+            this.lDepartment.Text = "Отдел";
+            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // dgv_EmployeeToDepartment
             // 
             this.dgv_EmployeeToDepartment.AutoGenerateColumns = false;
+            this.dgv_EmployeeToDepartment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_EmployeeToDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_EmployeeToDepartment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn1,
@@ -653,60 +674,70 @@ namespace TestDbApp
             this.iDDataGridViewTextBoxColumn1.DataPropertyName = "ID";
             this.iDDataGridViewTextBoxColumn1.HeaderText = "ID";
             this.iDDataGridViewTextBoxColumn1.Name = "iDDataGridViewTextBoxColumn1";
+            this.iDDataGridViewTextBoxColumn1.Width = 46;
             // 
             // departmentIDDataGridViewTextBoxColumn1
             // 
             this.departmentIDDataGridViewTextBoxColumn1.DataPropertyName = "DepartmentID";
             this.departmentIDDataGridViewTextBoxColumn1.HeaderText = "DepartmentID";
             this.departmentIDDataGridViewTextBoxColumn1.Name = "departmentIDDataGridViewTextBoxColumn1";
+            this.departmentIDDataGridViewTextBoxColumn1.Width = 248;
             // 
             // surNameDataGridViewTextBoxColumn1
             // 
             this.surNameDataGridViewTextBoxColumn1.DataPropertyName = "SurName";
             this.surNameDataGridViewTextBoxColumn1.HeaderText = "SurName";
             this.surNameDataGridViewTextBoxColumn1.Name = "surNameDataGridViewTextBoxColumn1";
+            this.surNameDataGridViewTextBoxColumn1.Width = 87;
             // 
             // firstNameDataGridViewTextBoxColumn1
             // 
             this.firstNameDataGridViewTextBoxColumn1.DataPropertyName = "FirstName";
             this.firstNameDataGridViewTextBoxColumn1.HeaderText = "FirstName";
             this.firstNameDataGridViewTextBoxColumn1.Name = "firstNameDataGridViewTextBoxColumn1";
+            this.firstNameDataGridViewTextBoxColumn1.Width = 91;
             // 
             // patronymicDataGridViewTextBoxColumn1
             // 
             this.patronymicDataGridViewTextBoxColumn1.DataPropertyName = "Patronymic";
             this.patronymicDataGridViewTextBoxColumn1.HeaderText = "Patronymic";
             this.patronymicDataGridViewTextBoxColumn1.Name = "patronymicDataGridViewTextBoxColumn1";
+            this.patronymicDataGridViewTextBoxColumn1.Width = 95;
             // 
             // dateOfBirthDataGridViewTextBoxColumn1
             // 
             this.dateOfBirthDataGridViewTextBoxColumn1.DataPropertyName = "DateOfBirth";
             this.dateOfBirthDataGridViewTextBoxColumn1.HeaderText = "DateOfBirth";
             this.dateOfBirthDataGridViewTextBoxColumn1.Name = "dateOfBirthDataGridViewTextBoxColumn1";
+            this.dateOfBirthDataGridViewTextBoxColumn1.Width = 97;
             // 
             // docSeriesDataGridViewTextBoxColumn1
             // 
             this.docSeriesDataGridViewTextBoxColumn1.DataPropertyName = "DocSeries";
             this.docSeriesDataGridViewTextBoxColumn1.HeaderText = "DocSeries";
             this.docSeriesDataGridViewTextBoxColumn1.Name = "docSeriesDataGridViewTextBoxColumn1";
+            this.docSeriesDataGridViewTextBoxColumn1.Width = 91;
             // 
             // docNumberDataGridViewTextBoxColumn1
             // 
             this.docNumberDataGridViewTextBoxColumn1.DataPropertyName = "DocNumber";
             this.docNumberDataGridViewTextBoxColumn1.HeaderText = "DocNumber";
             this.docNumberDataGridViewTextBoxColumn1.Name = "docNumberDataGridViewTextBoxColumn1";
+            this.docNumberDataGridViewTextBoxColumn1.Width = 101;
             // 
             // positionDataGridViewTextBoxColumn1
             // 
             this.positionDataGridViewTextBoxColumn1.DataPropertyName = "Position";
             this.positionDataGridViewTextBoxColumn1.HeaderText = "Position";
             this.positionDataGridViewTextBoxColumn1.Name = "positionDataGridViewTextBoxColumn1";
+            this.positionDataGridViewTextBoxColumn1.Width = 78;
             // 
             // departmentDataGridViewTextBoxColumn1
             // 
             this.departmentDataGridViewTextBoxColumn1.DataPropertyName = "Department";
             this.departmentDataGridViewTextBoxColumn1.HeaderText = "Department";
             this.departmentDataGridViewTextBoxColumn1.Name = "departmentDataGridViewTextBoxColumn1";
+            this.departmentDataGridViewTextBoxColumn1.Width = 99;
             // 
             // entityDataSource_Org
             // 
@@ -792,6 +823,7 @@ namespace TestDbApp
             // dgv_Department
             // 
             this.dgv_Department.AutoGenerateColumns = false;
+            this.dgv_Department.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_Department.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Department.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn2,
@@ -813,24 +845,28 @@ namespace TestDbApp
             this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
             this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
             this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
+            this.iDDataGridViewTextBoxColumn2.Width = 248;
             // 
             // parentDepartmentIDDataGridViewTextBoxColumn
             // 
             this.parentDepartmentIDDataGridViewTextBoxColumn.DataPropertyName = "ParentDepartmentID";
             this.parentDepartmentIDDataGridViewTextBoxColumn.HeaderText = "ParentDepartmentID";
             this.parentDepartmentIDDataGridViewTextBoxColumn.Name = "parentDepartmentIDDataGridViewTextBoxColumn";
+            this.parentDepartmentIDDataGridViewTextBoxColumn.Width = 147;
             // 
             // codeDataGridViewTextBoxColumn
             // 
             this.codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
             this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
             this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            this.codeDataGridViewTextBoxColumn.Width = 63;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 68;
             // 
             // entityBindNav_Department
             // 
@@ -846,6 +882,7 @@ namespace TestDbApp
             // dgv_Employee
             // 
             this.dgv_Employee.AutoGenerateColumns = false;
+            this.dgv_Employee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_Employee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Employee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn,
@@ -873,6 +910,7 @@ namespace TestDbApp
             this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
             this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
             this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.Width = 46;
             // 
             // departmentIDDataGridViewTextBoxColumn
             // 
@@ -886,18 +924,21 @@ namespace TestDbApp
             this.surNameDataGridViewTextBoxColumn.DataPropertyName = "SurName";
             this.surNameDataGridViewTextBoxColumn.HeaderText = "SurName";
             this.surNameDataGridViewTextBoxColumn.Name = "surNameDataGridViewTextBoxColumn";
+            this.surNameDataGridViewTextBoxColumn.Width = 87;
             // 
             // firstNameDataGridViewTextBoxColumn
             // 
             this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
             this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
             this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            this.firstNameDataGridViewTextBoxColumn.Width = 91;
             // 
             // patronymicDataGridViewTextBoxColumn
             // 
             this.patronymicDataGridViewTextBoxColumn.DataPropertyName = "Patronymic";
             this.patronymicDataGridViewTextBoxColumn.HeaderText = "Patronymic";
             this.patronymicDataGridViewTextBoxColumn.Name = "patronymicDataGridViewTextBoxColumn";
+            this.patronymicDataGridViewTextBoxColumn.Width = 95;
             // 
             // dateOfBirthDataGridViewTextBoxColumn
             // 
@@ -925,6 +966,7 @@ namespace TestDbApp
             this.positionDataGridViewTextBoxColumn.DataPropertyName = "Position";
             this.positionDataGridViewTextBoxColumn.HeaderText = "Position";
             this.positionDataGridViewTextBoxColumn.Name = "positionDataGridViewTextBoxColumn";
+            this.positionDataGridViewTextBoxColumn.Width = 78;
             // 
             // departmentDataGridViewTextBoxColumn
             // 
@@ -943,24 +985,6 @@ namespace TestDbApp
             this.entityBindNav_Employee.Size = new System.Drawing.Size(1061, 26);
             this.entityBindNav_Employee.TabIndex = 1;
             this.entityBindNav_Employee.Text = "entityBindingNavigator1";
-            // 
-            // cbDepartment
-            // 
-            this.cbDepartment.Location = new System.Drawing.Point(380, 55);
-            this.cbDepartment.Name = "cbDepartment";
-            this.cbDepartment.Size = new System.Drawing.Size(166, 23);
-            this.cbDepartment.TabIndex = 49;
-            // 
-            // lDepartment
-            // 
-            this.lDepartment.AutoSize = true;
-            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(296, 57);
-            this.lDepartment.Name = "lDepartment";
-            this.lDepartment.Size = new System.Drawing.Size(49, 16);
-            this.lDepartment.TabIndex = 48;
-            this.lDepartment.Text = "Отдел";
-            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
