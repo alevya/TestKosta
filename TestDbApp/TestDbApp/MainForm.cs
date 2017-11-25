@@ -74,11 +74,14 @@ namespace TestDbApp
             var employees = new List<Employee>();
             var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
 
+            bindSrc_DepartmentToEmployee.Clear();
             GetEmployees(employees, selDepartment, l);
+            if(!employees.Any()) return;
+
             var bindingList = entityDataSource_Org.CreateView(employees);
             var dlEmployee = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
             var dlDepartment = entityDataSource_Org.GetLookupDictionary(typeof(Department));
-            bindSrc_DepartmentToEmployee.DataSource = employees;//bindingList;
+            bindSrc_DepartmentToEmployee.DataSource = bindingList;//employees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
             //dgv_EmployeeToDepartment.DataMember = "Employee";
 
@@ -87,7 +90,7 @@ namespace TestDbApp
         private static void GetEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
         {
             var ds = from Department d in departments
-                where d.ParentDepartmentID == dep.ID
+                where d.ParentDepartmentID == dep.DepartmentId
                 select d;
 
             employees.AddRange(dep.Employees);
@@ -102,7 +105,7 @@ namespace TestDbApp
             //Binding ComboBox на вкладке <Сотрудники> 
             cb_Department.DataSource = cb_DepartmentToEmployee.DataSource = entityDataSource_Org.EntitySets["Departments"];
             cb_Department.DisplayMember = cb_DepartmentToEmployee.DisplayMember = "Name";
-            cb_Department.ValueMember = cb_DepartmentToEmployee.ValueMember = "ID";
+            cb_Department.ValueMember = cb_DepartmentToEmployee.ValueMember = "DepartmentId";
             var bindEmpl =
                 new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true)
                 {
@@ -166,7 +169,7 @@ namespace TestDbApp
 
         private static TreeNode GetTreeNode(Department row, IEnumerable<Department> list)
         {
-            Guid.TryParse(row.ID.ToString(), out Guid nodeID);
+            Guid.TryParse(row.DepartmentId.ToString(), out Guid nodeID);
             var node = new TreeNode
             {
                 Text = Convert.ToString(row.Name),

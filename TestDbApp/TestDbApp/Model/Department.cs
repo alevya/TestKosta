@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,10 +10,11 @@ namespace TestDbApp.Model
     public class Department
     {
         private readonly HashSet<Employee> _employees;
+        //private readonly ObservableCollection<Employee> _employees;
         public Department()
         {
             //var emps = new ObservableCollection<Employee>();
-            //Employees = emps;
+            //_employees = emps;
             //emps.CollectionChanged += (sender, e) =>
             //{
             //    if (e.NewItems != null)
@@ -41,9 +43,9 @@ namespace TestDbApp.Model
             _employees = new HashSet<Employee>();
         }
 
-        [Required, Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ID { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(name:"ID")]
+        public Guid DepartmentId { get; set; }
         public Guid? ParentDepartmentID { get; set; }
 
         [MaxLength(10)]
@@ -51,13 +53,6 @@ namespace TestDbApp.Model
         [Required, MaxLength(50)]
         public string Name { get; set; }
 
-        public ICollection<Employee> Employees
-        {
-            get
-            {
-
-                return _employees;
-            }
-        }
+        public ICollection<Employee> Employees => _employees;
     }
 }

@@ -19,23 +19,20 @@ namespace TestDbApp.Model
         public string FirstName { get; set; }
         [MaxLength(50)]
         public string Patronymic { get; set; }
+
+        [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
 
-        [MaxLength(4)]
+        [StringLength(4, MinimumLength = 4)]
         public string DocSeries { get; set; }
-        [MaxLength(6)]
+
+        [StringLength(6, MinimumLength = 6)]
         public string DocNumber { get; set; }
+
         [Required, MaxLength(50)]
         public string Position { get; set; }
         [ForeignKey("DepartmentID")]
         public virtual Department Department { get; set; }
-
-        //[NotMapped]
-        //public string DepartmentName
-        //{
-        //    get => Department.Name;
-        //    set { }
-        //}
 
         //public Department Department
         //{

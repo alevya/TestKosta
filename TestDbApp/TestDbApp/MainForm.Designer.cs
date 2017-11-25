@@ -96,7 +96,6 @@ namespace TestDbApp
             this.ec_DocSeries = new TestDbApp.Common.EditControl();
             this.ec_DocNumber = new TestDbApp.Common.EditControl();
             this.dgv_Department = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parentDepartmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -823,11 +822,11 @@ namespace TestDbApp
             // 
             // dgv_Department
             // 
+            this.dgv_Department.AllowUserToAddRows = false;
             this.dgv_Department.AutoGenerateColumns = false;
             this.dgv_Department.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_Department.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Department.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn2,
             this.parentDepartmentIDDataGridViewTextBoxColumn,
             this.codeDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn});
@@ -840,13 +839,6 @@ namespace TestDbApp
             this.dgv_Department.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Department.Size = new System.Drawing.Size(1395, 552);
             this.dgv_Department.TabIndex = 0;
-            // 
-            // iDDataGridViewTextBoxColumn2
-            // 
-            this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
-            this.iDDataGridViewTextBoxColumn2.Width = 248;
             // 
             // parentDepartmentIDDataGridViewTextBoxColumn
             // 
@@ -882,6 +874,7 @@ namespace TestDbApp
             // 
             // dgv_Employee
             // 
+            this.dgv_Employee.AllowUserToAddRows = false;
             this.dgv_Employee.AutoGenerateColumns = false;
             this.dgv_Employee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_Employee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
