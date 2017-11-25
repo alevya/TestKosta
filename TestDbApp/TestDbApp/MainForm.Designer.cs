@@ -236,7 +236,7 @@ namespace TestDbApp
             // cb_DepartmentToEmployee
             // 
             this.cb_DepartmentToEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cb_DepartmentToEmployee.Location = new System.Drawing.Point(380, 55);
+            this.cb_DepartmentToEmployee.Location = new System.Drawing.Point(395, 55);
             this.cb_DepartmentToEmployee.Name = "cb_DepartmentToEmployee";
             this.cb_DepartmentToEmployee.Size = new System.Drawing.Size(166, 23);
             this.cb_DepartmentToEmployee.TabIndex = 49;
@@ -245,7 +245,7 @@ namespace TestDbApp
             // 
             this.lDepartment.AutoSize = true;
             this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(296, 57);
+            this.lDepartment.Location = new System.Drawing.Point(311, 57);
             this.lDepartment.Name = "lDepartment";
             this.lDepartment.Size = new System.Drawing.Size(49, 16);
             this.lDepartment.TabIndex = 48;
@@ -255,7 +255,7 @@ namespace TestDbApp
             // tb_Age
             // 
             this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Age.Location = new System.Drawing.Point(448, 116);
+            this.tb_Age.Location = new System.Drawing.Point(463, 116);
             this.tb_Age.Name = "tb_Age";
             this.tb_Age.Size = new System.Drawing.Size(49, 21);
             this.tb_Age.TabIndex = 47;
@@ -265,7 +265,7 @@ namespace TestDbApp
             // 
             this.l_Age.AutoSize = true;
             this.l_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Age.Location = new System.Drawing.Point(295, 121);
+            this.l_Age.Location = new System.Drawing.Point(310, 121);
             this.l_Age.Name = "l_Age";
             this.l_Age.Size = new System.Drawing.Size(147, 16);
             this.l_Age.TabIndex = 46;
@@ -275,7 +275,7 @@ namespace TestDbApp
             // 
             this.lPosition.AutoSize = true;
             this.lPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPosition.Location = new System.Drawing.Point(295, 33);
+            this.lPosition.Location = new System.Drawing.Point(310, 33);
             this.lPosition.Name = "lPosition";
             this.lPosition.Size = new System.Drawing.Size(79, 16);
             this.lPosition.TabIndex = 40;
@@ -323,7 +323,7 @@ namespace TestDbApp
             this.panel1.Controls.Add(this.ec_DocNumber);
             this.panel1.Controls.Add(this.lDocNumber);
             this.panel1.Controls.Add(this.lDocSeries);
-            this.panel1.Location = new System.Drawing.Point(552, 20);
+            this.panel1.Location = new System.Drawing.Point(567, 20);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(239, 75);
             this.panel1.TabIndex = 27;
@@ -365,9 +365,9 @@ namespace TestDbApp
             // 
             this.dtp_DateBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource_Org, "Employees.DateOfBirth", true));
             this.dtp_DateBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dtp_DateBirth.Location = new System.Drawing.Point(127, 121);
+            this.dtp_DateBirth.Location = new System.Drawing.Point(127, 122);
             this.dtp_DateBirth.Name = "dtp_DateBirth";
-            this.dtp_DateBirth.Size = new System.Drawing.Size(148, 21);
+            this.dtp_DateBirth.Size = new System.Drawing.Size(158, 21);
             this.dtp_DateBirth.TabIndex = 18;
             // 
             // tp_Department
@@ -756,7 +756,7 @@ namespace TestDbApp
             // 
             this.ec_Position.AttributeName = "Position";
             this.ec_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Position.Location = new System.Drawing.Point(380, 26);
+            this.ec_Position.Location = new System.Drawing.Point(395, 26);
             this.ec_Position.Multiline = false;
             this.ec_Position.Name = "ec_Position";
             this.ec_Position.Size = new System.Drawing.Size(166, 22);
@@ -767,10 +767,10 @@ namespace TestDbApp
             // 
             this.ec_Patronymic.AttributeName = "Patronymic";
             this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Patronymic.Location = new System.Drawing.Point(127, 87);
+            this.ec_Patronymic.Location = new System.Drawing.Point(127, 88);
             this.ec_Patronymic.Multiline = false;
             this.ec_Patronymic.Name = "ec_Patronymic";
-            this.ec_Patronymic.Size = new System.Drawing.Size(148, 22);
+            this.ec_Patronymic.Size = new System.Drawing.Size(158, 22);
             this.ec_Patronymic.TabIndex = 43;
             this.ec_Patronymic.Value = "";
             // 
@@ -778,10 +778,10 @@ namespace TestDbApp
             // 
             this.ec_SurName.AttributeName = "SurName";
             this.ec_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_SurName.Location = new System.Drawing.Point(127, 26);
+            this.ec_SurName.Location = new System.Drawing.Point(127, 27);
             this.ec_SurName.Multiline = false;
             this.ec_SurName.Name = "ec_SurName";
-            this.ec_SurName.Size = new System.Drawing.Size(148, 25);
+            this.ec_SurName.Size = new System.Drawing.Size(158, 25);
             this.ec_SurName.TabIndex = 42;
             this.ec_SurName.Value = "";
             // 
@@ -789,10 +789,10 @@ namespace TestDbApp
             // 
             this.ec_FirstName.AttributeName = "FirstName";
             this.ec_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_FirstName.Location = new System.Drawing.Point(127, 58);
+            this.ec_FirstName.Location = new System.Drawing.Point(127, 59);
             this.ec_FirstName.Multiline = false;
             this.ec_FirstName.Name = "ec_FirstName";
-            this.ec_FirstName.Size = new System.Drawing.Size(148, 23);
+            this.ec_FirstName.Size = new System.Drawing.Size(158, 23);
             this.ec_FirstName.TabIndex = 36;
             this.ec_FirstName.Value = "";
             // 

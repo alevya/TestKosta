@@ -24,17 +24,6 @@ namespace TestDbApp
             dtp_DateBirth.ValueChanged += DtpDateBirthOnValueChanged;
 
             EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
-
-            cb_Department.DataSource = entityDataSource_Org.EntitySets["Departments"];
-            cb_Department.DisplayMember = "Name";
-            cb_Department.ValueMember = "ID";
-            var bindEmpl =
-                new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true)
-                {
-                    DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
-                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
-                };
-            cb_Department.DataBindings.Add(bindEmpl);
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
@@ -110,28 +99,47 @@ namespace TestDbApp
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
+            //Binding ComboBox на вкладке <Сотрудники> 
+            cb_Department.DataSource = cb_DepartmentToEmployee.DataSource = entityDataSource_Org.EntitySets["Departments"];
+            cb_Department.DisplayMember = cb_DepartmentToEmployee.DisplayMember = "Name";
+            cb_Department.ValueMember = cb_DepartmentToEmployee.ValueMember = "ID";
+            var bindEmpl =
+                new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true)
+                {
+                    DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
+                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
+                };
+            cb_Department.DataBindings.Add(bindEmpl);
+
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
             _populateTreeView();
 
-            if (tv_Department.Nodes.Count > 0)
-            {
-                tv_Department.SelectedNode = tv_Department.Nodes[0];
-                _bindingEmployeeDetails(bindSrc_DepartmentToEmployee);
-            }
+            if (tv_Department.Nodes.Count <= 0) return;
+            tv_Department.SelectedNode = tv_Department.Nodes[0];
+            _bindingEmployeeDetails(bindSrc_DepartmentToEmployee);
         }
 
         private void _bindingEmployeeDetails(object dataSource)
         {
-            if(dataSource == null) return;
+            if (dataSource == null) return;
+
             ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName));
             ec_SurName.DataBindings.Add(new Binding("Value", dataSource, ec_SurName.AttributeName));
             ec_Patronymic.DataBindings.Add(new Binding("Value", dataSource, ec_Patronymic.AttributeName));
-            //ec_DepartmentName.DataBindings.Add(new Binding("Value", dataSource, ec_DepartmentName.AttributeName));
             ec_Position.DataBindings.Add(new Binding("Value", dataSource, ec_Position.AttributeName));
             ec_DocNumber.DataBindings.Add(new Binding("Value", dataSource, ec_DocNumber.AttributeName));
             ec_DocSeries.DataBindings.Add(new Binding("Value", dataSource, ec_DocSeries.AttributeName));
             dtp_DateBirth.DataBindings.Add(new Binding("Text", dataSource, "DateOfBirth"));
+
+            //Binding ComboBox на вкладке <Структура предприятия> 
+            var bindDepToEmpl =
+                new Binding("SelectedValue", dataSource, "DepartmentID", true)
+                {
+                    DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
+                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
+                };
+            cb_DepartmentToEmployee.DataBindings.Add(bindDepToEmpl);
             bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
         }
 
