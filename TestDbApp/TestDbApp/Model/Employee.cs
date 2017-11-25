@@ -23,10 +23,10 @@ namespace TestDbApp.Model
         [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
 
-        [StringLength(4, MinimumLength = 4)]
+        [StringLength(4)]
         public string DocSeries { get; set; }
 
-        [StringLength(6, MinimumLength = 6)]
+        [StringLength(6)]
         public string DocNumber { get; set; }
 
         [Required, MaxLength(50)]

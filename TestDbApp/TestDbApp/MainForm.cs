@@ -78,10 +78,10 @@ namespace TestDbApp
             GetEmployees(employees, selDepartment, l);
             if(!employees.Any()) return;
 
-            var bindingList = entityDataSource_Org.CreateView(employees);
+            //var bindingList = entityDataSource_Org.CreateView(employees);
             var dlEmployee = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
             var dlDepartment = entityDataSource_Org.GetLookupDictionary(typeof(Department));
-            bindSrc_DepartmentToEmployee.DataSource = bindingList;//employees;
+            bindSrc_DepartmentToEmployee.DataSource = employees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
             //dgv_EmployeeToDepartment.DataMember = "Employee";
 
