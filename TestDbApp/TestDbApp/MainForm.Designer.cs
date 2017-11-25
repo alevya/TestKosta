@@ -278,7 +278,7 @@ namespace TestDbApp
             // 
             this.lPatronymic.AutoSize = true;
             this.lPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lPatronymic.Location = new System.Drawing.Point(16, 96);
+            this.lPatronymic.Location = new System.Drawing.Point(16, 93);
             this.lPatronymic.Name = "lPatronymic";
             this.lPatronymic.Size = new System.Drawing.Size(71, 16);
             this.lPatronymic.TabIndex = 38;
@@ -306,7 +306,7 @@ namespace TestDbApp
             this.panel1.Controls.Add(this.lDocSeries);
             this.panel1.Location = new System.Drawing.Point(552, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(322, 75);
+            this.panel1.Size = new System.Drawing.Size(239, 75);
             this.panel1.TabIndex = 27;
             // 
             // lDocNumber
@@ -736,7 +736,7 @@ namespace TestDbApp
             // 
             this.ec_Patronymic.AttributeName = "Patronymic";
             this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Patronymic.Location = new System.Drawing.Point(127, 93);
+            this.ec_Patronymic.Location = new System.Drawing.Point(127, 87);
             this.ec_Patronymic.Multiline = false;
             this.ec_Patronymic.Name = "ec_Patronymic";
             this.ec_Patronymic.Size = new System.Drawing.Size(148, 22);
@@ -773,7 +773,7 @@ namespace TestDbApp
             this.ec_DocSeries.Location = new System.Drawing.Point(143, 41);
             this.ec_DocSeries.Multiline = false;
             this.ec_DocSeries.Name = "ec_DocSeries";
-            this.ec_DocSeries.Size = new System.Drawing.Size(148, 22);
+            this.ec_DocSeries.Size = new System.Drawing.Size(82, 22);
             this.ec_DocSeries.TabIndex = 45;
             this.ec_DocSeries.Value = "";
             // 
@@ -785,7 +785,7 @@ namespace TestDbApp
             this.ec_DocNumber.Location = new System.Drawing.Point(143, 11);
             this.ec_DocNumber.Multiline = false;
             this.ec_DocNumber.Name = "ec_DocNumber";
-            this.ec_DocNumber.Size = new System.Drawing.Size(148, 22);
+            this.ec_DocNumber.Size = new System.Drawing.Size(82, 22);
             this.ec_DocNumber.TabIndex = 44;
             this.ec_DocNumber.Value = "";
             // 
