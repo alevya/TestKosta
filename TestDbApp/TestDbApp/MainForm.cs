@@ -24,6 +24,20 @@ namespace TestDbApp
             dtp_DateBirth.ValueChanged += DtpDateBirthOnValueChanged;
 
             EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
+
+            //cb_Department.DataSource = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
+            //cb_Department.DisplayMember = "Name";
+            //cb_Department.ValueMember = "ID";
+            //var bindEmpl = new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true);
+            //bindEmpl.DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
+            //bindEmpl.ControlUpdateMode = ControlUpdateMode.OnPropertyChanged;
+            //cb_Department.DataBindings.Add(bindEmpl);
+            //cb_Department.SelectedIndexChanged += CbDepartmentOnSelectedIndexChanged;
+        }
+
+        private void CbDepartmentOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+        {
+            var selected = cb_Department.SelectedItem;
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
@@ -116,7 +130,7 @@ namespace TestDbApp
             ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName));
             ec_SurName.DataBindings.Add(new Binding("Value", dataSource, ec_SurName.AttributeName));
             ec_Patronymic.DataBindings.Add(new Binding("Value", dataSource, ec_Patronymic.AttributeName));
-            ec_DepartmentName.DataBindings.Add(new Binding("Value", dataSource, ec_DepartmentName.AttributeName));
+            //ec_DepartmentName.DataBindings.Add(new Binding("Value", dataSource, ec_DepartmentName.AttributeName));
             ec_Position.DataBindings.Add(new Binding("Value", dataSource, ec_Position.AttributeName));
             ec_DocNumber.DataBindings.Add(new Binding("Value", dataSource, ec_DocNumber.AttributeName));
             ec_DocSeries.DataBindings.Add(new Binding("Value", dataSource, ec_DocSeries.AttributeName));
@@ -180,6 +194,9 @@ namespace TestDbApp
 
         }
 
-       
+        private void bindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

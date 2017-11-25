@@ -41,7 +41,7 @@ namespace TestDbApp.EntityFrameworkBinding
             set
             {
                 _dataSource = value;
-                UpdateCurrencyManager();
+                _updateCurrencyManager();
             }
         }
 
@@ -56,7 +56,7 @@ namespace TestDbApp.EntityFrameworkBinding
             set
             {
                 _dataMember = value;
-                UpdateCurrencyManager();
+                _updateCurrencyManager();
             }
         }
 
@@ -67,7 +67,7 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             _dataSource = dataSource;
             _dataMember = dataMember;
-            UpdateCurrencyManager();
+            _updateCurrencyManager();
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace TestDbApp.EntityFrameworkBinding
         protected override void OnBindingContextChanged(EventArgs e)
         {
             base.OnBindingContextChanged(e);
-            UpdateCurrencyManager();
+            _updateCurrencyManager();
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace TestDbApp.EntityFrameworkBinding
             EntityDataSource?.Refresh();
         }
 
-        private void UpdateCurrencyManager()
+        private void _updateCurrencyManager()
         {
             if (_cm != null)
             {

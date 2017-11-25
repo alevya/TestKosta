@@ -7,8 +7,6 @@ namespace TestDbApp.Model
     [Table("Empoyee")]
     public class Employee
     {
-        public Employee() { }
-
         [Required, Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ID { get; set; }
@@ -32,12 +30,12 @@ namespace TestDbApp.Model
         [ForeignKey("DepartmentID")]
         public virtual Department Department { get; set; }
 
-        [NotMapped]
-        public string DepartmentName
-        {
-            get => Department.Name;
-            set { }
-        }
+        //[NotMapped]
+        //public string DepartmentName
+        //{
+        //    get => Department.Name;
+        //    set { }
+        //}
 
         //public Department Department
         //{
