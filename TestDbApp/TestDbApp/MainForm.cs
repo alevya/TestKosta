@@ -25,24 +25,21 @@ namespace TestDbApp
 
             EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
 
-            //cb_Department.DataSource = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
-            //cb_Department.DisplayMember = "Name";
-            //cb_Department.ValueMember = "ID";
-            //var bindEmpl = new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true);
-            //bindEmpl.DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
-            //bindEmpl.ControlUpdateMode = ControlUpdateMode.OnPropertyChanged;
-            //cb_Department.DataBindings.Add(bindEmpl);
-            //cb_Department.SelectedIndexChanged += CbDepartmentOnSelectedIndexChanged;
-        }
-
-        private void CbDepartmentOnSelectedIndexChanged(object sender, EventArgs eventArgs)
-        {
-            var selected = cb_Department.SelectedItem;
+            cb_Department.DataSource = entityDataSource_Org.EntitySets["Departments"];
+            cb_Department.DisplayMember = "Name";
+            cb_Department.ValueMember = "ID";
+            var bindEmpl =
+                new Binding("SelectedValue", entityDataSource_Org, "Employees.DepartmentID", true)
+                {
+                    DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
+                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
+                };
+            cb_Department.DataBindings.Add(bindEmpl);
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
         {
-            string msgError = string.Empty;
+            string msgError;
             var inExc = args.Exception.InnerException;
             if (inExc?.InnerException != null)
             {

@@ -37,6 +37,8 @@ namespace TestDbApp
             this.splCnt = new System.Windows.Forms.SplitContainer();
             this.tv_Department = new System.Windows.Forms.TreeView();
             this.gb_Employee = new System.Windows.Forms.GroupBox();
+            this.cb_DepartmentToEmployee = new System.Windows.Forms.ComboBox();
+            this.lDepartment = new System.Windows.Forms.Label();
             this.tb_Age = new System.Windows.Forms.TextBox();
             this.l_Age = new System.Windows.Forms.Label();
             this.lPosition = new System.Windows.Forms.Label();
@@ -52,6 +54,7 @@ namespace TestDbApp
             this.tp_Employee = new System.Windows.Forms.TabPage();
             this.p_Employee = new System.Windows.Forms.Panel();
             this.gb_EmployeeDetails = new System.Windows.Forms.GroupBox();
+            this.cb_Department = new System.Windows.Forms.ComboBox();
             this.l_Department = new System.Windows.Forms.Label();
             this.tb_Position = new System.Windows.Forms.TextBox();
             this.p_DocInfo = new System.Windows.Forms.Panel();
@@ -73,9 +76,6 @@ namespace TestDbApp
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
-            this.cb_Department = new System.Windows.Forms.ComboBox();
-            this.cbDepartment = new System.Windows.Forms.ComboBox();
-            this.lDepartment = new System.Windows.Forms.Label();
             this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -209,7 +209,7 @@ namespace TestDbApp
             // 
             // gb_Employee
             // 
-            this.gb_Employee.Controls.Add(this.cbDepartment);
+            this.gb_Employee.Controls.Add(this.cb_DepartmentToEmployee);
             this.gb_Employee.Controls.Add(this.lDepartment);
             this.gb_Employee.Controls.Add(this.tb_Age);
             this.gb_Employee.Controls.Add(this.l_Age);
@@ -232,6 +232,25 @@ namespace TestDbApp
             this.gb_Employee.TabIndex = 1;
             this.gb_Employee.TabStop = false;
             this.gb_Employee.Text = "Данные сотрудника";
+            // 
+            // cb_DepartmentToEmployee
+            // 
+            this.cb_DepartmentToEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cb_DepartmentToEmployee.Location = new System.Drawing.Point(380, 55);
+            this.cb_DepartmentToEmployee.Name = "cb_DepartmentToEmployee";
+            this.cb_DepartmentToEmployee.Size = new System.Drawing.Size(166, 23);
+            this.cb_DepartmentToEmployee.TabIndex = 49;
+            // 
+            // lDepartment
+            // 
+            this.lDepartment.AutoSize = true;
+            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDepartment.Location = new System.Drawing.Point(296, 57);
+            this.lDepartment.Name = "lDepartment";
+            this.lDepartment.Size = new System.Drawing.Size(49, 16);
+            this.lDepartment.TabIndex = 48;
+            this.lDepartment.Text = "Отдел";
+            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tb_Age
             // 
@@ -407,6 +426,14 @@ namespace TestDbApp
             this.gb_EmployeeDetails.TabIndex = 3;
             this.gb_EmployeeDetails.TabStop = false;
             this.gb_EmployeeDetails.Text = "Данные сотрудника";
+            // 
+            // cb_Department
+            // 
+            this.cb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cb_Department.Location = new System.Drawing.Point(141, 159);
+            this.cb_Department.Name = "cb_Department";
+            this.cb_Department.Size = new System.Drawing.Size(158, 23);
+            this.cb_Department.TabIndex = 18;
             // 
             // l_Department
             // 
@@ -616,33 +643,6 @@ namespace TestDbApp
             // bindSrc_DepartmentToEmployee
             // 
             this.bindSrc_DepartmentToEmployee.CurrentChanged += new System.EventHandler(this.bindSrc_DepartmentToEmployee_CurrentChanged);
-            // 
-            // cb_Department
-            // 
-            this.cb_Department.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cb_Department.Location = new System.Drawing.Point(141, 159);
-            this.cb_Department.Name = "cb_Department";
-            this.cb_Department.Size = new System.Drawing.Size(158, 23);
-            this.cb_Department.TabIndex = 18;
-            // 
-            // cbDepartment
-            // 
-            this.cbDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbDepartment.Location = new System.Drawing.Point(380, 55);
-            this.cbDepartment.Name = "cbDepartment";
-            this.cbDepartment.Size = new System.Drawing.Size(166, 23);
-            this.cbDepartment.TabIndex = 49;
-            // 
-            // lDepartment
-            // 
-            this.lDepartment.AutoSize = true;
-            this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lDepartment.Location = new System.Drawing.Point(296, 57);
-            this.lDepartment.Name = "lDepartment";
-            this.lDepartment.Size = new System.Drawing.Size(49, 16);
-            this.lDepartment.TabIndex = 48;
-            this.lDepartment.Text = "Отдел";
-            this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgv_EmployeeToDepartment
             // 
@@ -995,7 +995,6 @@ namespace TestDbApp
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тестовое приложение";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splCnt_Organization.Panel1.ResumeLayout(false);
             this.splCnt_Organization.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).EndInit();
@@ -1111,7 +1110,7 @@ namespace TestDbApp
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn1;
         private System.Windows.Forms.ComboBox cb_Department;
-        private System.Windows.Forms.ComboBox cbDepartment;
+        private System.Windows.Forms.ComboBox cb_DepartmentToEmployee;
         private System.Windows.Forms.Label lDepartment;
     }
 }
