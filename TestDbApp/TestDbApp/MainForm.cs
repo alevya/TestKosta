@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using TestDbApp.EntityFrameworkBinding;
@@ -101,13 +103,33 @@ namespace TestDbApp
 
             var employees = new List<Employee>();
             var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
+            var sql = @"WITH Recursive (ID, ParentID, DepartmentName)
+            AS
+            (
+                SELECT ID, ParentDepartmentID, Name
+                FROM Department d
+            WHERE d.ID = @param
+            UNION ALL
+            SELECT d.ID, d.ParentDepartmentID, d.Name
+                FROM Department d
+            JOIN Recursive r ON d.ParentDepartmentID = r.ID
+                )
+
+            select* from Empoyee as e
+            inner join
+            (SELECT ID, ParentID, DepartmentName
+                FROM Recursive r) as rd
+                on rd.ID = e.DepartmentID";
+            var sqlParam = new SqlParameter("param", selDepartment.DepartmentId);
+            var res = entityDataSource_Org.DbContext.Database.SqlQuery<Employee>(sql, sqlParam).ToList();
 
             bindSrc_DepartmentToEmployee.Clear();
             GetEmployees(employees, selDepartment, l);
             if (!employees.Any()) return;
 
+            //if (!res.Any()) return;
             var blEmployees = entityDataSource_Org.CreateView(employees);
-            bindSrc_DepartmentToEmployee.DataSource = blEmployees;//employees;
+            bindSrc_DepartmentToEmployee.DataSource = blEmployees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
         }
 
