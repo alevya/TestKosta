@@ -22,8 +22,6 @@ namespace TestDbApp
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
           
             dtp_DateBirth.ValueChanged += DtpDateBirthOnValueChanged;
-
-            EmployeeOfDepatmentNavigator.DataSource = bindSrc_DepartmentToEmployee;
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
@@ -102,11 +100,7 @@ namespace TestDbApp
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
-            //---Binding ComboBox на вкладках <Сотрудники> и <Структура предприятия>
-            cb_Department.DataSource = cb_DepartmentToEmployee.DataSource = entityDataSource_Org.EntitySets["Departments"];
-            cb_Department.DisplayMember = cb_DepartmentToEmployee.DisplayMember = "Name";
-            cb_Department.ValueMember = cb_DepartmentToEmployee.ValueMember = "DepartmentId";
-            //---
+        
             
             //---Привязка и заполнение дерева структуры предприятия
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
@@ -116,27 +110,6 @@ namespace TestDbApp
             if (tv_Department.Nodes.Count <= 0) return;
             tv_Department.SelectedNode = tv_Department.Nodes[0];
             _bindingEmployeeDetails(bindSrc_DepartmentToEmployee);
-            //---
-
-            //---Привязка полей на вкладке <Сотрудники>
-            bindSrc_Employee.DataSource = entityDataSource_Org.EntitySets["Employees"];
-            dgv_Employee.DataMember = string.Empty;
-            dgv_Employee.DataSource = bindSrc_Employee;
-
-            tb_FirstName.DataBindings.Add("Text", bindSrc_Employee, "FirstName", true);
-            tb_SurName.DataBindings.Add(new Binding("Text", bindSrc_Employee, "SurName", true));
-            tb_Patronymic.DataBindings.Add(new Binding("Text", bindSrc_Employee, "Patronymic", true));
-            tb_Position.DataBindings.Add(new Binding("Text", bindSrc_Employee, "Position", true));
-            tb_DocNumber.DataBindings.Add(new Binding("Text", bindSrc_Employee, "DocNumber", true));
-            tb_DocSeries.DataBindings.Add(new Binding("Text", bindSrc_Employee, "DocSeries", true));
-            dtp_DateOfBirth.DataBindings.Add(new Binding("Value", bindSrc_Employee, "DateOfBirth", true));
-            var bindEmpl =
-                new Binding("SelectedValue", bindSrc_Employee, "DepartmentID", true)
-                {
-                    DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
-                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
-                };
-            cb_Department.DataBindings.Add(bindEmpl);
             //---
         }
 
@@ -157,7 +130,7 @@ namespace TestDbApp
                 new Binding("SelectedValue", dataSource, "DepartmentID", true)
                 {
                     DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
-                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
+                    //ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
                 };
             cb_DepartmentToEmployee.DataBindings.Add(bindDepToEmpl);
             bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;

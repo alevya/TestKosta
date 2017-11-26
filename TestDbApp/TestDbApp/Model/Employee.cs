@@ -7,6 +7,11 @@ namespace TestDbApp.Model
     [Table("Empoyee")]
     public class Employee
     {
+        public Employee()
+        {
+            
+        }
+
         [Required, Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ID { get; set; }
@@ -31,8 +36,8 @@ namespace TestDbApp.Model
 
         [Required, MaxLength(50)]
         public string Position { get; set; }
-        [ForeignKey("DepartmentID")]
-        public virtual Department Department { get; set; }
+        //[ForeignKey("DepartmentID")]
+        //public virtual Department Department { get; set; }
 
         //public Department Department
         //{
