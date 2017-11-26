@@ -69,6 +69,8 @@ namespace TestDbApp
         private void _btnRefresh_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.Refresh();
+            //_populateTreeView();
+            TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
 
         }
 

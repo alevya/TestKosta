@@ -25,7 +25,7 @@ namespace TestDbApp.Model
         [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
 
-        [NotMapped, MaxLength(100), MinLength(0)]
+        [NotMapped]
         public int Age
         {
             get
