@@ -54,5 +54,9 @@ namespace TestDbApp.Model
         public string Name { get; set; }
 
         public ICollection<Employee> Employees => _employees;
+
+        public virtual Department Parent { get; set; }
+        public virtual ICollection<Department> Children { get; set; }
+    
     }
 }

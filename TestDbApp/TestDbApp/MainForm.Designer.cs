@@ -31,6 +31,7 @@ namespace TestDbApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splCnt_Organization = new System.Windows.Forms.SplitContainer();
             this.tc_Organization = new System.Windows.Forms.TabControl();
             this.tp_DepartmentToEmployees = new System.Windows.Forms.TabPage();
@@ -76,6 +77,19 @@ namespace TestDbApp
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
+            this.bindSrc_Employee = new System.Windows.Forms.BindingSource(this.components);
+            this.bindNavEmployee = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,12 +120,11 @@ namespace TestDbApp
             this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateOfBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.docSeriesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.docNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityBindNav_Employee = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -131,6 +144,9 @@ namespace TestDbApp
             this.p_DocInfo.SuspendLayout();
             this.p_command.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindSrc_DepartmentToEmployee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindSrc_Employee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavEmployee)).BeginInit();
+            this.bindNavEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Department)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).BeginInit();
@@ -254,7 +270,7 @@ namespace TestDbApp
             // tb_Age
             // 
             this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Age.Location = new System.Drawing.Point(463, 116);
+            this.tb_Age.Location = new System.Drawing.Point(463, 120);
             this.tb_Age.Name = "tb_Age";
             this.tb_Age.Size = new System.Drawing.Size(49, 21);
             this.tb_Age.TabIndex = 47;
@@ -264,7 +280,7 @@ namespace TestDbApp
             // 
             this.l_Age.AutoSize = true;
             this.l_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l_Age.Location = new System.Drawing.Point(310, 121);
+            this.l_Age.Location = new System.Drawing.Point(310, 125);
             this.l_Age.Name = "l_Age";
             this.l_Age.Size = new System.Drawing.Size(147, 16);
             this.l_Age.TabIndex = 46;
@@ -362,9 +378,8 @@ namespace TestDbApp
             // 
             // dtp_DateBirth
             // 
-            this.dtp_DateBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource_Org, "Employees.DateOfBirth", true));
             this.dtp_DateBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dtp_DateBirth.Location = new System.Drawing.Point(127, 122);
+            this.dtp_DateBirth.Location = new System.Drawing.Point(127, 124);
             this.dtp_DateBirth.Name = "dtp_DateBirth";
             this.dtp_DateBirth.Size = new System.Drawing.Size(158, 21);
             this.dtp_DateBirth.TabIndex = 18;
@@ -395,7 +410,7 @@ namespace TestDbApp
             // p_Employee
             // 
             this.p_Employee.Controls.Add(this.dgv_Employee);
-            this.p_Employee.Controls.Add(this.entityBindNav_Employee);
+            this.p_Employee.Controls.Add(this.bindNavEmployee);
             this.p_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Employee.Location = new System.Drawing.Point(3, 3);
             this.p_Employee.Name = "p_Employee";
@@ -447,7 +462,6 @@ namespace TestDbApp
             // 
             // tb_Position
             // 
-            this.tb_Position.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.Position", true));
             this.tb_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_Position.Location = new System.Drawing.Point(141, 132);
             this.tb_Position.Name = "tb_Position";
@@ -491,7 +505,6 @@ namespace TestDbApp
             // 
             // tb_DocSeries
             // 
-            this.tb_DocSeries.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.DocNumber", true));
             this.tb_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_DocSeries.Location = new System.Drawing.Point(161, 37);
             this.tb_DocSeries.Name = "tb_DocSeries";
@@ -500,7 +513,6 @@ namespace TestDbApp
             // 
             // tb_DocNumber
             // 
-            this.tb_DocNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.DocSeries", true));
             this.tb_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_DocNumber.Location = new System.Drawing.Point(161, 11);
             this.tb_DocNumber.Name = "tb_DocNumber";
@@ -520,7 +532,6 @@ namespace TestDbApp
             // 
             // tb_Patronymic
             // 
-            this.tb_Patronymic.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.Patronymic", true));
             this.tb_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_Patronymic.Location = new System.Drawing.Point(141, 53);
             this.tb_Patronymic.Name = "tb_Patronymic";
@@ -540,7 +551,6 @@ namespace TestDbApp
             // 
             // tb_SurName
             // 
-            this.tb_SurName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.SurName", true));
             this.tb_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_SurName.Location = new System.Drawing.Point(141, 80);
             this.tb_SurName.Name = "tb_SurName";
@@ -560,7 +570,6 @@ namespace TestDbApp
             // 
             // tb_FirstName
             // 
-            this.tb_FirstName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource_Org, "Employees.FirstName", true));
             this.tb_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_FirstName.Location = new System.Drawing.Point(141, 27);
             this.tb_FirstName.Name = "tb_FirstName";
@@ -591,7 +600,6 @@ namespace TestDbApp
             // 
             // dtp_DateOfBirth
             // 
-            this.dtp_DateOfBirth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.entityDataSource_Org, "Employees.DateOfBirth", true));
             this.dtp_DateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtp_DateOfBirth.Location = new System.Drawing.Point(141, 106);
             this.dtp_DateOfBirth.Name = "dtp_DateOfBirth";
@@ -642,6 +650,121 @@ namespace TestDbApp
             // bindSrc_DepartmentToEmployee
             // 
             this.bindSrc_DepartmentToEmployee.CurrentChanged += new System.EventHandler(this.bindSrc_DepartmentToEmployee_CurrentChanged);
+            // 
+            // bindNavEmployee
+            // 
+            this.bindNavEmployee.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindNavEmployee.BindingSource = this.bindSrc_Employee;
+            this.bindNavEmployee.CountItem = this.bindingNavigatorCountItem;
+            this.bindNavEmployee.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindNavEmployee.ImageScalingSize = new System.Drawing.Size(18, 18);
+            this.bindNavEmployee.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.bindNavEmployee.Location = new System.Drawing.Point(0, 0);
+            this.bindNavEmployee.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindNavEmployee.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindNavEmployee.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindNavEmployee.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindNavEmployee.Name = "bindNavEmployee";
+            this.bindNavEmployee.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindNavEmployee.Size = new System.Drawing.Size(1061, 25);
+            this.bindNavEmployee.TabIndex = 2;
+            this.bindNavEmployee.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Переместить в начало";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Переместить назад";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Положение";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 25);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Текущее положение";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(51, 22);
+            this.bindingNavigatorCountItem.Text = "для {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Переместить вперед";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Переместить в конец";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Добавить";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // dgv_EmployeeToDepartment
             // 
@@ -884,19 +1007,19 @@ namespace TestDbApp
             this.surNameDataGridViewTextBoxColumn,
             this.firstNameDataGridViewTextBoxColumn,
             this.patronymicDataGridViewTextBoxColumn,
-            this.dateOfBirthDataGridViewTextBoxColumn,
+            this.DateOfBirth,
+            this.positionDataGridViewTextBoxColumn,
             this.docSeriesDataGridViewTextBoxColumn,
             this.docNumberDataGridViewTextBoxColumn,
-            this.positionDataGridViewTextBoxColumn,
             this.departmentDataGridViewTextBoxColumn});
             this.dgv_Employee.DataMember = "Employees";
             this.dgv_Employee.DataSource = this.entityDataSource_Org;
             this.dgv_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_Employee.Location = new System.Drawing.Point(0, 26);
+            this.dgv_Employee.Location = new System.Drawing.Point(0, 25);
             this.dgv_Employee.MultiSelect = false;
             this.dgv_Employee.Name = "dgv_Employee";
             this.dgv_Employee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Employee.Size = new System.Drawing.Size(1061, 546);
+            this.dgv_Employee.Size = new System.Drawing.Size(1061, 547);
             this.dgv_Employee.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn
@@ -911,35 +1034,42 @@ namespace TestDbApp
             this.departmentIDDataGridViewTextBoxColumn.DataPropertyName = "DepartmentID";
             this.departmentIDDataGridViewTextBoxColumn.HeaderText = "DepartmentID";
             this.departmentIDDataGridViewTextBoxColumn.Name = "departmentIDDataGridViewTextBoxColumn";
-            this.departmentIDDataGridViewTextBoxColumn.Visible = false;
+            this.departmentIDDataGridViewTextBoxColumn.Width = 111;
             // 
             // surNameDataGridViewTextBoxColumn
             // 
             this.surNameDataGridViewTextBoxColumn.DataPropertyName = "SurName";
-            this.surNameDataGridViewTextBoxColumn.HeaderText = "SurName";
+            this.surNameDataGridViewTextBoxColumn.HeaderText = "Имя";
             this.surNameDataGridViewTextBoxColumn.Name = "surNameDataGridViewTextBoxColumn";
-            this.surNameDataGridViewTextBoxColumn.Width = 87;
+            this.surNameDataGridViewTextBoxColumn.Width = 59;
             // 
             // firstNameDataGridViewTextBoxColumn
             // 
             this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
-            this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "Фамилия";
             this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
-            this.firstNameDataGridViewTextBoxColumn.Width = 91;
+            this.firstNameDataGridViewTextBoxColumn.Width = 89;
             // 
             // patronymicDataGridViewTextBoxColumn
             // 
             this.patronymicDataGridViewTextBoxColumn.DataPropertyName = "Patronymic";
-            this.patronymicDataGridViewTextBoxColumn.HeaderText = "Patronymic";
+            this.patronymicDataGridViewTextBoxColumn.HeaderText = "Отчество";
             this.patronymicDataGridViewTextBoxColumn.Name = "patronymicDataGridViewTextBoxColumn";
-            this.patronymicDataGridViewTextBoxColumn.Width = 95;
+            this.patronymicDataGridViewTextBoxColumn.Width = 90;
             // 
-            // dateOfBirthDataGridViewTextBoxColumn
+            // DateOfBirth
             // 
-            this.dateOfBirthDataGridViewTextBoxColumn.DataPropertyName = "DateOfBirth";
-            this.dateOfBirthDataGridViewTextBoxColumn.HeaderText = "DateOfBirth";
-            this.dateOfBirthDataGridViewTextBoxColumn.Name = "dateOfBirthDataGridViewTextBoxColumn";
-            this.dateOfBirthDataGridViewTextBoxColumn.Visible = false;
+            this.DateOfBirth.DataPropertyName = "DateOfBirth";
+            this.DateOfBirth.HeaderText = "DateOfBirth";
+            this.DateOfBirth.Name = "DateOfBirth";
+            this.DateOfBirth.Visible = false;
+            this.DateOfBirth.Width = 97;
+            // 
+            // positionDataGridViewTextBoxColumn
+            // 
+            this.positionDataGridViewTextBoxColumn.DataPropertyName = "Position";
+            this.positionDataGridViewTextBoxColumn.HeaderText = "Должность";
+            this.positionDataGridViewTextBoxColumn.Name = "positionDataGridViewTextBoxColumn";
             // 
             // docSeriesDataGridViewTextBoxColumn
             // 
@@ -947,6 +1077,7 @@ namespace TestDbApp
             this.docSeriesDataGridViewTextBoxColumn.HeaderText = "DocSeries";
             this.docSeriesDataGridViewTextBoxColumn.Name = "docSeriesDataGridViewTextBoxColumn";
             this.docSeriesDataGridViewTextBoxColumn.Visible = false;
+            this.docSeriesDataGridViewTextBoxColumn.Width = 91;
             // 
             // docNumberDataGridViewTextBoxColumn
             // 
@@ -954,13 +1085,7 @@ namespace TestDbApp
             this.docNumberDataGridViewTextBoxColumn.HeaderText = "DocNumber";
             this.docNumberDataGridViewTextBoxColumn.Name = "docNumberDataGridViewTextBoxColumn";
             this.docNumberDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // positionDataGridViewTextBoxColumn
-            // 
-            this.positionDataGridViewTextBoxColumn.DataPropertyName = "Position";
-            this.positionDataGridViewTextBoxColumn.HeaderText = "Position";
-            this.positionDataGridViewTextBoxColumn.Name = "positionDataGridViewTextBoxColumn";
-            this.positionDataGridViewTextBoxColumn.Width = 78;
+            this.docNumberDataGridViewTextBoxColumn.Width = 101;
             // 
             // departmentDataGridViewTextBoxColumn
             // 
@@ -968,17 +1093,7 @@ namespace TestDbApp
             this.departmentDataGridViewTextBoxColumn.HeaderText = "Department";
             this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             this.departmentDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // entityBindNav_Employee
-            // 
-            this.entityBindNav_Employee.DataMember = "Employees";
-            this.entityBindNav_Employee.DataSource = this.entityDataSource_Org;
-            this.entityBindNav_Employee.ImageScalingSize = new System.Drawing.Size(18, 18);
-            this.entityBindNav_Employee.Location = new System.Drawing.Point(0, 0);
-            this.entityBindNav_Employee.Name = "entityBindNav_Employee";
-            this.entityBindNav_Employee.Size = new System.Drawing.Size(1061, 26);
-            this.entityBindNav_Employee.TabIndex = 1;
-            this.entityBindNav_Employee.Text = "entityBindingNavigator1";
+            this.departmentDataGridViewTextBoxColumn.Width = 99;
             // 
             // MainForm
             // 
@@ -1015,6 +1130,10 @@ namespace TestDbApp
             this.p_DocInfo.PerformLayout();
             this.p_command.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindSrc_DepartmentToEmployee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindSrc_Employee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavEmployee)).EndInit();
+            this.bindNavEmployee.ResumeLayout(false);
+            this.bindNavEmployee.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Department)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
@@ -1031,16 +1150,6 @@ namespace TestDbApp
         private System.Windows.Forms.TabPage tp_Employee;
         private System.Windows.Forms.Panel p_Employee;
         private System.Windows.Forms.DataGridView dgv_Employee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn departmentIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronymicDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn docSeriesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn docNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
@@ -1085,7 +1194,6 @@ namespace TestDbApp
         private System.Windows.Forms.TextBox tb_Age;
         private System.Windows.Forms.Label l_Age;
         private EntityFrameworkBinding.EntityBindingNavigator EmployeeOfDepatmentNavigator;
-        private EntityFrameworkBinding.EntityBindingNavigator entityBindNav_Employee;
         private System.Windows.Forms.TabPage tp_Department;
         private System.Windows.Forms.DataGridView dgv_Department;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
@@ -1106,6 +1214,29 @@ namespace TestDbApp
         private System.Windows.Forms.DataGridViewTextBoxColumn docNumberDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.BindingSource bindSrc_Employee;
+        private System.Windows.Forms.BindingNavigator bindNavEmployee;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn departmentIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronymicDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateOfBirth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn positionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn docSeriesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn docNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
     }
 }
 
