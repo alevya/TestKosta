@@ -11,6 +11,8 @@ namespace TestDbApp
 {
     public partial class MainForm : Form
     {
+        private int _ageEmployee;
+
         public MainForm()
         {
             InitializeComponent();
@@ -48,8 +50,8 @@ namespace TestDbApp
 
         private void DtpDateBirthOnValueChanged(object sender, EventArgs eventArgs)
         {
-            var diff = new DifferenceDate(dtp_DateBirth.Value, DateTime.Now);
-            tb_Age.Text = Convert.ToString(diff.Years);
+            //var diff = new DifferenceDate(dtp_DateBirth.Value, DateTime.Now);
+            //tb_Age.Text = Convert.ToString(diff.Years);
         }
 
         private void BindSrcDepartmentToEmployeeOnCurrentChanged(object sender, EventArgs eventArgs)
@@ -97,6 +99,7 @@ namespace TestDbApp
             cb_DepartmentToEmployee.DataSource = entityDataSource_Org;
             cb_DepartmentToEmployee.DisplayMember = "Departments.Name";
             cb_DepartmentToEmployee.ValueMember = "Departments.DepartmentId";
+
             //---Привязка и заполнение дерева структуры предприятия
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
@@ -119,6 +122,7 @@ namespace TestDbApp
             ec_DocNumber.DataBindings.Add(new Binding("Value", dataSource, ec_DocNumber.AttributeName, true));
             ec_DocSeries.DataBindings.Add(new Binding("Value", dataSource, ec_DocSeries.AttributeName, true));
             dtp_DateBirth.DataBindings.Add(new Binding("Value", dataSource, "DateOfBirth", true));
+            tb_Age.DataBindings.Add(new Binding("Text", dataSource, "Age", true));
 
             //Binding ComboBox на вкладке <Структура предприятия> 
             var bindDepToEmpl =
@@ -191,5 +195,7 @@ namespace TestDbApp
         {
 
         }
+
+        //internal int AgeCurrentEmployee 
     }
 }

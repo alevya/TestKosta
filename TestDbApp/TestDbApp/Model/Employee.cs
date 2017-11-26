@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TestDbApp.Common;
 
 namespace TestDbApp.Model
 {
@@ -24,6 +25,16 @@ namespace TestDbApp.Model
         [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
 
+        [NotMapped, MaxLength(100), MinLength(0)]
+        public int Age
+        {
+            get
+            {
+                var diff = new DifferenceDate(DateOfBirth, DateTime.Now);
+                return diff.Years;
+            }
+        }
+
         [StringLength(4)]
         public string DocSeries { get; set; }
 
@@ -34,5 +45,6 @@ namespace TestDbApp.Model
         public string Position { get; set; }
         [ForeignKey("DepartmentID")]
         public virtual Department Department { get; set; }
+
     }
 }
