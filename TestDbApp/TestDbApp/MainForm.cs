@@ -64,13 +64,15 @@ namespace TestDbApp
         private void _btnCancel_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.CancelChanges();
+            bindSrc_DepartmentToEmployee.CancelEdit();
         }
 
         private void _btnRefresh_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.Refresh();
+            
             //_populateTreeView();
-            TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
+            //TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
 
         }
 
@@ -104,7 +106,8 @@ namespace TestDbApp
             GetEmployees(employees, selDepartment, l);
             if (!employees.Any()) return;
 
-            bindSrc_DepartmentToEmployee.DataSource = employees;
+            var blEmployees = entityDataSource_Org.CreateView(employees);
+            bindSrc_DepartmentToEmployee.DataSource = blEmployees;//employees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
         }
 
