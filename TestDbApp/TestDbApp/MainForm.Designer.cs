@@ -113,7 +113,6 @@ namespace TestDbApp
             this.parentDepartmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityBindNav_Department = new TestDbApp.EntityFrameworkBinding.EntityBindingNavigator();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -387,7 +386,6 @@ namespace TestDbApp
             // tp_Department
             // 
             this.tp_Department.Controls.Add(this.dgv_Department);
-            this.tp_Department.Controls.Add(this.entityBindNav_Department);
             this.tp_Department.Location = new System.Drawing.Point(4, 22);
             this.tp_Department.Name = "tp_Department";
             this.tp_Department.Size = new System.Drawing.Size(1395, 578);
@@ -956,11 +954,11 @@ namespace TestDbApp
             this.dgv_Department.DataMember = "Departments";
             this.dgv_Department.DataSource = this.entityDataSource_Org;
             this.dgv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_Department.Location = new System.Drawing.Point(0, 26);
+            this.dgv_Department.Location = new System.Drawing.Point(0, 0);
             this.dgv_Department.MultiSelect = false;
             this.dgv_Department.Name = "dgv_Department";
             this.dgv_Department.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Department.Size = new System.Drawing.Size(1395, 552);
+            this.dgv_Department.Size = new System.Drawing.Size(1395, 578);
             this.dgv_Department.TabIndex = 0;
             // 
             // parentDepartmentIDDataGridViewTextBoxColumn
@@ -983,17 +981,6 @@ namespace TestDbApp
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.Width = 68;
-            // 
-            // entityBindNav_Department
-            // 
-            this.entityBindNav_Department.DataMember = "Departments";
-            this.entityBindNav_Department.DataSource = this.entityDataSource_Org;
-            this.entityBindNav_Department.ImageScalingSize = new System.Drawing.Size(18, 18);
-            this.entityBindNav_Department.Location = new System.Drawing.Point(0, 0);
-            this.entityBindNav_Department.Name = "entityBindNav_Department";
-            this.entityBindNav_Department.Size = new System.Drawing.Size(1395, 26);
-            this.entityBindNav_Department.TabIndex = 1;
-            this.entityBindNav_Department.Text = "entityBindingNavigator1";
             // 
             // dgv_Employee
             // 
@@ -1120,7 +1107,6 @@ namespace TestDbApp
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tp_Department.ResumeLayout(false);
-            this.tp_Department.PerformLayout();
             this.tp_Employee.ResumeLayout(false);
             this.p_Employee.ResumeLayout(false);
             this.p_Employee.PerformLayout();
@@ -1200,7 +1186,6 @@ namespace TestDbApp
         private System.Windows.Forms.DataGridViewTextBoxColumn parentDepartmentIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private EntityFrameworkBinding.EntityBindingNavigator entityBindNav_Department;
         private System.Windows.Forms.ComboBox cb_Department;
         private System.Windows.Forms.ComboBox cb_DepartmentToEmployee;
         private System.Windows.Forms.Label lDepartment;
