@@ -48,7 +48,6 @@ namespace TestDbApp
 
         private void DtpDateBirthOnValueChanged(object sender, EventArgs eventArgs)
         {
-            //var dtBirth = dtp_DateBirth.Value;
             var diff = new DifferenceDate(dtp_DateBirth.Value, DateTime.Now);
             tb_Age.Text = Convert.ToString(diff.Years);
         }
@@ -76,13 +75,8 @@ namespace TestDbApp
             GetEmployees(employees, selDepartment, l);
             if(!employees.Any()) return;
 
-            //var bindingList = entityDataSource_Org.CreateView(employees);
-            var dlEmployee = entityDataSource_Org.GetLookupDictionary(typeof(Employee));
-            var dlDepartment = entityDataSource_Org.GetLookupDictionary(typeof(Department));
             bindSrc_DepartmentToEmployee.DataSource = employees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
-            //dgv_EmployeeToDepartment.DataMember = "Employee";
-
         }
 
         private static void GetEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
@@ -130,7 +124,7 @@ namespace TestDbApp
                 new Binding("SelectedValue", dataSource, "DepartmentID", true)
                 {
                     DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged,
-                    //ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
+                    ControlUpdateMode = ControlUpdateMode.OnPropertyChanged
                 };
             cb_DepartmentToEmployee.DataBindings.Add(bindDepToEmpl);
             bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
@@ -176,23 +170,23 @@ namespace TestDbApp
         }
 
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void _btnSave_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.SaveChanges();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void _btnCancel_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.CancelChanges();
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void _btnRefresh_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.Refresh();
 
         }
 
-        private void bindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
+        private void _bindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
         {
 
         }

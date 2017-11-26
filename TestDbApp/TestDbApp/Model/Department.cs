@@ -10,36 +10,8 @@ namespace TestDbApp.Model
     public class Department
     {
         private readonly HashSet<Employee> _employees;
-        //private readonly ObservableCollection<Employee> _employees;
         public Department()
         {
-            //var emps = new ObservableCollection<Employee>();
-            //_employees = emps;
-            //emps.CollectionChanged += (sender, e) =>
-            //{
-            //    if (e.NewItems != null)
-            //    {
-            //        foreach (Employee item in e.NewItems)
-            //        {
-            //            if (item.Department != this)
-            //            {
-            //                item.Department = this;
-            //            }
-            //        }
-            //    }
-
-            //    if (e.OldItems == null) return;
-
-            //    foreach (Employee item in e.OldItems)
-            //    {
-            //        if (item.Department == this)
-            //        {
-            //            item.Department = null;
-            //        }
-            //    }
-
-            //};
-
             _employees = new HashSet<Employee>();
         }
 
@@ -55,8 +27,8 @@ namespace TestDbApp.Model
 
         public ICollection<Employee> Employees => _employees;
 
-        //public virtual Department Parent { get; set; }
-        //public virtual ICollection<Department> Children { get; set; }
-    
+        public virtual Department Parent { get; set; }
+        public virtual ICollection<Department> Children { get; set; }
+
     }
 }

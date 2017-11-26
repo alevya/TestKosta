@@ -7,11 +7,7 @@ namespace TestDbApp.Model
     [Table("Empoyee")]
     public class Employee
     {
-        public Employee()
-        {
-            
-        }
-
+     
         [Required, Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ID { get; set; }
@@ -36,31 +32,7 @@ namespace TestDbApp.Model
 
         [Required, MaxLength(50)]
         public string Position { get; set; }
-        //[ForeignKey("DepartmentID")]
-        //public virtual Department Department { get; set; }
-
-        //public Department Department
-        //{
-        //    get => _department;
-        //    set
-        //    {
-        //        if (value != _department)
-        //        {
-        //            Department originalDepartment = _department;
-        //            _department = value;
-
-        //            if (originalDepartment != null && originalDepartment.Employees.Contains(this))
-        //            {
-        //                originalDepartment.Employees.Remove(this);
-        //            }
-
-        //            // Add to new collection
-        //            if (value != null && !value.Employees.Contains(this))
-        //            {
-        //                value.Employees.Add(this);
-        //            }
-        //        }
-        //    }
-        //}
+        [ForeignKey("DepartmentID")]
+        public virtual Department Department { get; set; }
     }
 }
