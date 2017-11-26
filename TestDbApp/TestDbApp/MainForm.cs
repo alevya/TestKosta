@@ -15,7 +15,7 @@ namespace TestDbApp
             Load += OnLoad;
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
-            bindSrc_DepartmentToEmployee.DataMemberChanged += BindSrcDepartmentToEmployeeOnDataMemberChanged;
+   
             bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
         }
@@ -122,8 +122,6 @@ namespace TestDbApp
                 GetEmployees(employees, item, departments);
             }
         }
-
-
 
         private void _bindingEmployeeDetails(object dataSource)
         {
