@@ -94,8 +94,9 @@ namespace TestDbApp
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
-        
-            
+            cb_DepartmentToEmployee.DataSource = entityDataSource_Org;
+            cb_DepartmentToEmployee.DisplayMember = "Departments.Name";
+            cb_DepartmentToEmployee.ValueMember = "Departments.DepartmentId";
             //---Привязка и заполнение дерева структуры предприятия
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
