@@ -162,13 +162,13 @@ namespace TestDbApp
             }
         }
 
-        private static TreeNode GetTreeNode(Department row, IEnumerable<Department> list)
+        private static TreeNode GetTreeNode(Department dep, IEnumerable<Department> list)
         {
-            Guid.TryParse(row.DepartmentId.ToString(), out Guid nodeID);
+            Guid.TryParse(dep.DepartmentId.ToString(), out Guid nodeID);
             var node = new TreeNode
                        {
-                           Text = Convert.ToString(row.Name),
-                           Tag = row
+                           Text = Convert.ToString(dep.Name),
+                           Tag = dep
                        };
             var res = list.Where(department => department.ParentDepartmentID == nodeID);
             foreach (var item in res)
