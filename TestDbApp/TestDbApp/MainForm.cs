@@ -34,7 +34,8 @@ namespace TestDbApp
             PopulateTreeView();
 
             if (tv_Department.Nodes.Count <= 0) return;
-            tv_Department.SelectedNode = tv_Department.Nodes[0];
+            
+            tv_Department.SelectedNode = tv_Department.TopNode;
             BindingEmployeeDetails(bindSrc_DepartmentToEmployee);
             //---
         }
