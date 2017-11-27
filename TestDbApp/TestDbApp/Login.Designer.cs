@@ -36,8 +36,13 @@ namespace TestDbApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tb_user = new System.Windows.Forms.TextBox();
             this.tb_password = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.l_user = new System.Windows.Forms.Label();
+            this.l_password = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb_server = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tb_database = new System.Windows.Forms.TextBox();
+            this.chb_SSPI = new System.Windows.Forms.CheckBox();
             this.m_oPicturePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_oPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,15 +93,46 @@ namespace TestDbApp
             this.tb_password.Name = "tb_password";
             this.tb_password.TextChanged += new System.EventHandler(this.TbPasswordTextChanged);
             // 
-            // label2
+            // l_user
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.l_user, "l_user");
+            this.l_user.Name = "l_user";
             // 
-            // label3
+            // l_password
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.l_password, "l_password");
+            this.l_password.Name = "l_password";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // tb_server
+            // 
+            resources.ApplyResources(this.tb_server, "tb_server");
+            this.tb_server.Name = "tb_server";
+            this.tb_server.TextChanged += new System.EventHandler(this.TbServerTextChanged);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // tb_database
+            // 
+            resources.ApplyResources(this.tb_database, "tb_database");
+            this.tb_database.Name = "tb_database";
+            this.tb_database.TextChanged += new System.EventHandler(this.TbDatabaseTextChanged);
+            // 
+            // chb_SSPI
+            // 
+            resources.ApplyResources(this.chb_SSPI, "chb_SSPI");
+            this.chb_SSPI.Checked = true;
+            this.chb_SSPI.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chb_SSPI.Name = "chb_SSPI";
+            this.chb_SSPI.UseVisualStyleBackColor = true;
+            this.chb_SSPI.CheckStateChanged += new System.EventHandler(this.ChbSspiCheckStateChanged);
             // 
             // Login
             // 
@@ -105,11 +141,16 @@ namespace TestDbApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.m_btnCancel;
             this.ControlBox = false;
+            this.Controls.Add(this.chb_SSPI);
+            this.Controls.Add(this.tb_database);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tb_server);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_user);
             this.Controls.Add(this.tb_password);
             this.Controls.Add(this.m_oPicturePanel);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.l_user);
+            this.Controls.Add(this.l_password);
             this.Controls.Add(this.m_btnCancel);
             this.Controls.Add(this.m_OK);
             this.Controls.Add(this.pictureBox1);
@@ -134,7 +175,12 @@ namespace TestDbApp
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox tb_user;
         private System.Windows.Forms.TextBox tb_password;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label l_user;
+        private System.Windows.Forms.Label l_password;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_server;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tb_database;
+        private System.Windows.Forms.CheckBox chb_SSPI;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -6,22 +7,45 @@ namespace TestDbApp
 {
     public partial class Login : Form
     {
-        private readonly string _connectionString;
+        public string ConnectionString { get; private set; }
+        private string _server;
+        private string _database;
         private string _pswd;
         private string _user;
 
-        public Login(string connectionString)
+        public Login()
         {
             InitializeComponent();
-            _connectionString = connectionString;
-            if (!string.IsNullOrEmpty(_connectionString))
+            _server = _database = _pswd = _user = string.Empty;
+
+            try
             {
-                tb_user.Enabled = false;
-                tb_password.Enabled = false;
+                ConnectionString = ConfigurationManager.ConnectionStrings["TestDBConnectionString"].ConnectionString;
             }
+            catch
+            {
+                // ignored
+            }
+            if (!string.IsNullOrEmpty(ConnectionString))
+            {
+                tb_server.Enabled = false;
+                tb_database.Enabled = false;
+                chb_SSPI.Enabled = false;
+            }
+            ChbSspiCheckStateChanged(this, EventArgs.Empty);
         }
 
         #region Events
+
+        private void TbServerTextChanged(object sender, EventArgs e)
+        {
+            _server = tb_server.Text;
+        }
+
+        private void TbDatabaseTextChanged(object sender, EventArgs e)
+        {
+            _database = tb_database.Text;
+        }
 
         private void TbUserTextChanged(object sender, EventArgs e)
         {
@@ -33,14 +57,21 @@ namespace TestDbApp
             _pswd = tb_password.Text;
         }
 
+        private void ChbSspiCheckStateChanged(object sender, EventArgs e)
+        {
+            l_password.Visible = tb_password.Visible = !chb_SSPI.Checked;
+            l_user.Visible = tb_user.Visible = !chb_SSPI.Checked;
+        }
+
         private async void OkClick(object sender, EventArgs e)
         {
-            m_OK.Enabled = false;
+            if (string.IsNullOrEmpty(ConnectionString))
+            {
+                ConnectionString = chb_SSPI.Checked ? $"Data Source = {_server}; Initial Catalog = {_database}; Integrated Security = True" 
+                                                    : $"Server={_server};Initial Catalog={_database};User ID={_user};Password={_pswd}";
+            }
 
-            tb_user.ReadOnly = true;
-            tb_password.ReadOnly = true;
             var result = await Task.Run(() => TryConnection());
-
             if (result)
             {
                 DialogResult = DialogResult.OK;
@@ -54,14 +85,22 @@ namespace TestDbApp
             }
         }
 
+
+
+        #endregion
+
+        #region Methods
+
         private bool TryConnection()
         {
-            using (var dbContext = new Model.TestDbContext(_connectionString))
+            using (var dbContext = new Model.TestDbContext(ConnectionString))
             {
                 return dbContext.Database.Exists();
             }
         }
 
         #endregion
+
+
     }
 }
