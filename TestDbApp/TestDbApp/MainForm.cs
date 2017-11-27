@@ -98,8 +98,8 @@ namespace TestDbApp
         /// <param name="e"></param>
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            entityDataSource_Org.Refresh();
-            TvDepartmentOnAfterSelect(sender, new TreeViewEventArgs(tv_Department.SelectedNode));
+            if (entityDataSource_Org.EntitySets["Employees"].List != null)
+                entityDataSource_Org.Refresh();
         }
 
         /// <summary>
