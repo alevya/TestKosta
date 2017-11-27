@@ -114,7 +114,6 @@ namespace TestDbApp
 
             var blEmployees = entityDataSource_Org.CreateView(employees);
             bindSrc_DepartmentToEmployee.DataSource = blEmployees;
-            dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
         }
 
         #endregion
@@ -132,6 +131,7 @@ namespace TestDbApp
 
         private void BindingEmployeeDetails(object dataSource)
         {
+            dgv_EmployeeToDepartment.DataSource = dataSource;
             if (dataSource == null) return;
 
             ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName, true));
