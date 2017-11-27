@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using TestDbApp.EntityFrameworkBinding;
@@ -14,12 +15,14 @@ namespace TestDbApp
             InitializeComponent();
             Load += OnLoad;
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
+            entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
    
             bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
         }
 
+       
         #region Events
 
         private void OnLoad(object sender, EventArgs eventArgs)
@@ -57,9 +60,22 @@ namespace TestDbApp
             args.Handled = true;
         }
 
+        private void EntityDataSourceOrgOnSavingChanges(object sender, CancelEventArgs cancelEventArgs)
+        {
+            var dialogRes = MessageBox.Show(this, "Сохранить данные?", "Сохранение",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            if (dialogRes != DialogResult.Yes)
+            {
+                cancelEventArgs.Cancel = true;
+            }
+           
+        }
+
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.SaveChanges();
+            TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -73,7 +89,7 @@ namespace TestDbApp
             entityDataSource_Org.Refresh();
             
             //_populateTreeView();
-            //TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
+            TvDepartmentOnAfterSelect(sender, new TreeViewEventArgs(tv_Department.SelectedNode));
 
         }
 
