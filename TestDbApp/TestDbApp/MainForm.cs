@@ -17,8 +17,6 @@ namespace TestDbApp
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
-  
-            bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
         }
 
        
@@ -90,13 +88,6 @@ namespace TestDbApp
             
             //_populateTreeView();
             TvDepartmentOnAfterSelect(sender, new TreeViewEventArgs(tv_Department.SelectedNode));
-
-        }
-
-        private void BindSrcDepartmentToEmployeeOnCurrentChanged(object sender, EventArgs eventArgs)
-        {
-            var currentEmpl = bindSrc_DepartmentToEmployee.Current as Employee;
-            if (currentEmpl == null) return;
 
         }
 
