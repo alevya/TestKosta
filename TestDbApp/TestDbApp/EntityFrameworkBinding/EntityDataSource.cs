@@ -55,6 +55,11 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string NameOrConnectionString { get; set; }
+
+        /// <summary>
         /// Gets or sets the DbContext used as a data source.
         /// </summary>
         [Browsable(false),DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -65,9 +70,13 @@ namespace TestDbApp.EntityFrameworkBinding
                 if (_ctx != null || _ctxType == null || DesignMode) return _ctx;
                 try
                 {
-                    DbContext = Activator.CreateInstance(_ctxType) as DbContext;
+                    //DbContext = Activator.CreateInstance(_ctxType) as DbContext;
+                    DbContext = Activator.CreateInstance(_ctxType, NameOrConnectionString) as DbContext;
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
                 return _ctx;
             }
             set

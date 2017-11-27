@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,25 +6,23 @@ namespace TestDbApp
 {
     public partial class Login : Form
     {
+        private readonly string _connectionString;
         private string _pswd;
         private string _user;
-        public string Culture { get; }
 
-        public Login()
+        public Login(string connectionString)
         {
-            Culture = Thread.CurrentThread.CurrentCulture.Name;
-
             InitializeComponent();
-            Shown += LoginShown;
+            _connectionString = connectionString;
+            if (!string.IsNullOrEmpty(_connectionString))
+            {
+                tb_user.Enabled = false;
+                tb_password.Enabled = false;
+            }
         }
 
-        private void LoginShown(object sender, EventArgs e)
-        {
-            tb_password.Focus();
-        }
-
-     
         #region Events
+
         private void TbUserTextChanged(object sender, EventArgs e)
         {
             _user = tb_user.Text;
@@ -43,9 +40,12 @@ namespace TestDbApp
             tb_user.ReadOnly = true;
             tb_password.ReadOnly = true;
             var result = await Task.Run(() => TryConnection());
-            
-            if(result)
+
+            if (result)
+            {
                 DialogResult = DialogResult.OK;
+                Close();
+            }
             else
             {
                 DialogResult = DialogResult.None;
@@ -54,9 +54,9 @@ namespace TestDbApp
             }
         }
 
-        private static bool TryConnection()
+        private bool TryConnection()
         {
-            using (var dbContext = new Model.TestDbContext())
+            using (var dbContext = new Model.TestDbContext(_connectionString))
             {
                 return dbContext.Database.Exists();
             }

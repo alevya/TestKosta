@@ -4,7 +4,7 @@ namespace TestDbApp.Model
 {
     public class TestDbContext : DbContext
     {
-        public TestDbContext() : base(nameOrConnectionString: "TestDBConnectionString")
+        public TestDbContext(string nameOrConnectionString) : base(nameOrConnectionString: nameOrConnectionString)
         {
 
             if (!Database.Exists())

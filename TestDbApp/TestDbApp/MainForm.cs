@@ -10,10 +10,11 @@ namespace TestDbApp
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        public MainForm(string nameOrConnectionString)
         {
             InitializeComponent();
             Load += OnLoad;
+            entityDataSource_Org.NameOrConnectionString = nameOrConnectionString;
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
