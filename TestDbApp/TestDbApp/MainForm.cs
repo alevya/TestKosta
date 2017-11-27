@@ -19,7 +19,6 @@ namespace TestDbApp
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
         }
 
-       
         #region Events
 
         private void OnLoad(object sender, EventArgs eventArgs)
