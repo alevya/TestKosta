@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using TestDbApp.EntityFrameworkBinding;
@@ -33,11 +31,11 @@ namespace TestDbApp
             //---Привязка и заполнение дерева структуры предприятия
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
             tv_Department.DataBindings.Add(bind);
-            _populateTreeView();
+            PopulateTreeView();
 
             if (tv_Department.Nodes.Count <= 0) return;
             tv_Department.SelectedNode = tv_Department.Nodes[0];
-            _bindingEmployeeDetails(bindSrc_DepartmentToEmployee);
+            BindingEmployeeDetails(bindSrc_DepartmentToEmployee);
             //---
         }
 
@@ -58,18 +56,18 @@ namespace TestDbApp
             args.Handled = true;
         }
 
-        private void _btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.SaveChanges();
         }
 
-        private void _btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.CancelChanges();
             bindSrc_DepartmentToEmployee.CancelEdit();
         }
 
-        private void _btnRefresh_Click(object sender, EventArgs e)
+        private void BtnRefresh_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.Refresh();
             
@@ -78,7 +76,7 @@ namespace TestDbApp
 
         }
 
-        private void _bindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
+        private void BindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
         {
 
         }
@@ -102,32 +100,11 @@ namespace TestDbApp
             if (selDepartment == null) return;
 
             var employees = new List<Employee>();
-            var l = entityDataSource_Org.EntitySets["Departments"].Cast<Department>().ToList();
-            var sql = @"WITH Recursive (ID, ParentID, DepartmentName)
-            AS
-            (
-                SELECT ID, ParentDepartmentID, Name
-                FROM Department d
-            WHERE d.ID = @param
-            UNION ALL
-            SELECT d.ID, d.ParentDepartmentID, d.Name
-                FROM Department d
-            JOIN Recursive r ON d.ParentDepartmentID = r.ID
-                )
-
-            select* from Empoyee as e
-            inner join
-            (SELECT ID, ParentID, DepartmentName
-                FROM Recursive r) as rd
-                on rd.ID = e.DepartmentID";
-            var sqlParam = new SqlParameter("param", selDepartment.DepartmentId);
-            var res = entityDataSource_Org.DbContext.Database.SqlQuery<Employee>(sql, sqlParam).ToList();
-
+         
             bindSrc_DepartmentToEmployee.Clear();
-            GetEmployees(employees, selDepartment, l);
+            GetEmployees(employees, selDepartment);
             if (!employees.Any()) return;
 
-            //if (!res.Any()) return;
             var blEmployees = entityDataSource_Org.CreateView(employees);
             bindSrc_DepartmentToEmployee.DataSource = blEmployees;
             dgv_EmployeeToDepartment.DataSource = bindSrc_DepartmentToEmployee;
@@ -137,20 +114,16 @@ namespace TestDbApp
 
         #region Methods
 
-        private static void GetEmployees(List<Employee> employees, Department dep, IEnumerable<Department> departments)
+        private static void GetEmployees(List<Employee> employees, Department dep)
         {
-            var ds = from Department d in departments
-                where d.ParentDepartmentID == dep.DepartmentId
-                select d;
-
             employees.AddRange(dep.Employees);
-            foreach (var item in ds)
+            foreach (var childDep in dep.Children)
             {
-                GetEmployees(employees, item, departments);
+                GetEmployees(employees, childDep);
             }
         }
 
-        private void _bindingEmployeeDetails(object dataSource)
+        private void BindingEmployeeDetails(object dataSource)
         {
             if (dataSource == null) return;
 
@@ -173,7 +146,7 @@ namespace TestDbApp
             cb_DepartmentToEmployee.DataBindings.Add(bindDepToEmpl);
         }
 
-        private void _populateTreeView()
+        private void PopulateTreeView()
         {
             var list = tv_Department.Tag as IEnumerable<Department>;
             if (list == null) return;

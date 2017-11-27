@@ -166,7 +166,7 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         // update data map when list changes
-        void _list_ListChanged(object sender, ListChangedEventArgs e)
+        private void _list_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (_dctLookup == null) return;
             // clear old dictionary

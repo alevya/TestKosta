@@ -203,7 +203,7 @@ namespace TestDbApp
             // 
             // bindSrc_DepartmentToEmployee
             // 
-            this.bindSrc_DepartmentToEmployee.CurrentChanged += new System.EventHandler(this._bindSrc_DepartmentToEmployee_CurrentChanged);
+            this.bindSrc_DepartmentToEmployee.CurrentChanged += new System.EventHandler(this.BindSrc_DepartmentToEmployee_CurrentChanged);
             // 
             // bindingNavigatorCountItem1
             // 
@@ -475,7 +475,7 @@ namespace TestDbApp
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this._btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnRefresh
             // 
@@ -485,7 +485,7 @@ namespace TestDbApp
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Обновить";
             this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this._btnRefresh_Click);
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // btnCancel
             // 
@@ -495,7 +495,7 @@ namespace TestDbApp
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this._btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // dgv_EmployeeToDepartment
             // 
