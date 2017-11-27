@@ -17,8 +17,7 @@ namespace TestDbApp
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
-   
-            bindSrc_DepartmentToEmployee.CurrentItemChanged += BindSrcDepartmentToEmployeeOnCurrentItemChanged;
+  
             bindSrc_DepartmentToEmployee.CurrentChanged += BindSrcDepartmentToEmployeeOnCurrentChanged;
         }
 
@@ -91,16 +90,6 @@ namespace TestDbApp
             
             //_populateTreeView();
             TvDepartmentOnAfterSelect(sender, new TreeViewEventArgs(tv_Department.SelectedNode));
-
-        }
-
-        private void BindSrc_DepartmentToEmployee_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BindSrcDepartmentToEmployeeOnCurrentItemChanged(object sender, EventArgs eventArgs)
-        {
 
         }
 

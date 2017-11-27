@@ -203,7 +203,6 @@ namespace TestDbApp
             // 
             // bindSrc_DepartmentToEmployee
             // 
-            this.bindSrc_DepartmentToEmployee.CurrentChanged += new System.EventHandler(this.BindSrc_DepartmentToEmployee_CurrentChanged);
             // 
             // bindingNavigatorCountItem1
             // 
