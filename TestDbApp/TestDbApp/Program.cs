@@ -14,8 +14,11 @@ namespace TestDbApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var loginForm = new Login();
+            var dRes = loginForm.ShowDialog();
 
-            Application.Run(new MainForm());
+            if(dRes == DialogResult.OK)
+                Application.Run(new MainForm());
         }
     }
 }

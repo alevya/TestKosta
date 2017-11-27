@@ -34,19 +34,13 @@ namespace TestDbApp
             this.m_btnCancel = new System.Windows.Forms.Button();
             this.m_OK = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.l_service = new System.Windows.Forms.Label();
-            this.tb_service = new System.Windows.Forms.TextBox();
-            this.tp_login = new System.Windows.Forms.TabPage();
-            this.tb_password = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tb_user = new System.Windows.Forms.TextBox();
-            this.tc_main = new System.Windows.Forms.TabControl();
+            this.tb_password = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.m_oPicturePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_oPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tp_login.SuspendLayout();
-            this.tc_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_oPicturePanel
@@ -74,7 +68,7 @@ namespace TestDbApp
             resources.ApplyResources(this.m_OK, "m_OK");
             this.m_OK.Name = "m_OK";
             this.m_OK.TabStop = false;
-            this.m_OK.Click += new System.EventHandler(this.m_OK_Click);
+            this.m_OK.Click += new System.EventHandler(this.OkClick);
             // 
             // pictureBox1
             // 
@@ -82,56 +76,27 @@ namespace TestDbApp
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // l_service
+            // tb_user
             // 
-            resources.ApplyResources(this.l_service, "l_service");
-            this.l_service.Name = "l_service";
-            // 
-            // tb_service
-            // 
-            resources.ApplyResources(this.tb_service, "tb_service");
-            this.tb_service.Name = "tb_service";
-            this.tb_service.TextChanged += new System.EventHandler(this.tb_service_TextChanged);
-            // 
-            // tp_login
-            // 
-            this.tp_login.Controls.Add(this.tb_user);
-            this.tp_login.Controls.Add(this.tb_password);
-            this.tp_login.Controls.Add(this.label2);
-            this.tp_login.Controls.Add(this.label3);
-            resources.ApplyResources(this.tp_login, "tp_login");
-            this.tp_login.Name = "tp_login";
-            this.tp_login.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.tb_user, "tb_user");
+            this.tb_user.Name = "tb_user";
+            this.tb_user.TextChanged += new System.EventHandler(this.TbUserTextChanged);
             // 
             // tb_password
             // 
             resources.ApplyResources(this.tb_password, "tb_password");
             this.tb_password.Name = "tb_password";
-            this.tb_password.TextChanged += new System.EventHandler(this.tb_password_TextChanged);
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            this.tb_password.TextChanged += new System.EventHandler(this.TbPasswordTextChanged);
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // tb_user
+            // label3
             // 
-            resources.ApplyResources(this.tb_user, "tb_user");
-            this.tb_user.Name = "tb_user";
-            this.tb_user.TextChanged += new System.EventHandler(this.tb_user_TextChanged);
-            // 
-            // tc_main
-            // 
-            this.tc_main.Controls.Add(this.tp_login);
-            resources.ApplyResources(this.tc_main, "tc_main");
-            this.tc_main.Name = "tc_main";
-            this.tc_main.SelectedIndex = 0;
-            this.tc_main.TabStop = false;
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
             // 
             // Login
             // 
@@ -140,10 +105,11 @@ namespace TestDbApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.m_btnCancel;
             this.ControlBox = false;
-            this.Controls.Add(this.tc_main);
-            this.Controls.Add(this.tb_service);
-            this.Controls.Add(this.l_service);
+            this.Controls.Add(this.tb_user);
+            this.Controls.Add(this.tb_password);
             this.Controls.Add(this.m_oPicturePanel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.m_btnCancel);
             this.Controls.Add(this.m_OK);
             this.Controls.Add(this.pictureBox1);
@@ -154,9 +120,6 @@ namespace TestDbApp
             this.m_oPicturePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.m_oPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tp_login.ResumeLayout(false);
-            this.tp_login.PerformLayout();
-            this.tc_main.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,13 +132,9 @@ namespace TestDbApp
         private System.Windows.Forms.Button m_btnCancel;
         private System.Windows.Forms.Button m_OK;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label l_service;
-        private System.Windows.Forms.TextBox tb_service;
-        private System.Windows.Forms.TabPage tp_login;
         private System.Windows.Forms.TextBox tb_user;
         private System.Windows.Forms.TextBox tb_password;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabControl tc_main;
     }
 }

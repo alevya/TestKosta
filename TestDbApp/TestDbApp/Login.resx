@@ -426,10 +426,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;m_oPicturePanel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="m_btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 120</value>
+    <value>285, 62</value>
   </data>
   <data name="m_btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -450,13 +450,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;m_btnCancel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="m_OK.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>5</value>
   </data>
   <data name="m_OK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 91</value>
+    <value>191, 62</value>
   </data>
   <data name="m_OK.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -477,7 +474,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;m_OK.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -769,58 +766,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="l_service.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="l_service.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 15</value>
-  </data>
-  <data name="l_service.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
-  </data>
-  <data name="l_service.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="l_service.Text" xml:space="preserve">
-    <value>Сервис</value>
-  </data>
-  <data name="&gt;&gt;l_service.Name" xml:space="preserve">
-    <value>l_service</value>
-  </data>
-  <data name="&gt;&gt;l_service.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;l_service.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;l_service.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tb_service.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 12</value>
-  </data>
-  <data name="tb_service.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 20</value>
-  </data>
-  <data name="tb_service.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tb_service.Name" xml:space="preserve">
-    <value>tb_service</value>
-  </data>
-  <data name="&gt;&gt;tb_service.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_service.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tb_service.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="tb_user.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 16</value>
+    <value>213, 7</value>
   </data>
   <data name="tb_user.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
@@ -835,13 +784,13 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tb_user.Parent" xml:space="preserve">
-    <value>tp_login</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;tb_user.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tb_password.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 42</value>
+    <value>213, 33</value>
   </data>
   <data name="tb_password.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
@@ -859,7 +808,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tb_password.Parent" xml:space="preserve">
-    <value>tp_login</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;tb_password.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -868,10 +817,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>105, 7</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 19</value>
+    <value>102, 19</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -889,16 +838,16 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tp_login</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 42</value>
+    <value>119, 33</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
@@ -919,58 +868,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tp_login</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tp_login.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tp_login.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tp_login.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 79</value>
-  </data>
-  <data name="tp_login.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tp_login.Text" xml:space="preserve">
-    <value>Вход</value>
-  </data>
-  <data name="&gt;&gt;tp_login.Name" xml:space="preserve">
-    <value>tp_login</value>
-  </data>
-  <data name="&gt;&gt;tp_login.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tp_login.Parent" xml:space="preserve">
-    <value>tc_main</value>
-  </data>
-  <data name="&gt;&gt;tp_login.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tc_main.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 38</value>
-  </data>
-  <data name="tc_main.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 105</value>
-  </data>
-  <data name="tc_main.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;tc_main.Name" xml:space="preserve">
-    <value>tc_main</value>
-  </data>
-  <data name="&gt;&gt;tc_main.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tc_main.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tc_main.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -982,7 +883,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>384, 151</value>
+    <value>381, 96</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2120,7 +2021,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Регистрация</value>
+    <value>Подключение</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Login</value>
