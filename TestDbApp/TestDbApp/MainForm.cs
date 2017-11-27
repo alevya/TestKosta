@@ -68,28 +68,45 @@ namespace TestDbApp
            
         }
 
-
+        /// <summary>
+        /// Обработчик события нажатия кнопки сохранения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSave_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.SaveChanges();
             TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки отмены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            entityDataSource_Org.CancelChanges();
+            if(entityDataSource_Org.EntitySets["Employees"].List != null)
+                entityDataSource_Org.CancelChanges();
             bindSrc_DepartmentToEmployee.CancelEdit();
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки обновления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
             entityDataSource_Org.Refresh();
-            
-            //_populateTreeView();
             TvDepartmentOnAfterSelect(sender, new TreeViewEventArgs(tv_Department.SelectedNode));
-
         }
 
+        /// <summary>
+        /// Обработчик после выбора узла дерева
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
         {
             var selectedNode = tv_Department.SelectedNode;
