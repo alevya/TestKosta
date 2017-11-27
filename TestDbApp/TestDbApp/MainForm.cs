@@ -67,6 +67,7 @@ namespace TestDbApp
             if (dialogRes != DialogResult.Yes)
             {
                 cancelEventArgs.Cancel = true;
+                BtnCancel_Click(sender, EventArgs.Empty);
             }
            
         }
