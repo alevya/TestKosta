@@ -15,11 +15,11 @@ namespace TestDbApp.Model
         [Required]
         public Guid DepartmentID { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, StringLength(50)]
         public string SurName { get; set; }
-        [Required, MaxLength(50)]
+        [Required, StringLength(50)]
         public string FirstName { get; set; }
-        [MaxLength(50)]
+        [StringLength(50)]
         public string Patronymic { get; set; }
 
         [Column(TypeName = "datetime")]
@@ -41,7 +41,7 @@ namespace TestDbApp.Model
         [StringLength(6)]
         public string DocNumber { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, StringLength(50)]
         public string Position { get; set; }
         [ForeignKey("DepartmentID")]
         public virtual Department Department { get; set; }
