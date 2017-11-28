@@ -5,6 +5,12 @@ using System.Windows.Forms;
 
 namespace TestDbApp
 {
+    /// <summary>
+    /// Форма подключения к БД
+    /// </summary>
+    /// <remarks>
+    /// По умолчанию строка подключения берется из файла конфигурации App.config
+    /// </remarks>
     public partial class Login : Form
     {
         public string ConnectionString { get; private set; }
