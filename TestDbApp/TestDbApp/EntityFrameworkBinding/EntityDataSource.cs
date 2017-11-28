@@ -13,7 +13,7 @@ namespace TestDbApp.EntityFrameworkBinding
     {
         private DbContext _ctx;
         private readonly EntitySetCollection _entSets = new EntitySetCollection();
-        private Type _ctxType; // to support design-time
+        private Type _ctxType; 
 
         public EntityDataSource()
         {
@@ -30,11 +30,12 @@ namespace TestDbApp.EntityFrameworkBinding
         #region Object model
 
         /// <summary>
-        /// Gets or sets the type of DbContext to use as a data source.
+        /// Получает или задает тип DbContext для использования в качестве источника данных.
         /// </summary>
         /// <remarks>
-        /// This property is normally set at design time. Once it is set, the 
-        /// component will automatically create an DbContext of the appropriate type.
+        /// Это свойство можно установить во время разработки. 
+        /// Как только оно будет установлено,
+        /// компонент автоматически создаст DbContext соответствующего типа.
         /// </remarks>
         [TypeConverter(typeof(DbContextTypeConverter))]
         public Type DbContextType
@@ -42,12 +43,10 @@ namespace TestDbApp.EntityFrameworkBinding
             get => _ctxType;
             set
             {
-                if (value == _ctxType) return;
+                if (_ctxType == value) return;
                 OnDbContextTypeChanging(EventArgs.Empty);
                 _ctx = null;
                 _ctxType = value;
-
-                // generate object sets (will re-create object context if appropriate)
                 GenerateEntitySets(_ctxType);
 
                 OnDbContextTypeChanged(EventArgs.Empty);
@@ -60,7 +59,7 @@ namespace TestDbApp.EntityFrameworkBinding
         public string NameOrConnectionString { get; set; }
 
         /// <summary>
-        /// Gets or sets the DbContext used as a data source.
+        /// Получает или задает DbContext, используемый в качестве источника данных.
         /// </summary>
         [Browsable(false),DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbContext DbContext
@@ -70,7 +69,6 @@ namespace TestDbApp.EntityFrameworkBinding
                 if (_ctx != null || _ctxType == null || DesignMode) return _ctx;
                 try
                 {
-                    //DbContext = Activator.CreateInstance(_ctxType) as DbContext;
                     DbContext = Activator.CreateInstance(_ctxType, NameOrConnectionString) as DbContext;
                 }
                 catch
@@ -87,33 +85,32 @@ namespace TestDbApp.EntityFrameworkBinding
 
                 _ctx = value;
                 _ctxType = _ctx?.GetType();
-                // generate object sets
                 GenerateEntitySets(_ctxType);
 
                 OnDbContextChanged(EventArgs.Empty);
             }
         }
+
         /// <summary>
-        /// Gets the collection of EntitySets available in this EntityDataSource.
+        /// Получает набор EntitySet, доступных в этом EntityDataSource.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public EntitySetCollection EntitySets => _entSets;
 
         /// <summary>
-        /// Saves all changes made to all entity sets back to the database.
+        /// Сохраняет все изменения, внесенные во все наборы объектов обратно в базу данных.
         /// </summary>
         public int SaveChanges()
         {
             var e = new CancelEventArgs();
             OnSavingChanges(e);
 
-            // save the changes
             int count = 0;
             if (e.Cancel) return count;
             try
             {
                 count = _ctx.SaveChanges();
-                Debug.WriteLine($"Done. {count} changes saved.");
+                Debug.WriteLine($"Сохранено {count} записей.");
 
                 OnSavedChanges(e);
             }
@@ -126,11 +123,10 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Cancels all changes made to all entity sets.
+        /// Отменяет все изменения, внесенные во все наборы объектов.
         /// </summary>
         public void CancelChanges()
         {
-            // notify
             var e = new CancelEventArgs();
             OnCancelingChanges(e);
 
@@ -142,7 +138,6 @@ namespace TestDbApp.EntityFrameworkBinding
                     {
                         entSet.CancelChanges();
                     }
-                    //_ctx.AcceptAllChanges();
                 }
                 catch (Exception x)
                 {
@@ -151,11 +146,11 @@ namespace TestDbApp.EntityFrameworkBinding
 
                 OnCanceledChanges(EventArgs.Empty);
             }
-            Debug.WriteLine("Done. All changes canceled.");
+            Debug.WriteLine("Все изменения отменены.");
         }
 
         /// <summary>
-        /// Refreshes all views by loading their data from the database.
+        /// Обновляет все представления, загружая их данные из базы данных.
         /// </summary>
         public void Refresh()
         {
@@ -180,17 +175,17 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Gets a lookup dictionary for a given element type.
+        /// Получает словарь поиска для определенного типа элемента.
         /// </summary>
-        /// <param name="elementType">Type of element for which to return a lookup dictionary.</param>
-        /// <returns>A lookup dictionary for a given element type.</returns>
+        /// <param name="elementType">Тип элемента для возврата словаря поиска.</param>
+        /// <returns>Словарь поиска для данного типа элемента.</returns>
         /// <remarks>
-        /// <para>The lookup dictionary has keys that correspond to the items on a list and
-        /// values that contain a string representation of the items.</para>
-        /// <para>When lists of entities are sorted on a column that contains entity references, 
-        /// the lookup dictionary is used to provide the sorting order. For example, if you sort a 
-        /// list of products by category, the data map associated with the Categories list determines 
-        /// the order in which the categories are compared while sorting.</para>
+        /// <para>Словарь поиска содержит ключи, соответствующие элементам в списке и
+        /// значения, которые содержат строковое представление элементов.</para>
+        /// <para>Когда списки объектов сортируются по столбцу, содержащему ссылки на сущности, 
+        /// словарь поиска используется для предоставления порядка сортировки. 
+        /// Например, если вы сортируете список продуктов по категориям, карта данных, связанная со списком
+        /// категорий, определяет порядок сравнения категорий при сортировке.</para>
         /// </remarks>
         public ListDictionary GetLookupDictionary(Type elementType)
         {
@@ -205,35 +200,33 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Creates an IBindingList based on a given query.
+        /// Создает IBindingList на основе заданного запроса.
         /// </summary>
-        /// <param name="query"><see cref="IEnumerable"/> used as a data source for the list.</param>
-        /// <returns>An <see cref="IBindingList"/> that provides a sortable/filterable view of the data.</returns>
+        /// <param name="query"><see cref="IEnumerable"/> используется как источник данных для списка.</param>
+        /// <returns>Возвращает <see cref="IBindingList"/> который обеспечивает сортируемое / фильтруемое представление данных.</returns>
         public IBindingList CreateView(IEnumerable query)
         {
-            // get the query type
             var type = typeof(object);
             foreach (var item in query)
             {
                 type = item.GetType();
                 break;
             }
-
-            // create the binding list
             var listType = typeof(EntityBindingList<>);
             listType = listType.MakeGenericType(type);
             var list = (IEntityBindingList)Activator.CreateInstance(listType, this, query, type.Name);
             return list;
         }
+
         /// <summary>
-        /// Gets a value that determines whether the component is in design mode.
+        /// Возвращает значение, определяющее, находится ли компонент в режиме разработки.
         /// </summary>
         protected internal new bool DesignMode => base.DesignMode;
 
         #endregion
 
         /// <summary>
-        /// Populates the EntitySets collection from the current DomainContext.
+        /// Заполняет коллекцию EntitySets из текущего домена DomainContext
         /// </summary>
         private void GenerateEntitySets(Type ctxType)
         {
@@ -254,154 +247,143 @@ namespace TestDbApp.EntityFrameworkBinding
         #region Events
 
         /// <summary>
-        /// Occurs before the value of the <see cref="DbContextType"/> property changes.
+        /// Возникает до изменения  <see cref="DbContextType"/>
         /// </summary>
         public event EventHandler DbContextTypeChanging;
 
         /// <summary>
-        /// Raises the <see cref="DbContextTypeChanging"/> event.
+        /// Вызывает <see cref="DbContextTypeChanging"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextTypeChanging(EventArgs e)
         {
             DbContextTypeChanging?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs after the value of the <see cref="DbContextType"/> property changes.
+        /// Возникает после изменения <see cref="DbContextType"/>
         /// </summary>
         public event EventHandler DbContextTypeChanged;
 
         /// <summary>
-        /// Raises the <see cref="DbContextTypeChanged"/> event.
+        /// Вызывает <see cref="DbContextTypeChanged"/> событие
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextTypeChanged(EventArgs e)
         {
             DbContextTypeChanged?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs before the value of the <see cref="DbContext"/> property changes.
+        /// Возникает до изменения  <see cref="DbContext"/>
         /// </summary>
         public event EventHandler DbContextChanging;
 
         /// <summary>
-        /// Raises the <see cref="DbContextChanging"/> event.
+        /// Вызывает <see cref="DbContextChanging"/> событие
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextChanging(EventArgs e)
         {
             DbContextChanging?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs after the value of the <see cref="DbContext"/> property changes.
+        /// Возникает после изменения <see cref="DbContext"/>
         /// </summary>
         public event EventHandler DbContextChanged;
 
         /// <summary>
-        /// Raises the <see cref="DbContextChanged"/> event.
+        /// Вызывает <see cref="DbContextChanged"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDbContextChanged(EventArgs e)
         {
             DbContextChanged?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs before changes are saved to the database.
+        /// Происходит до того, как изменения будут сохранены в базе данных.
         /// </summary>
         public event CancelEventHandler SavingChanges;
 
         /// <summary>
-        /// Raises the <see cref="SavingChanges"/> event.
+        /// Вызывает <see cref="SavingChanges"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnSavingChanges(CancelEventArgs e)
         {
             SavingChanges?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs after changes are saved to the database.
+        /// Происходит после сохранения изменений в базе данных.
         /// </summary>
         public event EventHandler SavedChanges;
 
         /// <summary>
-        /// Raises the <see cref="SavedChanges"/> event.
+        /// Вызывает <see cref="SavedChanges"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnSavedChanges(EventArgs e)
         {
             SavedChanges?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs before changes are canceled and values are reloaded from the database.
+        /// Возникает до отмены изменений, а значения перезагружаются из базы данных.
         /// </summary>
         public event CancelEventHandler CancelingChanges;
+
         /// <summary>
-        /// Raises the <see cref="CancelingChanges"/> event.
+        /// Вызов <see cref="CancelingChanges"/> события.
         /// </summary>
-        /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
-        /// 
         protected virtual void OnCancelingChanges(CancelEventArgs e)
         {
             CancelingChanges?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs after changes are canceled and values are reloaded from the database.
+        /// Происходит после отмены изменений и перезагрузки значений из базы данных.
         /// </summary>
         public event EventHandler CanceledChanges;
 
         /// <summary>
-        /// Raises the <see cref="CanceledChanges"/> event.
+        /// Вызывает <see cref="CanceledChanges"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnCanceledChanges(EventArgs e)
         {
             CanceledChanges?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs before values are refreshed from the database.
+        /// Происходит до того, как значения обновляются из базы данных.
         /// </summary>
         public event CancelEventHandler Refreshing;
 
         /// <summary>
-        /// Raises the <see cref="Refreshing"/> event.
+        /// Вызов <see cref="Refreshing"/> события.
         /// </summary>
-        /// <param name="e"><see cref="CancelEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnRefreshing(CancelEventArgs e)
         {
             Refreshing?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs after values are refreshed from the database.
+        /// Происходит после обновления значений из базы данных.
         /// </summary>
         public event EventHandler Refreshed;
 
         /// <summary>
-        /// Raises the <see cref="Refreshed"/> event.
+        /// Вызов <see cref="Refreshed"/> события.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
         protected virtual void OnRefreshed(EventArgs e)
         {
             Refreshed?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Occurs when an error is detected while loading data from or saving data to the database.
+        /// Происходит при обнаружении ошибки при загрузке данных или сохранении данных в базу данных.
         /// </summary>
         public event EventHandler<DataErrorEventArgs> DataError;
 
         /// <summary>
-        /// Raises the <see cref="DataError"/> event.
+        /// Вызов <see cref="DataError"/> события.
         /// </summary>
-        /// <param name="e"><see cref="DataErrorEventArgs"/> that contains the event parameters.</param>
         protected virtual void OnDataError(DataErrorEventArgs e)
         {
             DataError?.Invoke(this, e);
@@ -413,7 +395,6 @@ namespace TestDbApp.EntityFrameworkBinding
 
         #endregion
 
-        //-------------------------------------------------------------------------
         #region IListSource Implements
 
         bool IListSource.ContainsListCollection => true;
@@ -426,11 +407,10 @@ namespace TestDbApp.EntityFrameworkBinding
 
         #endregion
 
-        //-------------------------------------------------------------------------
         #region  IExtenderProvider Implements
 
         /// <summary>
-        /// We can extend DataGridView control.
+        ///  Можно расширить элемент управления DataGridView.
         /// </summary>
         /// <param name="extendee"></param>
         /// <returns></returns>
@@ -439,7 +419,6 @@ namespace TestDbApp.EntityFrameworkBinding
             if (!(extendee is Control)) return false;
             for (var type = extendee.GetType(); type != null; type = type.BaseType)
             {
-                // DataGridView
                 if (type == typeof(DataGridView))
                 {
                     return true;
@@ -449,10 +428,8 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Add or remove automatic data maps for the columns on a DataGridView control.
-        /// </summary>
-        /// <param name="grid">DataGridView control.</param>
-        /// <param name="autoLookups">Whether to enable or disable automatic data maps for the columns on the <paramref name="grid"/> control.</param>
+        /// Установка карты данных для столбцов элемента управления DataGridView.
+        /// 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetAutoLookup(Control grid, bool autoLookups)
         {
@@ -473,34 +450,28 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Gets a value that determines whether automatic data maps are enabled for a given DataGridView control.
+        /// Возвращает значение, определяющее, включены ли карты данных для данного элемента управления DataGridView
         /// </summary>
-        /// <param name="grid">DataGridView control.</param>
-        /// <returns>Whether automatic data maps are is enabled for the columns on the <paramref name="grid"/> control.</returns>
         [EditorBrowsable(EditorBrowsableState.Never), DefaultValue(false)]
         public bool GetAutoLookup(Control grid)
         {
             return _autoLookup.ContainsKey(grid);
         }
 
-        // enabled/disable automatic data maps for a control
         private readonly Dictionary<Control, bool> _autoLookup = new Dictionary<Control, bool>();
 
         private static void EnableAutoLookup(Control control, bool map)
         {
-            // get event handlers
             var ctlType = control.GetType();
             var dsChanged = ctlType.GetEvent("DataSourceChanged");
             var dmChanged = ctlType.GetEvent("DataMemberChanged");
             var bcChanged = ctlType.GetEvent("BindingContextChanged");
 
-            // sanity
             if (dsChanged == null || dmChanged == null || bcChanged == null)
             {
-                throw new Exception("Cannot connect event handlers for this control.");
+                throw new Exception("Невозможно подключить обработчики событий для этого элемента управления.");
             }
 
-            // connect/disconnect event handlers
             var handler = new EventHandler(control_DataSourceChanged);
             if (map)
             {
@@ -521,46 +492,41 @@ namespace TestDbApp.EntityFrameworkBinding
             CustomizeGrid(sender as Control);
         }
 
-        // customize the columns of a DataGridView control 
         private static void CustomizeGrid(IDisposable ctl)
         {
             dynamic grid = ctl;
             if (grid.DataSource == null || grid.BindingContext == null) return;
-            // get currency manager
             CurrencyManager cm = null;
             try
             {
                 cm = grid.BindingContext[grid.DataSource, grid.DataMember] as CurrencyManager;
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
 
-            // get source list from currency manager bound directly to EntityDataSource
             var list = cm?.List as IEntityBindingList;
 
-            // if failed, try binding via BindingSource component
             if (cm != null && (list == null && cm.List is BindingSource))
             {
                 list = ((BindingSource)(cm.List)).List as IEntityBindingList;
             }
 
-            // customize the columns
             if (list?.DataSource == null) return;
             var entType = list.ElementType;
             var entDataSource = list.DataSource;
-
-            // customize grid columns
+            
             var dgv = ctl as DataGridView;
             if (dgv != null)
             {
-                // customize DataGridView
                 CustomizeDataGridView(dgv, entType, entDataSource);
             }
         }
 
-        // customize the columns of a DataGridView
         private static void CustomizeDataGridView(DataGridView dgv, Type entType, EntityDataSource entDataSource)
         {
-            // configure columns
+
             for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
             {
                 var c = dgv.Columns[colIndex];
@@ -601,23 +567,12 @@ namespace TestDbApp.EntityFrameworkBinding
 
     public class DataErrorEventArgs : EventArgs
     {
-        /// <summary>
-        /// Initializes a new instance of a <see cref="DataErrorEventArgs"/>.
-        /// </summary>
-        /// <param name="x"><see cref="Exception"/> that triggered the event.</param>
         public DataErrorEventArgs(Exception x)
         {
             Exception = x;
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="Exception"/> that triggered the event.
-        /// </summary>
         public Exception Exception { get; set; }
-
-        /// <summary>
-        /// Whether the error was handled and the source exception should be ignored.
-        /// </summary>
         public bool Handled { get; set; }
     }
 

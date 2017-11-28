@@ -2,6 +2,9 @@
 
 namespace TestDbApp.Model
 {
+    /// <summary>
+    /// Класс DbContext, используемый в качестве источника данных.
+    /// </summary>
     public class TestDbContext : DbContext
     {
         public TestDbContext(string nameOrConnectionString) : base(nameOrConnectionString: nameOrConnectionString)

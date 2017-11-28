@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace TestDbApp.Common
 {
+    /// <summary>
+    /// Контрол для поля ввода
+    /// </summary>
     public partial class EditControl : UserControl
     {
         public EditControl()
