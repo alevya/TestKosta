@@ -179,7 +179,6 @@ namespace TestDbApp
             this.patronymicDataGridViewTextBoxColumn,
             this.positionDataGridViewTextBoxColumn});
             this.dgv_EmployeeToDepartment.DataMember = "Employees";
-            this.dgv_EmployeeToDepartment.DataSource = this.entityDataSource_Org;
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
             this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
