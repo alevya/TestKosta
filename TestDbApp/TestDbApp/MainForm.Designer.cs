@@ -70,16 +70,16 @@ namespace TestDbApp
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SurName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Patronymic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ec_Position = new TestDbApp.Common.EditControl();
             this.ec_Patronymic = new TestDbApp.Common.EditControl();
             this.ec_SurName = new TestDbApp.Common.EditControl();
             this.ec_FirstName = new TestDbApp.Common.EditControl();
             this.ec_DocSeries = new TestDbApp.Common.EditControl();
             this.ec_DocNumber = new TestDbApp.Common.EditControl();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SurName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Patronymic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -513,12 +513,45 @@ namespace TestDbApp
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(16, 160);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(3, 160);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 9);
+            this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 50;
             this.label1.Text = "! - обязательные поля";
+            // 
+            // FirstName
+            // 
+            this.FirstName.DataPropertyName = "FirstName";
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 54;
+            // 
+            // SurName
+            // 
+            this.SurName.DataPropertyName = "SurName";
+            this.SurName.HeaderText = "Фамилия";
+            this.SurName.Name = "SurName";
+            this.SurName.ReadOnly = true;
+            this.SurName.Width = 81;
+            // 
+            // Patronymic
+            // 
+            this.Patronymic.DataPropertyName = "Patronymic";
+            this.Patronymic.HeaderText = "Отчество";
+            this.Patronymic.Name = "Patronymic";
+            this.Patronymic.ReadOnly = true;
+            this.Patronymic.Width = 79;
+            // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "Position";
+            this.Position.HeaderText = "Должность";
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            this.Position.Width = 90;
             // 
             // ec_Position
             // 
@@ -599,38 +632,6 @@ namespace TestDbApp
             this.ec_DocNumber.Size = new System.Drawing.Size(82, 22);
             this.ec_DocNumber.TabIndex = 44;
             this.ec_DocNumber.Value = "";
-            // 
-            // FirstName
-            // 
-            this.FirstName.DataPropertyName = "FirstName";
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 54;
-            // 
-            // SurName
-            // 
-            this.SurName.DataPropertyName = "SurName";
-            this.SurName.HeaderText = "Фамилия";
-            this.SurName.Name = "SurName";
-            this.SurName.ReadOnly = true;
-            this.SurName.Width = 81;
-            // 
-            // Patronymic
-            // 
-            this.Patronymic.DataPropertyName = "Patronymic";
-            this.Patronymic.HeaderText = "Отчество";
-            this.Patronymic.Name = "Patronymic";
-            this.Patronymic.ReadOnly = true;
-            this.Patronymic.Width = 79;
-            // 
-            // Position
-            // 
-            this.Position.DataPropertyName = "Position";
-            this.Position.HeaderText = "Должность";
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            this.Position.Width = 90;
             // 
             // MainForm
             // 
