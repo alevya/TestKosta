@@ -23,6 +23,16 @@ namespace TestDbApp.Common
 
         #region Properties
 
+        [Description("Максимальная длина поля ввода")]
+        public int MaxLen
+        {
+            get => tb_value.MaxLength;
+            set => tb_value.MaxLength = value;
+        }
+
+        [Description("Обязательное поле")]
+        public bool IsRequed { get; set; }
+
         [Browsable(false)]
         public bool Multiline
         {
@@ -39,51 +49,6 @@ namespace TestDbApp.Common
 
         public object Value { get => tb_value.Text; set => tb_value.Text = value as string;
         }
-
-        //[Description("Источник данных")]
-        //[Bindable(true)]
-        //[TypeConverter(typeof(BindingSource))]
-        //public Type DataSourceType
-        //{
-        //    get => _dataSourceType;
-        //    set
-        //    {
-        //        if(value == _dataSourceType) return;
-        //        OnDataSourceTypeChanging(EventArgs.Empty);
-        //        _bindingSource = null;
-        //        _dataSourceType = value;
-        //        OnDataSourceTypeChanged(EventArgs.Empty);
-        //    }
-        //}
-
-        //[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        //public BindingSource BindingSource
-        //{
-        //    get
-        //    {
-        //        if (_bindingSource != null || _dataSourceType == null || DesignMode) return _bindingSource;
-        //        try
-        //        {
-        //            BindingSource = Activator.CreateInstance(_dataSourceType) as BindingSource;
-        //        }
-        //        catch { }
-        //        return _bindingSource;
-        //    }
-        //    set
-        //    {
-        //        if (Equals(_bindingSource, value)) return;
-
-        //        OnBindingSourceChanging(EventArgs.Empty);
-
-        //        _bindingSource = value;
-        //        _dataSourceType = _bindingSource?.GetType();
-        //        // generate object sets
-        //        //GenerateEntitySets(_ctxType);
-
-        //        OnBindingSourceChanged(EventArgs.Empty);
-        //    }
-        //}
-
         #endregion
 
         #region Event handlers
@@ -123,63 +88,6 @@ namespace TestDbApp.Common
         {
             _validate(cancelEventArgs, sender as Control);
         }
-
-        ///// <summary>
-        ///// Occurs before the value of the <see cref="DataSourceType"/> property changes.
-        ///// </summary>
-        //public event EventHandler DataSourceTypeChanging;
-
-        ///// <summary>
-        ///// Raises the <see cref="DataSourceTypeChanging"/> event.
-        ///// </summary>
-        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
-        //protected virtual void OnDataSourceTypeChanging(EventArgs e)
-        //{
-        //    DataSourceTypeChanging?.Invoke(this, e);
-        //}
-
-        ///// <summary>
-        ///// Occurs after the value of the <see cref=""/> property changes.
-        ///// </summary>
-        //public event EventHandler DataSourceTypeChanged;
-
-        ///// <summary>
-        ///// Raises the <see cref="DataSourceTypeChanged"/> event.
-        ///// </summary>
-        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
-        //protected virtual void OnDataSourceTypeChanged(EventArgs e)
-        //{
-        //    DataSourceTypeChanged?.Invoke(this, e);
-        //}
-
-        ///// <summary>
-        ///// Occurs before the value of the <see cref="BindingSource"/> property changes.
-        ///// </summary>
-        //public event EventHandler BindingSourceChanging;
-
-        ///// <summary>
-        ///// Raises the <see cref=" BindingSourceChanging"/> event.
-        ///// </summary>
-        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
-        //protected virtual void OnBindingSourceChanging(EventArgs e)
-        //{
-        //    BindingSourceChanging?.Invoke(this, e);
-        //}
-
-        ///// <summary>
-        ///// Occurs after the value of the <see cref="BindingSource"/> property changes.
-        ///// </summary>
-        //public event EventHandler BindingSourceChanged;
-
-        ///// <summary>
-        ///// Raises the <see cref="BindingSourceChanged"/> event.
-        ///// </summary>
-        ///// <param name="e"><see cref="EventArgs"/> that contains the event parameters.</param>
-        //protected virtual void OnBindingSourceChanged(EventArgs e)
-        //{
-        //    BindingSourceChanged?.Invoke(this, e);
-        //}
-
         #endregion
 
         #region Methods
@@ -355,10 +263,7 @@ namespace TestDbApp.Common
             return true;
         }
 
-
         #endregion
-
-
 
     }
 }

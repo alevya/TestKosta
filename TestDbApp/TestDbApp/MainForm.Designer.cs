@@ -37,6 +37,12 @@ namespace TestDbApp
             this.tp_DepartmentToEmployees = new System.Windows.Forms.TabPage();
             this.splCnt = new System.Windows.Forms.SplitContainer();
             this.tv_Department = new System.Windows.Forms.TreeView();
+            this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
+            this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.bindNav_EmployeeToDepartment = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
@@ -55,11 +61,17 @@ namespace TestDbApp
             this.lDepartment = new System.Windows.Forms.Label();
             this.tb_Age = new System.Windows.Forms.TextBox();
             this.l_Age = new System.Windows.Forms.Label();
+            this.ec_Position = new TestDbApp.Common.EditControl();
+            this.ec_Patronymic = new TestDbApp.Common.EditControl();
+            this.ec_SurName = new TestDbApp.Common.EditControl();
             this.lPosition = new System.Windows.Forms.Label();
             this.lSurName = new System.Windows.Forms.Label();
             this.lPatronymic = new System.Windows.Forms.Label();
             this.lFirstName = new System.Windows.Forms.Label();
+            this.ec_FirstName = new TestDbApp.Common.EditControl();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ec_DocSeries = new TestDbApp.Common.EditControl();
+            this.ec_DocNumber = new TestDbApp.Common.EditControl();
             this.lDocNumber = new System.Windows.Forms.Label();
             this.lDocSeries = new System.Windows.Forms.Label();
             this.lDateOfBirth = new System.Windows.Forms.Label();
@@ -68,18 +80,6 @@ namespace TestDbApp
             this.btnSave = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
-            this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
-            this.ec_Position = new TestDbApp.Common.EditControl();
-            this.ec_Patronymic = new TestDbApp.Common.EditControl();
-            this.ec_SurName = new TestDbApp.Common.EditControl();
-            this.ec_FirstName = new TestDbApp.Common.EditControl();
-            this.ec_DocSeries = new TestDbApp.Common.EditControl();
-            this.ec_DocNumber = new TestDbApp.Common.EditControl();
-            this.surNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt_Organization)).BeginInit();
             this.splCnt_Organization.Panel1.SuspendLayout();
             this.splCnt_Organization.Panel2.SuspendLayout();
@@ -90,13 +90,13 @@ namespace TestDbApp
             this.splCnt.Panel1.SuspendLayout();
             this.splCnt.Panel2.SuspendLayout();
             this.splCnt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav_EmployeeToDepartment)).BeginInit();
             this.bindNav_EmployeeToDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindSrc_DepartmentToEmployee)).BeginInit();
             this.gb_Employee.SuspendLayout();
             this.panel1.SuspendLayout();
             this.p_command.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).BeginInit();
             this.SuspendLayout();
             // 
             // splCnt_Organization
@@ -166,6 +166,59 @@ namespace TestDbApp
             this.tv_Department.Name = "tv_Department";
             this.tv_Department.Size = new System.Drawing.Size(488, 572);
             this.tv_Department.TabIndex = 0;
+            // 
+            // dgv_EmployeeToDepartment
+            // 
+            this.dgv_EmployeeToDepartment.AllowUserToAddRows = false;
+            this.dgv_EmployeeToDepartment.AutoGenerateColumns = false;
+            this.dgv_EmployeeToDepartment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgv_EmployeeToDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_EmployeeToDepartment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.surNameDataGridViewTextBoxColumn,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.patronymicDataGridViewTextBoxColumn,
+            this.positionDataGridViewTextBoxColumn});
+            this.dgv_EmployeeToDepartment.DataMember = "Employees";
+            this.dgv_EmployeeToDepartment.DataSource = this.entityDataSource_Org;
+            this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
+            this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
+            this.dgv_EmployeeToDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(897, 384);
+            this.dgv_EmployeeToDepartment.TabIndex = 0;
+            // 
+            // surNameDataGridViewTextBoxColumn
+            // 
+            this.surNameDataGridViewTextBoxColumn.DataPropertyName = "SurName";
+            this.surNameDataGridViewTextBoxColumn.HeaderText = "Фамилия";
+            this.surNameDataGridViewTextBoxColumn.Name = "surNameDataGridViewTextBoxColumn";
+            this.surNameDataGridViewTextBoxColumn.Width = 81;
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "Имя";
+            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            this.firstNameDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // patronymicDataGridViewTextBoxColumn
+            // 
+            this.patronymicDataGridViewTextBoxColumn.DataPropertyName = "Patronymic";
+            this.patronymicDataGridViewTextBoxColumn.HeaderText = "Отчество";
+            this.patronymicDataGridViewTextBoxColumn.Name = "patronymicDataGridViewTextBoxColumn";
+            this.patronymicDataGridViewTextBoxColumn.Width = 79;
+            // 
+            // positionDataGridViewTextBoxColumn
+            // 
+            this.positionDataGridViewTextBoxColumn.DataPropertyName = "Position";
+            this.positionDataGridViewTextBoxColumn.HeaderText = "Должность";
+            this.positionDataGridViewTextBoxColumn.Name = "positionDataGridViewTextBoxColumn";
+            this.positionDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // entityDataSource_Org
+            // 
+            this.entityDataSource_Org.DbContextType = typeof(TestDbApp.Model.TestDbContext);
+            this.entityDataSource_Org.NameOrConnectionString = null;
             // 
             // bindNav_EmployeeToDepartment
             // 
@@ -351,6 +404,45 @@ namespace TestDbApp
             this.l_Age.TabIndex = 46;
             this.l_Age.Text = "Возраст (полных лет)";
             // 
+            // ec_Position
+            // 
+            this.ec_Position.AttributeName = "Position";
+            this.ec_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_Position.IsRequed = true;
+            this.ec_Position.Location = new System.Drawing.Point(395, 26);
+            this.ec_Position.MaxLen = 50;
+            this.ec_Position.Multiline = false;
+            this.ec_Position.Name = "ec_Position";
+            this.ec_Position.Size = new System.Drawing.Size(166, 22);
+            this.ec_Position.TabIndex = 44;
+            this.ec_Position.Value = "";
+            // 
+            // ec_Patronymic
+            // 
+            this.ec_Patronymic.AttributeName = "Patronymic";
+            this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_Patronymic.IsRequed = true;
+            this.ec_Patronymic.Location = new System.Drawing.Point(127, 88);
+            this.ec_Patronymic.MaxLen = 50;
+            this.ec_Patronymic.Multiline = false;
+            this.ec_Patronymic.Name = "ec_Patronymic";
+            this.ec_Patronymic.Size = new System.Drawing.Size(158, 22);
+            this.ec_Patronymic.TabIndex = 43;
+            this.ec_Patronymic.Value = "";
+            // 
+            // ec_SurName
+            // 
+            this.ec_SurName.AttributeName = "SurName";
+            this.ec_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_SurName.IsRequed = true;
+            this.ec_SurName.Location = new System.Drawing.Point(127, 27);
+            this.ec_SurName.MaxLen = 50;
+            this.ec_SurName.Multiline = false;
+            this.ec_SurName.Name = "ec_SurName";
+            this.ec_SurName.Size = new System.Drawing.Size(158, 25);
+            this.ec_SurName.TabIndex = 42;
+            this.ec_SurName.Value = "";
+            // 
             // lPosition
             // 
             this.lPosition.AutoSize = true;
@@ -395,6 +487,19 @@ namespace TestDbApp
             this.lFirstName.Text = "Имя";
             this.lFirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ec_FirstName
+            // 
+            this.ec_FirstName.AttributeName = "FirstName";
+            this.ec_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_FirstName.IsRequed = true;
+            this.ec_FirstName.Location = new System.Drawing.Point(127, 59);
+            this.ec_FirstName.MaxLen = 50;
+            this.ec_FirstName.Multiline = false;
+            this.ec_FirstName.Name = "ec_FirstName";
+            this.ec_FirstName.Size = new System.Drawing.Size(158, 23);
+            this.ec_FirstName.TabIndex = 36;
+            this.ec_FirstName.Value = "";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
@@ -407,6 +512,34 @@ namespace TestDbApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(239, 75);
             this.panel1.TabIndex = 27;
+            // 
+            // ec_DocSeries
+            // 
+            this.ec_DocSeries.AccessibleName = "";
+            this.ec_DocSeries.AttributeName = "DocSeries";
+            this.ec_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_DocSeries.IsRequed = false;
+            this.ec_DocSeries.Location = new System.Drawing.Point(143, 41);
+            this.ec_DocSeries.MaxLen = 4;
+            this.ec_DocSeries.Multiline = false;
+            this.ec_DocSeries.Name = "ec_DocSeries";
+            this.ec_DocSeries.Size = new System.Drawing.Size(82, 22);
+            this.ec_DocSeries.TabIndex = 45;
+            this.ec_DocSeries.Value = "";
+            // 
+            // ec_DocNumber
+            // 
+            this.ec_DocNumber.AccessibleName = "";
+            this.ec_DocNumber.AttributeName = "DocNumber";
+            this.ec_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ec_DocNumber.IsRequed = false;
+            this.ec_DocNumber.Location = new System.Drawing.Point(143, 11);
+            this.ec_DocNumber.MaxLen = 6;
+            this.ec_DocNumber.Multiline = false;
+            this.ec_DocNumber.Name = "ec_DocNumber";
+            this.ec_DocNumber.Size = new System.Drawing.Size(82, 22);
+            this.ec_DocNumber.TabIndex = 44;
+            this.ec_DocNumber.Value = "";
             // 
             // lDocNumber
             // 
@@ -490,127 +623,6 @@ namespace TestDbApp
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // dgv_EmployeeToDepartment
-            // 
-            this.dgv_EmployeeToDepartment.AllowUserToAddRows = false;
-            this.dgv_EmployeeToDepartment.AutoGenerateColumns = false;
-            this.dgv_EmployeeToDepartment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgv_EmployeeToDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_EmployeeToDepartment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.surNameDataGridViewTextBoxColumn,
-            this.firstNameDataGridViewTextBoxColumn,
-            this.patronymicDataGridViewTextBoxColumn,
-            this.positionDataGridViewTextBoxColumn});
-            this.dgv_EmployeeToDepartment.DataMember = "Employees";
-            this.dgv_EmployeeToDepartment.DataSource = this.entityDataSource_Org;
-            this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
-            this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
-            this.dgv_EmployeeToDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(897, 384);
-            this.dgv_EmployeeToDepartment.TabIndex = 0;
-            // 
-            // entityDataSource_Org
-            // 
-            this.entityDataSource_Org.DbContextType = typeof(TestDbApp.Model.TestDbContext);
-            this.entityDataSource_Org.NameOrConnectionString = null;
-            // 
-            // ec_Position
-            // 
-            this.ec_Position.AttributeName = "Position";
-            this.ec_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Position.Location = new System.Drawing.Point(395, 26);
-            this.ec_Position.Multiline = false;
-            this.ec_Position.Name = "ec_Position";
-            this.ec_Position.Size = new System.Drawing.Size(166, 22);
-            this.ec_Position.TabIndex = 44;
-            this.ec_Position.Value = "";
-            // 
-            // ec_Patronymic
-            // 
-            this.ec_Patronymic.AttributeName = "Patronymic";
-            this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Patronymic.Location = new System.Drawing.Point(127, 88);
-            this.ec_Patronymic.Multiline = false;
-            this.ec_Patronymic.Name = "ec_Patronymic";
-            this.ec_Patronymic.Size = new System.Drawing.Size(158, 22);
-            this.ec_Patronymic.TabIndex = 43;
-            this.ec_Patronymic.Value = "";
-            // 
-            // ec_SurName
-            // 
-            this.ec_SurName.AttributeName = "SurName";
-            this.ec_SurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_SurName.Location = new System.Drawing.Point(127, 27);
-            this.ec_SurName.Multiline = false;
-            this.ec_SurName.Name = "ec_SurName";
-            this.ec_SurName.Size = new System.Drawing.Size(158, 25);
-            this.ec_SurName.TabIndex = 42;
-            this.ec_SurName.Value = "";
-            // 
-            // ec_FirstName
-            // 
-            this.ec_FirstName.AttributeName = "FirstName";
-            this.ec_FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_FirstName.Location = new System.Drawing.Point(127, 59);
-            this.ec_FirstName.Multiline = false;
-            this.ec_FirstName.Name = "ec_FirstName";
-            this.ec_FirstName.Size = new System.Drawing.Size(158, 23);
-            this.ec_FirstName.TabIndex = 36;
-            this.ec_FirstName.Value = "";
-            // 
-            // ec_DocSeries
-            // 
-            this.ec_DocSeries.AccessibleName = "";
-            this.ec_DocSeries.AttributeName = "DocSeries";
-            this.ec_DocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_DocSeries.Location = new System.Drawing.Point(143, 41);
-            this.ec_DocSeries.Multiline = false;
-            this.ec_DocSeries.Name = "ec_DocSeries";
-            this.ec_DocSeries.Size = new System.Drawing.Size(82, 22);
-            this.ec_DocSeries.TabIndex = 45;
-            this.ec_DocSeries.Value = "";
-            // 
-            // ec_DocNumber
-            // 
-            this.ec_DocNumber.AccessibleName = "";
-            this.ec_DocNumber.AttributeName = "DocNumber";
-            this.ec_DocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_DocNumber.Location = new System.Drawing.Point(143, 11);
-            this.ec_DocNumber.Multiline = false;
-            this.ec_DocNumber.Name = "ec_DocNumber";
-            this.ec_DocNumber.Size = new System.Drawing.Size(82, 22);
-            this.ec_DocNumber.TabIndex = 44;
-            this.ec_DocNumber.Value = "";
-            // 
-            // surNameDataGridViewTextBoxColumn
-            // 
-            this.surNameDataGridViewTextBoxColumn.DataPropertyName = "SurName";
-            this.surNameDataGridViewTextBoxColumn.HeaderText = "Фамилия";
-            this.surNameDataGridViewTextBoxColumn.Name = "surNameDataGridViewTextBoxColumn";
-            this.surNameDataGridViewTextBoxColumn.Width = 81;
-            // 
-            // firstNameDataGridViewTextBoxColumn
-            // 
-            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
-            this.firstNameDataGridViewTextBoxColumn.HeaderText = "Имя";
-            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
-            this.firstNameDataGridViewTextBoxColumn.Width = 54;
-            // 
-            // patronymicDataGridViewTextBoxColumn
-            // 
-            this.patronymicDataGridViewTextBoxColumn.DataPropertyName = "Patronymic";
-            this.patronymicDataGridViewTextBoxColumn.HeaderText = "Отчество";
-            this.patronymicDataGridViewTextBoxColumn.Name = "patronymicDataGridViewTextBoxColumn";
-            this.patronymicDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // positionDataGridViewTextBoxColumn
-            // 
-            this.positionDataGridViewTextBoxColumn.DataPropertyName = "Position";
-            this.positionDataGridViewTextBoxColumn.HeaderText = "Должность";
-            this.positionDataGridViewTextBoxColumn.Name = "positionDataGridViewTextBoxColumn";
-            this.positionDataGridViewTextBoxColumn.Width = 90;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -632,6 +644,7 @@ namespace TestDbApp
             this.splCnt.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splCnt)).EndInit();
             this.splCnt.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav_EmployeeToDepartment)).EndInit();
             this.bindNav_EmployeeToDepartment.ResumeLayout(false);
             this.bindNav_EmployeeToDepartment.PerformLayout();
@@ -641,7 +654,6 @@ namespace TestDbApp
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.p_command.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeToDepartment)).EndInit();
             this.ResumeLayout(false);
 
         }
