@@ -183,6 +183,7 @@ namespace TestDbApp
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
             this.dgv_EmployeeToDepartment.Name = "dgv_EmployeeToDepartment";
+            this.dgv_EmployeeToDepartment.ReadOnly = true;
             this.dgv_EmployeeToDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(897, 384);
             this.dgv_EmployeeToDepartment.TabIndex = 0;
