@@ -27,6 +27,7 @@ namespace TestDbApp
 
         private async void OnLoad(object sender, EventArgs eventArgs)
         {
+            dgv_EmployeeToDepartment.AutoGenerateColumns = false;
             Cursor = Cursors.WaitCursor;
             entityDataSource_Org = new EntityDataSource(components)
             {
