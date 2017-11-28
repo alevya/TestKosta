@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace TestDbApp.EntityFrameworkBinding
 {
     /// <summary>
-    /// IBindingList with support for sorting.
+    /// IBindingList с поддержкой сортировки.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class EntityBindingList<T> : BindingList<T>, ITypedList, IEntityBindingList where T : class
@@ -25,11 +25,11 @@ namespace TestDbApp.EntityFrameworkBinding
         private int _addingNew;
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="EntityBindingList"/>.
+        /// Инициализирует новый экземпляр объекта,<see cref="EntityBindingList"/>.
         /// </summary>
-        /// <param name="dataSource"><see cref="EntityDataSource"/> that owns the entities on this list.</param>
-        /// <param name="query"><see cref="IEnumerable"/> that provides the entities for this list.</param>
-        /// <param name="name">A name for identifying this list in its parent (for hierarchical binding).</param>
+        /// <param name="dataSource"><see cref="EntityDataSource"/> которому принадлежат сущности этого списка.</param>
+        /// <param name="query"><see cref="IEnumerable"/> предоставляет сущности для этого списка.</param>
+        /// <param name="name">Имя для идентификации этого списка в его родительском (для иерархической привязки).</param>
         public EntityBindingList(EntityDataSource dataSource, IEnumerable query, string name)
         {
             DataSource = dataSource;
@@ -38,54 +38,51 @@ namespace TestDbApp.EntityFrameworkBinding
             _query = query;
             _name = name;
 
-            // populate list
             if (dataSource != null && !dataSource.DesignMode)
             {
-                // at run time, get the data
                 Refresh();
             }
             else
             {
-                // at design time, add one element to help with binding
                 try
                 {
                     AddNew();
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
         }
         /// <summary>
-        /// Initializes a new instance of a <see cref="EntityBindingList"/>.
+        /// Инициализирует новый экземпляр объекта,<see cref="EntityBindingList"/>.
         /// </summary>
-        /// <param name="query"><see cref="IEnumerable"/> that provides the entities for this list.</param>
+        /// <param name="query"><see cref="IEnumerable"/> который предоставляет сущности для этого списка.</param>
         public EntityBindingList(IEnumerable query) : this(null, query, string.Empty) { }
 
         #region Object model
 
         /// <summary>
-        /// Gets the <see cref="EntityDataSource"/> that owns the elements on this list.
+        /// Получает <see cref="EntityDataSource"/> которому принадлежат элементы в этом списке.
         /// </summary>
         public EntityDataSource DataSource { get; }
 
         /// <summary>
-        /// Gets the <see cref="Type"/> of elements on this list.
+        /// Получает <see cref="Type"/> элементов списка.
         /// </summary>
         public Type ElementType => typeof(T);
 
         /// <summary>
-        /// Refreshes the list by re-loading all items from the source query.
+        /// Обновляет список, перезагружая все элементы из исходного запроса.
         /// </summary>
         public void Refresh()
         {
             try
             {
-                // suspend notifications until done
                 _deferNotifications = true;
 
-                // clear current items
                 Clear();
 
-                // add items in the query
                 foreach (T item in EntitySet.GetActiveEntities(_query))
                 {
                     if (ApplyFilter(item))
@@ -94,7 +91,6 @@ namespace TestDbApp.EntityFrameworkBinding
                     }
                 }
 
-                // apply sort if any
                 if (IsSortedCore)
                 {
                     ApplySortCore(_sortProp, _sortDir);
@@ -102,7 +98,6 @@ namespace TestDbApp.EntityFrameworkBinding
             }
             finally
             {
-                // done
                 _deferNotifications = false;
                 OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
             }
@@ -110,30 +105,25 @@ namespace TestDbApp.EntityFrameworkBinding
 
         #endregion
 
-        //----------------------------------------------------------------------------
         #region Overrides
 
         /// <summary>
-        /// Raises the <see cref="ListChanged"/> event.
+        /// Вызывает <see cref="ListChanged"/> событие.
         /// </summary>
-        /// <param name="e"><see cref="ListChangedEventArgs"/> that contains the event data.</param>
         protected override void OnListChanged(ListChangedEventArgs e)
         {
             if (_deferNotifications) return;
             base.OnListChanged(e);
 
-            // refresh iff we are not adding a new item
             if (_addingNew != 0) return;
             if (e.ListChangedType == ListChangedType.ItemChanged ||
                 e.ListChangedType == ListChangedType.ItemAdded)
             {
-                // refresh list (to honor filters)
                 if (_set == null && _query != null)
                 {
                     Refresh();
                 }
 
-                // refresh sort
                 if (_sortProp != null && Equals(e.PropertyDescriptor, _sortProp))
                 {
                     ApplySortCore(_sortProp, _sortDir);
@@ -142,15 +132,13 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Adds a new item to the end of the collection.
+        /// Добавляет новый элемент в конец коллекции.
         /// </summary>
-        /// <returns>The item that was added to the collection.</returns>
+        /// <returns>Элемент, добавленный в коллекцию.</returns>
         protected override object AddNewCore()
         {
-            // create new object
             var newObject = base.AddNewCore() as T;
 
-            // add to entity set
             if (_set != null)
             {
                 if (newObject != null) _set.Add(newObject);
@@ -160,17 +148,15 @@ namespace TestDbApp.EntityFrameworkBinding
                 _coll?.Add(newObject);
             }
 
-            // and return the new object
             return newObject;
         }
 
         /// <summary>
-        /// Removes the item at the specified index.
+        /// Удаляет элемент по указанному индексу.
         /// </summary>
-        /// <param name="index">Index of the item to remove.</param>
+        /// <param name="index">индекс элемента для удаления.</param>
         protected override void RemoveItem(int index)
         {
-            // remove from entity set
             if (index > -1)
             {
                 var item = this[index];
@@ -179,7 +165,6 @@ namespace TestDbApp.EntityFrameworkBinding
                 {
                     _set.Remove(item);
 
-                    // check that the entity was deleted
                     var ent = item as EntityObject;
                     if (ent != null)
                     {
@@ -195,23 +180,22 @@ namespace TestDbApp.EntityFrameworkBinding
                 }
             }
 
-            // and remove from this list
             base.RemoveItem(index);
         }
 
         /// <summary>
-        /// Allow adding new only if we have a set.
+        /// Разрешить добавлять новые, только если у нас есть набор.
         /// </summary>
         bool IBindingList.AllowNew => _set != null || _coll != null;
 
         /// <summary>
-        /// Allow removing only if we have a set.
+        /// 
         /// </summary>
         bool IBindingList.AllowRemove => _set != null || _coll != null;
 
         protected override void OnAddingNew(AddingNewEventArgs e)
         {
-            // BindingList<T> weirdness: EndNew is called twice instead of once
+            // BindingList<T> возможно ошибка: EndNew вызывается дважды вместо одного раза
             _addingNew = 2;
             base.OnAddingNew(e);
         }
@@ -240,27 +224,27 @@ namespace TestDbApp.EntityFrameworkBinding
         #region  Sorting 
 
         /// <summary>
-        /// Gets a value indicating whether this list supports sorting.
+        /// Возвращает значение, указывающее, поддерживает ли этот список сортировку.
         /// </summary>
         protected override bool SupportsSortingCore => true;
 
         /// <summary>
-        /// Gets the <see cref="PropertyDescriptor"/> that is used for sorting the list.
+        /// Получает <see cref="PropertyDescriptor"/> ,который используется для сортировки списка.
         /// </summary>
         protected override PropertyDescriptor SortPropertyCore => _sortProp;
 
         /// <summary>
-        /// Gets the <see cref="ListSortDirection"/> that is used for sorting the list.
+        /// Получает <see cref="ListSortDirection"/> ,который используется для сортировки списка.
         /// </summary>
         protected override ListSortDirection SortDirectionCore => _sortDir;
 
         /// <summary>
-        /// Gets a value indicating whether the list is currently sorted.
+        /// Возвращает значение, показывающее, отсортирован ли список.
         /// </summary>
         protected override bool IsSortedCore => _sortProp != null;
 
         /// <summary>
-        /// Removes any sorting currently applied to the list.
+        /// Удаляет все сортировки, которые в настоящее время применяются к списку.
         /// </summary>
         protected override void RemoveSortCore()
         {
@@ -269,37 +253,30 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Sorts the items on the list.
+        /// Сортирует элементы в списке.
         /// </summary>
-        /// <param name="prop"><see cref="PropertyDescriptor"/> that specifies the property to sort on.</param>
-        /// <param name="direction"><see cref="ListSortDirection"/> that specifies whether to sort the list in ascending or descending order.</param>
+        /// <param name="prop"><see cref="PropertyDescriptor"/> свойство для сортировки.</param>
+        /// <param name="direction"><see cref="ListSortDirection"/> направление сортировки.</param>
         protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
         {
-            // get list to sort
             var items = this.Items as List<T>;
-
-            // apply the sort
             if (items != null)
             {
-                // if this property is an EntityObject, get map to sort by display value
                 ListDictionary map = null;
-                if (DataSource != null && !prop.PropertyType.IsPrimitive) //typeof(EntityObject).IsAssignableFrom(prop.PropertyType))
+                if (DataSource != null && !prop.PropertyType.IsPrimitive) 
                 {
                     map = DataSource.GetLookupDictionary(prop.PropertyType);
                 }
 
-                // go sort the list
                 var pc = new PropertyComparer<T>(prop, direction, map);
                 items.Sort(pc);
             }
 
-            // save new settings and notify listeners
             _sortProp = prop;
             _sortDir = direction;
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
 
-        // PropertyComparer (used to sort the list)
         private class PropertyComparer<TC> : IComparer<TC>
         {
             private readonly PropertyDescriptor _pd;
@@ -316,30 +293,24 @@ namespace TestDbApp.EntityFrameworkBinding
             {
                 try
                 {
-                    // get values to compare
                     var o1 = _pd.GetValue(x);
                     var o2 = _pd.GetValue(y);
 
-                    // honor mapping (to sort mapped columns by display value)
                     if (_map != null)
                     {
-                        // use mapped values
                         o1 = _map[o1.ToString()];
                         o2 = _map[o2.ToString()];
                     }
 
-                    // make sure values are comparable
                     var v1 = o1 as IComparable;
                     var v2 = o2 as IComparable;
 
-                    // make the comparison
                     int cmp =
                         v1 == null && v2 == null ? 0 :
                             v1 == null ? +1 :
                                 v2 == null ? -1 :
                                     v1.CompareTo(v2);
 
-                    // and honor sort direction
                     return _direction == ListSortDirection.Ascending ? +cmp : -cmp;
                 }
                 catch
@@ -352,7 +323,6 @@ namespace TestDbApp.EntityFrameworkBinding
 
         #endregion
 
-        //----------------------------------------------------------------------------
         #region  ITypedList Implements
 
         PropertyDescriptorCollection ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
@@ -360,22 +330,18 @@ namespace TestDbApp.EntityFrameworkBinding
             var list = new List<PropertyDescriptor>();
             foreach (PropertyDescriptor pd in TypeDescriptor.GetProperties(typeof(T)))
             {
-                // skip base class properties (EntityState and EntityKey)
                 if (pd.ComponentType == typeof(EntityObject))
                 {
                     continue;
                 }
 
-                // add collection properties
                 var type = pd.PropertyType;
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
-                    //if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(EntityCollection<>))
                 {
                     list.Add(new CollectionPropertyDescriptor(DataSource, pd));
                     continue;
                 }
-
-                // add regular properties
+                
                 list.Add(pd);
             }
             return new PropertyDescriptorCollection(list.ToArray());
@@ -387,8 +353,7 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         #endregion
-
-        //----------------------------------------------------------------------------
+        
         #region  IBindingListView Implements
 
         private string _filter;
@@ -424,17 +389,18 @@ namespace TestDbApp.EntityFrameworkBinding
             if (_dtFilter == null) return true;
             try
             {
-                // populate the row
                 var row = _dtFilter.Rows[0];
                 foreach (var pi in typeof(T).GetProperties())
                 {
                     row[pi.Name] = pi.GetValue(item, null);
                 }
-
-                // compute the expression
+                
                 pass = (bool)row["_filter"];
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
             return pass;
         }
 
@@ -468,8 +434,11 @@ namespace TestDbApp.EntityFrameworkBinding
         #endregion
     }
 
-    // property descriptor that converts EntityCollection<T> properties into
-    // EntityBindingList properties.
+
+    /// <summary>
+    /// Дескриптор свойства, который преобразует свойства EntityCollection <T/> в
+    /// свойства объекта EntityBindingList.
+    /// </summary>
     internal class CollectionPropertyDescriptor : PropertyDescriptor
     {
         private readonly EntityDataSource _ds;
@@ -519,23 +488,12 @@ namespace TestDbApp.EntityFrameworkBinding
     }
 
     /// <summary>
-    /// Extends the IBindingListView with properties and methods relative to the entity set.
+    /// Расширяет IBindingListView со свойствами и методами относительно набора объектов.
     /// </summary>
     public interface IEntityBindingList : IBindingListView
     {
-        /// <summary>
-        /// Gets the <see cref="EntityDataSource"/> that owns the elements on this list.
-        /// </summary>
         EntityDataSource DataSource { get; }
-
-        /// <summary>
-        /// Gets the type of element on this list.
-        /// </summary>
         Type ElementType { get; }
-
-        /// <summary>
-        /// Refresh the list by re-loading all items from the source query.
-        /// </summary>
         void Refresh();
     }
 
