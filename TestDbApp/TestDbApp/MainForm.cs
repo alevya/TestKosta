@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace TestDbApp
             InitializeComponent();
             Load += OnLoad;
             entityDataSource_Org.NameOrConnectionString = nameOrConnectionString;
+            entityDataSource_Org.DbContextType = typeof(TestDbContext);
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
@@ -34,7 +36,7 @@ namespace TestDbApp
             PopulateTreeView();
 
             if (tv_Department.Nodes.Count <= 0) return;
-            
+
             tv_Department.SelectedNode = tv_Department.TopNode;
             BindingEmployeeDetails(bindSrc_DepartmentToEmployee);
             //---
@@ -137,10 +139,10 @@ namespace TestDbApp
             }
         }
 
-        private void BindingEmployeeDetails(object dataSource)
+        private void BindingEmployeeDetails(ICollection dataSource)
         {
-            dgv_EmployeeToDepartment.DataSource = dataSource;
-            if (dataSource == null) return;
+            //dgv_EmployeeToDepartment.DataSource = dataSource;
+            if (dataSource == null || dataSource.Count == 0) return;
 
             ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName, true));
             ec_SurName.DataBindings.Add(new Binding("Value", dataSource, ec_SurName.AttributeName, true));
