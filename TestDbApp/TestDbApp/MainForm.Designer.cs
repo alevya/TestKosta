@@ -422,7 +422,7 @@ namespace TestDbApp
             // 
             this.ec_Patronymic.AttributeName = "Patronymic";
             this.ec_Patronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ec_Patronymic.IsRequed = true;
+            this.ec_Patronymic.IsRequed = false;
             this.ec_Patronymic.Location = new System.Drawing.Point(127, 88);
             this.ec_Patronymic.MaxLen = 50;
             this.ec_Patronymic.Multiline = false;
