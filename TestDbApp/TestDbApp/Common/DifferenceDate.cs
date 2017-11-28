@@ -2,6 +2,9 @@
 
 namespace TestDbApp.Common
 {
+    /// <summary>
+    /// Класс, позволяющий вычислять различие в двух датах
+    /// </summary>
     internal  class DifferenceDate
     {
         private static readonly int[] MonthDay = { 31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -58,8 +61,17 @@ namespace TestDbApp.Common
 
         }
 
+        /// <summary>
+        /// Получение разницы в годах
+        /// </summary>
         public int Years { get; }
+        /// <summary>
+        /// Получение разницы в месяцах
+        /// </summary>
         public int Months { get; }
+        /// <summary>
+        /// Получение разницы в днях
+        /// </summary>
         public int Days { get; }
     }
 }

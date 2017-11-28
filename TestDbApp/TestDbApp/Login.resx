@@ -117,45 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;m_oPicture.Name" xml:space="preserve">
-    <value>m_oPicture</value>
-  </data>
-  <data name="&gt;&gt;m_oPicture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_oPicture.Parent" xml:space="preserve">
-    <value>m_oPicturePanel</value>
-  </data>
-  <data name="&gt;&gt;m_oPicture.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="m_oPicturePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="m_oPicturePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 80</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="m_oPicturePanel.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;m_oPicturePanel.Name" xml:space="preserve">
-    <value>m_oPicturePanel</value>
-  </data>
-  <data name="&gt;&gt;m_oPicturePanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_oPicturePanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;m_oPicturePanel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="m_oPicture.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="m_oPicture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -425,6 +391,7 @@
   <data name="m_oPicture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="m_oPicture.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -439,6 +406,27 @@
   </data>
   <data name="&gt;&gt;m_oPicture.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="m_oPicturePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 7</value>
+  </data>
+  <data name="m_oPicturePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 80</value>
+  </data>
+  <data name="m_oPicturePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;m_oPicturePanel.Name" xml:space="preserve">
+    <value>m_oPicturePanel</value>
+  </data>
+  <data name="&gt;&gt;m_oPicturePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_oPicturePanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;m_oPicturePanel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="m_btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 122</value>
@@ -892,7 +880,7 @@
     <value>151, 12</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 15</value>
+    <value>44, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -940,10 +928,10 @@
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 36</value>
+    <value>172, 38</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 15</value>
+    <value>23, 13</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -991,10 +979,10 @@
     <value>True</value>
   </data>
   <data name="chb_SSPI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 64</value>
+    <value>178, 64</value>
   </data>
   <data name="chb_SSPI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 19</value>
+    <value>191, 17</value>
   </data>
   <data name="chb_SSPI.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
