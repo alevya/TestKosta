@@ -6,7 +6,6 @@ namespace TestDbApp.Model
     {
         public TestDbContext(string nameOrConnectionString) : base(nameOrConnectionString: nameOrConnectionString)
         {
-
             if (!Database.Exists())
             {
                 Database.SetInitializer(new NullDatabaseInitializer<TestDbContext>());
