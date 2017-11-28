@@ -71,6 +71,7 @@ namespace TestDbApp
                                                     : $"Server={_server};Initial Catalog={_database};User ID={_user};Password={_pswd}";
             }
 
+            Cursor = Cursors.WaitCursor;
             var result = await Task.Run(() => TryConnection());
             if (result)
             {
@@ -83,6 +84,7 @@ namespace TestDbApp
                 MessageBox.Show(this, "Неудачная попытка подключения. Проверьте настройки подключения к базе данных", "Ошибка"
                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            Cursor = DefaultCursor;
         }
 
         #endregion
