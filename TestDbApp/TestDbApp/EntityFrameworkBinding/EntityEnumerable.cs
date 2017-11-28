@@ -14,24 +14,19 @@ using System.Reflection;
 namespace TestDbApp.EntityFrameworkBinding
 {
     /// <summary>
-    /// Exposes an DbSet in the current DbContext as a bindable data source.
+    /// Предоставляет DbSet в текущем DbContext в качестве связующего источника данных.
     /// </summary>
     /// <remarks>
-    /// This class implements the IListSource interface and returns an IBindingList 
-    /// built on top of the underlying DbSet.
+    /// Этот класс реализует интерфейс IListSource и возвращает IBindingList,
+    /// построенный поверх базового DbSet.
     /// </remarks>
     public class EntitySet : IListSource, IQueryable
     {
-        private IQueryable _query;          // the value of the property
-        private IEntityBindingList _list;   // default view for this set
-        private readonly PropertyInfo _pi;           // the property on the object context that gets the objects in this set
-        private ListDictionary _dctLookup;  // lookup dictionary (used to show and edit related entities in grid cells)
+        private IQueryable _query;          
+        private IEntityBindingList _list;   
+        private readonly PropertyInfo _pi;  
+        private ListDictionary _dctLookup;  
 
-        /// <summary>
-        /// Initializes a new instance of a <see cref="EntitySet"/>.
-        /// </summary>
-        /// <param name="ds"><see cref="EntityDataSource"/> that owns the entities.</param>
-        /// <param name="pi"><see cref="PropertyInfo"/> used to retrieve the set from the context.</param>
         internal EntitySet(EntityDataSource ds, PropertyInfo pi)
         {
             var type = pi.PropertyType;
@@ -48,26 +43,22 @@ namespace TestDbApp.EntityFrameworkBinding
         #region object model
 
         /// <summary>
-        /// Gets the <see cref="EntityDataSource"/> that owns this entity set.
+        /// Получает <see cref="EntityDataSource"/> ,которому принадлежит этот набор сущностей.
         /// </summary>
         public EntityDataSource DataSource { get; }
 
         /// <summary>
-        /// Gets the name of this entity set.
+        /// Получает имя этого набора объектов.
         /// </summary>
         public string Name => _pi?.Name;
 
         /// <summary>
-        /// Gets the type of entity in this entity set.
+        /// Возвращает тип объекта в этом наборе сущностей.
         /// </summary>
-        /// <remarks>
-        /// Name chosen for consistency with EntitySet.ElementType 
-        /// (EntityType would seem more appropriate).
-        /// </remarks>
         public Type ElementType { get; }
 
         /// <summary>
-        /// Gets the <see cref="IQueryable"/> object that retrieves the entities in this set.
+        /// Получает объект <see cref="IQueryable"/> ,который извлекает объекты в этом наборе.
         /// </summary>
         public IQueryable Query
         {
@@ -81,12 +72,12 @@ namespace TestDbApp.EntityFrameworkBinding
             }
         }
         /// <summary>
-        /// Gets a list of the entities in the set that have not been deleted or detached.
+        /// Получает список объектов в наборе, которые не были удалены или отсоединены.
         /// </summary>
         public IEnumerable ActiveEntities => GetActiveEntities(Query);
 
         /// <summary>
-        /// Gets a list of the entities in the set that have not been deleted or detached.
+        /// Получает список объектов в наборе, которые не были удалены или отсоединены.
         /// </summary>
         internal static IEnumerable GetActiveEntities(IEnumerable query)
         {
@@ -107,7 +98,7 @@ namespace TestDbApp.EntityFrameworkBinding
             }
         }
         /// <summary>
-        /// Cancels any pending changes on this entity set.
+        /// Отменяет любые ожидающие изменения в этом объекте.
         /// </summary>
         internal void CancelChanges()
         {
@@ -116,8 +107,9 @@ namespace TestDbApp.EntityFrameworkBinding
             ctx.Refresh(RefreshMode.StoreWins, Query);
             _list.Refresh();
         }
+
         /// <summary>
-        /// Refreshes this set's view by re-loading from the database.
+        /// Обновляет представление этого набора путем повторной загрузки из базы данных.
         /// </summary>
         public void RefreshView()
         {
@@ -126,22 +118,19 @@ namespace TestDbApp.EntityFrameworkBinding
             ctx.Refresh(RefreshMode.ClientWins, Query);
             _list.Refresh();
         }
+
         /// <summary>
-        /// Gets an <see cref="IBindingListView"/> that can be used as a data source for bound controls.
+        /// Получает <see cref="IBindingListView"/> ,который может использоваться как источник данных для связанных элементов управления.
         /// </summary>
         public IBindingListView List => GetBindingList();
 
         /// <summary>
-        /// Gets a dictionary containing entities as keys and their string representation as values.
+        /// Получает словарь, содержащий сущности как ключи, и их строковое представление как значения.
         /// </summary>
-        /// <remarks>
-        /// The data map is useful for displaying and editing entities in grid cells.
-        /// </remarks>
         public ListDictionary LookupDictionary => _dctLookup ?? (_dctLookup = BuildLookupDictionary());
 
         #endregion
 
-        //-------------------------------------------------------------------------
         #region IListSource Implements
 
         bool IListSource.ContainsListCollection => false;
@@ -151,28 +140,26 @@ namespace TestDbApp.EntityFrameworkBinding
             return GetBindingList();
         }
 
-        // gets an IBindingListView for this entity set
+        /// <summary>
+        /// Получает IBindingListView для этого набора объектов
+        /// </summary>
+        /// <returns></returns>
         private IBindingListView GetBindingList()
         {
             if (_list != null) return _list;
-            // create the list
             var listType = typeof(EntityBindingList<>);
             listType = listType.MakeGenericType(ElementType);
             _list = (IEntityBindingList)Activator.CreateInstance(listType, DataSource, Query, Guid.NewGuid().ToString());// this.Name);
 
-            // and listen to changes in the new list
             _list.ListChanged += _list_ListChanged;
             return _list;
         }
 
-        // update data map when list changes
         private void _list_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (_dctLookup == null) return;
-            // clear old dictionary
             _dctLookup.Clear();
 
-            // build new dictionary
             var map = BuildLookupDictionary(_list);
             foreach (var kvp in map)
             {
@@ -180,7 +167,6 @@ namespace TestDbApp.EntityFrameworkBinding
             }
         }
 
-        // build a data map for this entity set
         private ListDictionary BuildLookupDictionary()
         {
             return BuildLookupDictionary(ActiveEntities);
@@ -188,7 +174,6 @@ namespace TestDbApp.EntityFrameworkBinding
 
         private ListDictionary BuildLookupDictionary(IEnumerable entities)
         {
-            // if the entity implements "ToString", then use it
             var mi = ElementType.GetMethod("ToString");
             if (mi != null && mi.DeclaringType == ElementType)
             {
@@ -199,8 +184,7 @@ namespace TestDbApp.EntityFrameworkBinding
                 }
                 return BuildLookupDictionary(list);
             }
-
-            // use "DefaultProperty"
+            
             var atts = ElementType.GetCustomAttributes(typeof(DefaultPropertyAttribute), false);
             if (atts.Length > 0)
             {
@@ -219,9 +203,7 @@ namespace TestDbApp.EntityFrameworkBinding
                     }
                 }
             }
-
-            // no default property: look for properties of type string with 
-            // names that contain "Name" or "Description"
+            
             foreach (var pi in ElementType.GetProperties())
             {
                 if (pi.PropertyType != typeof(string)) continue;
@@ -284,7 +266,7 @@ namespace TestDbApp.EntityFrameworkBinding
     }
 
     /// <summary>
-    /// Collection of EntitySet objects.
+    /// Коллекция объектов EntitySet.
     /// </summary>
     public class EntitySetCollection : ObservableCollection<EntitySet>
     {
@@ -311,7 +293,7 @@ namespace TestDbApp.EntityFrameworkBinding
         }
     }
     /// <summary>
-    /// Dictionary that implements IListSource (used for implementing lookup dictionaries)
+    /// Словарь, который реализует IListSource (используется для реализации словарей поиска)
     /// </summary>
     public class ListDictionary : Dictionary<object, string>, IListSource
     {
