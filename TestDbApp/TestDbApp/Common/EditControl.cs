@@ -64,7 +64,7 @@ namespace TestDbApp.Common
 
         private void TbValueOnTextChanged(object sender, EventArgs eventArgs)
         {
-            _validate(sender as Control);
+            //_validate(sender as Control);
         }
 
         private void TbValueOnKeyPress(object sender, KeyPressEventArgs keyPressEventArgs)
@@ -94,20 +94,22 @@ namespace TestDbApp.Common
         {
             if (IsRequed && tb_value.Text == string.Empty)
             {
-                _toolTip.AutoPopDelay = 2000;
-                _toolTip.InitialDelay = 1000;
-                _toolTip.ReshowDelay = 500;
-                _toolTip.IsBalloon = true;
-                _toolTip.ShowAlways = true;
-                _toolTip.Show(string.Empty, tb_value, 0);
-                var p = new Point(tb_value.Width, tb_value.Height / 10);
-                _toolTip.Show("Обязательное поле", tb_value, p);
+                l_required.Visible = true;
+                //_toolTip.AutoPopDelay = 2000;
+                //_toolTip.InitialDelay = 1000;
+                //_toolTip.ReshowDelay = 500;
+                //_toolTip.IsBalloon = true;
+                //_toolTip.ShowAlways = true;
+                //_toolTip.Show(string.Empty, tb_value, 0);
+                //var p = new Point(tb_value.Width, tb_value.Height / 10);
+                //_toolTip.Show("Обязательное поле", tb_value, p);
                 //return false;
             }
             else
             {
-                _toolTip.ShowAlways = false;
-                _toolTip.Hide(tb_value);
+                l_required.Visible = false;
+                //_toolTip.ShowAlways = false;
+                //_toolTip.Hide(tb_value);
             }
             
             return true;
