@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestDbApp.EntityFrameworkBinding;
 using TestDbApp.Model;
@@ -11,41 +13,66 @@ namespace TestDbApp
 {
     public partial class MainForm : Form
     {
+        private readonly string _conString;
         public MainForm(string nameOrConnectionString)
         {
             InitializeComponent();
             Load += OnLoad;
             Closed += OnClosed;
-            entityDataSource_Org.NameOrConnectionString = nameOrConnectionString;
-            entityDataSource_Org.DbContextType = typeof(TestDbContext);
-            entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
-            entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
+            _conString = nameOrConnectionString;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
         }
 
         #region Events
 
-        private void OnLoad(object sender, EventArgs eventArgs)
+        private async void OnLoad(object sender, EventArgs eventArgs)
         {
+            Cursor = Cursors.WaitCursor;
+            entityDataSource_Org = new EntityDataSource(components)
+            {
+                NameOrConnectionString = _conString,
+                DbContextType = typeof(TestDbContext)
+            };
+
+            entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
+            entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
+
+            await Task.Run(() => LoadDepartments());
+            PopulateTreeView();
+
+            if (tv_Department.Nodes.Count <= 0)
+            {
+                Cursor = DefaultCursor;
+                return;
+            }
+                
+
+            await entityDataSource_Org.EntitySets["Employees"].Query.LoadAsync();
+            dgv_EmployeeToDepartment.DataSource = entityDataSource_Org;
+            dgv_EmployeeToDepartment.DataMember = "Employees";
+
             cb_DepartmentToEmployee.DataSource = entityDataSource_Org;
+
             cb_DepartmentToEmployee.DisplayMember = "Departments.Name";
             cb_DepartmentToEmployee.ValueMember = "Departments.DepartmentId";
 
-            //---Привязка и заполнение дерева структуры предприятия
-            var bind = new Binding("Tag", entityDataSource_Org, "Departments");
-            tv_Department.DataBindings.Add(bind);
-            PopulateTreeView();
-
-            if (tv_Department.Nodes.Count <= 0) return;
-
             tv_Department.SelectedNode = tv_Department.TopNode;
             BindingEmployeeDetails(bindSrc_DepartmentToEmployee);
-            //---
+            Cursor = DefaultCursor;
         }
+
+        private void LoadDepartments()
+        {
+            entityDataSource_Org.EntitySets["Departments"].Query.Load();
+            var bind = new Binding("Tag", entityDataSource_Org, "Departments");
+
+            tv_Department.DataBindings.Add(bind);
+        }
+
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
-            entityDataSource_Org.DbContext?.Dispose();
+            entityDataSource_Org?.DbContext?.Dispose();
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
@@ -115,7 +142,7 @@ namespace TestDbApp
         /// Обработчик после выбора узла дерева
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="treeViewEventArgs"></param>
         private void TvDepartmentOnAfterSelect(object sender, TreeViewEventArgs treeViewEventArgs)
         {
             var selectedNode = tv_Department.SelectedNode;

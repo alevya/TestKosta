@@ -42,7 +42,7 @@ namespace TestDbApp
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patronymicDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
+            //this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.bindNav_EmployeeToDepartment = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
@@ -218,8 +218,8 @@ namespace TestDbApp
             // 
             // entityDataSource_Org
             // 
-            this.entityDataSource_Org.DbContextType = typeof(TestDbApp.Model.TestDbContext);
-            this.entityDataSource_Org.NameOrConnectionString = null;
+            //this.entityDataSource_Org.DbContextType = typeof(TestDbApp.Model.TestDbContext);
+            //this.entityDataSource_Org.NameOrConnectionString = null;
             // 
             // bindNav_EmployeeToDepartment
             // 
