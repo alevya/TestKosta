@@ -38,14 +38,6 @@ namespace TestDbApp
             this.splCnt = new System.Windows.Forms.SplitContainer();
             this.tv_Department = new System.Windows.Forms.TreeView();
             this.dgv_EmployeeToDepartment = new System.Windows.Forms.DataGridView();
-            this.surNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patronymicDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirthDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.departmentIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docSeriesDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource_Org = new TestDbApp.EntityFrameworkBinding.EntityDataSource(this.components);
             this.bindNav_EmployeeToDepartment = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindSrc_DepartmentToEmployee = new System.Windows.Forms.BindingSource(this.components);
@@ -177,16 +169,6 @@ namespace TestDbApp
             this.dgv_EmployeeToDepartment.AutoGenerateColumns = false;
             this.dgv_EmployeeToDepartment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv_EmployeeToDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_EmployeeToDepartment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.surNameDataGridViewTextBoxColumn1,
-            this.firstNameDataGridViewTextBoxColumn1,
-            this.patronymicDataGridViewTextBoxColumn1,
-            this.positionDataGridViewTextBoxColumn1,
-            this.dateOfBirthDataGridViewTextBoxColumn1,
-            this.departmentIDDataGridViewTextBoxColumn1,
-            this.docSeriesDataGridViewTextBoxColumn1,
-            this.docNumberDataGridViewTextBoxColumn1});
-            this.dgv_EmployeeToDepartment.DataMember = "Employees";
             this.dgv_EmployeeToDepartment.DataSource = this.entityDataSource_Org;
             this.dgv_EmployeeToDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_EmployeeToDepartment.Location = new System.Drawing.Point(0, 25);
@@ -194,65 +176,6 @@ namespace TestDbApp
             this.dgv_EmployeeToDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_EmployeeToDepartment.Size = new System.Drawing.Size(897, 384);
             this.dgv_EmployeeToDepartment.TabIndex = 0;
-            // 
-            // surNameDataGridViewTextBoxColumn1
-            // 
-            this.surNameDataGridViewTextBoxColumn1.DataPropertyName = "SurName";
-            this.surNameDataGridViewTextBoxColumn1.HeaderText = "Имя";
-            this.surNameDataGridViewTextBoxColumn1.Name = "surNameDataGridViewTextBoxColumn1";
-            this.surNameDataGridViewTextBoxColumn1.Width = 59;
-            // 
-            // firstNameDataGridViewTextBoxColumn1
-            // 
-            this.firstNameDataGridViewTextBoxColumn1.DataPropertyName = "FirstName";
-            this.firstNameDataGridViewTextBoxColumn1.HeaderText = "Фамилия";
-            this.firstNameDataGridViewTextBoxColumn1.Name = "firstNameDataGridViewTextBoxColumn1";
-            this.firstNameDataGridViewTextBoxColumn1.Width = 89;
-            // 
-            // patronymicDataGridViewTextBoxColumn1
-            // 
-            this.patronymicDataGridViewTextBoxColumn1.DataPropertyName = "Patronymic";
-            this.patronymicDataGridViewTextBoxColumn1.HeaderText = "Отчество";
-            this.patronymicDataGridViewTextBoxColumn1.Name = "patronymicDataGridViewTextBoxColumn1";
-            this.patronymicDataGridViewTextBoxColumn1.Width = 90;
-            // 
-            // positionDataGridViewTextBoxColumn1
-            // 
-            this.positionDataGridViewTextBoxColumn1.DataPropertyName = "Position";
-            this.positionDataGridViewTextBoxColumn1.HeaderText = "Должность";
-            this.positionDataGridViewTextBoxColumn1.Name = "positionDataGridViewTextBoxColumn1";
-            // 
-            // dateOfBirthDataGridViewTextBoxColumn1
-            // 
-            this.dateOfBirthDataGridViewTextBoxColumn1.DataPropertyName = "DateOfBirth";
-            this.dateOfBirthDataGridViewTextBoxColumn1.HeaderText = "Дата рождения";
-            this.dateOfBirthDataGridViewTextBoxColumn1.Name = "dateOfBirthDataGridViewTextBoxColumn1";
-            this.dateOfBirthDataGridViewTextBoxColumn1.Visible = false;
-            this.dateOfBirthDataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // departmentIDDataGridViewTextBoxColumn1
-            // 
-            this.departmentIDDataGridViewTextBoxColumn1.DataPropertyName = "DepartmentID";
-            this.departmentIDDataGridViewTextBoxColumn1.HeaderText = "DepartmentID";
-            this.departmentIDDataGridViewTextBoxColumn1.Name = "departmentIDDataGridViewTextBoxColumn1";
-            this.departmentIDDataGridViewTextBoxColumn1.Visible = false;
-            this.departmentIDDataGridViewTextBoxColumn1.Width = 111;
-            // 
-            // docSeriesDataGridViewTextBoxColumn1
-            // 
-            this.docSeriesDataGridViewTextBoxColumn1.DataPropertyName = "DocSeries";
-            this.docSeriesDataGridViewTextBoxColumn1.HeaderText = "DocSeries";
-            this.docSeriesDataGridViewTextBoxColumn1.Name = "docSeriesDataGridViewTextBoxColumn1";
-            this.docSeriesDataGridViewTextBoxColumn1.Visible = false;
-            this.docSeriesDataGridViewTextBoxColumn1.Width = 91;
-            // 
-            // docNumberDataGridViewTextBoxColumn1
-            // 
-            this.docNumberDataGridViewTextBoxColumn1.DataPropertyName = "DocNumber";
-            this.docNumberDataGridViewTextBoxColumn1.HeaderText = "DocNumber";
-            this.docNumberDataGridViewTextBoxColumn1.Name = "docNumberDataGridViewTextBoxColumn1";
-            this.docNumberDataGridViewTextBoxColumn1.Visible = false;
-            this.docNumberDataGridViewTextBoxColumn1.Width = 101;
             // 
             // entityDataSource_Org
             // 
@@ -292,7 +215,7 @@ namespace TestDbApp
             // bindingNavigatorCountItem1
             // 
             this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
-            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(51, 22);
+            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(43, 22);
             this.bindingNavigatorCountItem1.Text = "для {0}";
             this.bindingNavigatorCountItem1.ToolTipText = "Общее число элементов";
             // 
@@ -409,7 +332,7 @@ namespace TestDbApp
             this.cb_DepartmentToEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cb_DepartmentToEmployee.Location = new System.Drawing.Point(395, 55);
             this.cb_DepartmentToEmployee.Name = "cb_DepartmentToEmployee";
-            this.cb_DepartmentToEmployee.Size = new System.Drawing.Size(166, 23);
+            this.cb_DepartmentToEmployee.Size = new System.Drawing.Size(166, 21);
             this.cb_DepartmentToEmployee.TabIndex = 49;
             // 
             // lDepartment
@@ -418,7 +341,7 @@ namespace TestDbApp
             this.lDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lDepartment.Location = new System.Drawing.Point(311, 57);
             this.lDepartment.Name = "lDepartment";
-            this.lDepartment.Size = new System.Drawing.Size(49, 16);
+            this.lDepartment.Size = new System.Drawing.Size(38, 13);
             this.lDepartment.TabIndex = 48;
             this.lDepartment.Text = "Отдел";
             this.lDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -428,7 +351,8 @@ namespace TestDbApp
             this.tb_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tb_Age.Location = new System.Drawing.Point(463, 120);
             this.tb_Age.Name = "tb_Age";
-            this.tb_Age.Size = new System.Drawing.Size(49, 21);
+            this.tb_Age.ReadOnly = true;
+            this.tb_Age.Size = new System.Drawing.Size(49, 20);
             this.tb_Age.TabIndex = 47;
             this.tb_Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -438,7 +362,7 @@ namespace TestDbApp
             this.l_Age.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.l_Age.Location = new System.Drawing.Point(310, 125);
             this.l_Age.Name = "l_Age";
-            this.l_Age.Size = new System.Drawing.Size(147, 16);
+            this.l_Age.Size = new System.Drawing.Size(115, 13);
             this.l_Age.TabIndex = 46;
             this.l_Age.Text = "Возраст (полных лет)";
             // 
@@ -481,7 +405,7 @@ namespace TestDbApp
             this.lPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPosition.Location = new System.Drawing.Point(310, 33);
             this.lPosition.Name = "lPosition";
-            this.lPosition.Size = new System.Drawing.Size(79, 16);
+            this.lPosition.Size = new System.Drawing.Size(65, 13);
             this.lPosition.TabIndex = 40;
             this.lPosition.Text = "Должность";
             this.lPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -492,7 +416,7 @@ namespace TestDbApp
             this.lSurName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lSurName.Location = new System.Drawing.Point(16, 36);
             this.lSurName.Name = "lSurName";
-            this.lSurName.Size = new System.Drawing.Size(67, 16);
+            this.lSurName.Size = new System.Drawing.Size(56, 13);
             this.lSurName.TabIndex = 39;
             this.lSurName.Text = "Фамилия";
             this.lSurName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -503,7 +427,7 @@ namespace TestDbApp
             this.lPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPatronymic.Location = new System.Drawing.Point(16, 93);
             this.lPatronymic.Name = "lPatronymic";
-            this.lPatronymic.Size = new System.Drawing.Size(71, 16);
+            this.lPatronymic.Size = new System.Drawing.Size(54, 13);
             this.lPatronymic.TabIndex = 38;
             this.lPatronymic.Text = "Отчество";
             this.lPatronymic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -514,7 +438,7 @@ namespace TestDbApp
             this.lFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lFirstName.Location = new System.Drawing.Point(16, 62);
             this.lFirstName.Name = "lFirstName";
-            this.lFirstName.Size = new System.Drawing.Size(34, 16);
+            this.lFirstName.Size = new System.Drawing.Size(29, 13);
             this.lFirstName.TabIndex = 37;
             this.lFirstName.Text = "Имя";
             this.lFirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -573,7 +497,7 @@ namespace TestDbApp
             this.lDocNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lDocNumber.Location = new System.Drawing.Point(12, 11);
             this.lDocNumber.Name = "lDocNumber";
-            this.lDocNumber.Size = new System.Drawing.Size(125, 16);
+            this.lDocNumber.Size = new System.Drawing.Size(98, 13);
             this.lDocNumber.TabIndex = 43;
             this.lDocNumber.Text = "Номер документа";
             this.lDocNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -584,7 +508,7 @@ namespace TestDbApp
             this.lDocSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lDocSeries.Location = new System.Drawing.Point(12, 44);
             this.lDocSeries.Name = "lDocSeries";
-            this.lDocSeries.Size = new System.Drawing.Size(122, 16);
+            this.lDocSeries.Size = new System.Drawing.Size(95, 13);
             this.lDocSeries.TabIndex = 42;
             this.lDocSeries.Text = "Серия документа";
             this.lDocSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -595,7 +519,7 @@ namespace TestDbApp
             this.lDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lDateOfBirth.Location = new System.Drawing.Point(16, 124);
             this.lDateOfBirth.Name = "lDateOfBirth";
-            this.lDateOfBirth.Size = new System.Drawing.Size(107, 16);
+            this.lDateOfBirth.Size = new System.Drawing.Size(86, 13);
             this.lDateOfBirth.TabIndex = 19;
             this.lDateOfBirth.Text = "Дата рождения";
             this.lDateOfBirth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -605,7 +529,7 @@ namespace TestDbApp
             this.dtp_DateBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtp_DateBirth.Location = new System.Drawing.Point(127, 124);
             this.dtp_DateBirth.Name = "dtp_DateBirth";
-            this.dtp_DateBirth.Size = new System.Drawing.Size(158, 21);
+            this.dtp_DateBirth.Size = new System.Drawing.Size(158, 20);
             this.dtp_DateBirth.TabIndex = 18;
             // 
             // p_command

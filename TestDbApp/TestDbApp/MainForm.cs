@@ -15,6 +15,7 @@ namespace TestDbApp
         {
             InitializeComponent();
             Load += OnLoad;
+            Closed += OnClosed;
             entityDataSource_Org.NameOrConnectionString = nameOrConnectionString;
             entityDataSource_Org.DbContextType = typeof(TestDbContext);
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
@@ -40,6 +41,11 @@ namespace TestDbApp
             tv_Department.SelectedNode = tv_Department.TopNode;
             BindingEmployeeDetails(bindSrc_DepartmentToEmployee);
             //---
+        }
+
+        private void OnClosed(object sender, EventArgs eventArgs)
+        {
+            entityDataSource_Org.DbContext?.Dispose();
         }
 
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
@@ -141,7 +147,7 @@ namespace TestDbApp
 
         private void BindingEmployeeDetails(ICollection dataSource)
         {
-            //dgv_EmployeeToDepartment.DataSource = dataSource;
+            dgv_EmployeeToDepartment.DataSource = dataSource;
             if (dataSource == null || dataSource.Count == 0) return;
 
             ec_FirstName.DataBindings.Add(new Binding("Value", dataSource, ec_FirstName.AttributeName, true));
