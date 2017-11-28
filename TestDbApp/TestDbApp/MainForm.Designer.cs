@@ -162,6 +162,7 @@ namespace TestDbApp
             // tv_Department
             // 
             this.tv_Department.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tv_Department.HideSelection = false;
             this.tv_Department.Location = new System.Drawing.Point(0, 0);
             this.tv_Department.Name = "tv_Department";
             this.tv_Department.Size = new System.Drawing.Size(488, 572);
