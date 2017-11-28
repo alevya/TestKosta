@@ -37,16 +37,16 @@ namespace TestDbApp
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
 
-            await Task.Run(() => LoadDepartments());
+            await Task.Run(() => entityDataSource_Org.EntitySets["Departments"].Query.Load());
+            var bind = new Binding("Tag", entityDataSource_Org, "Departments");
+            tv_Department.DataBindings.Add(bind);
             PopulateTreeView();
-
             if (tv_Department.Nodes.Count <= 0)
             {
                 Cursor = DefaultCursor;
                 return;
             }
                 
-
             await entityDataSource_Org.EntitySets["Employees"].Query.LoadAsync();
             dgv_EmployeeToDepartment.DataSource = entityDataSource_Org;
             dgv_EmployeeToDepartment.DataMember = "Employees";
@@ -61,15 +61,6 @@ namespace TestDbApp
             Cursor = DefaultCursor;
         }
 
-        private void LoadDepartments()
-        {
-            entityDataSource_Org.EntitySets["Departments"].Query.Load();
-            var bind = new Binding("Tag", entityDataSource_Org, "Departments");
-
-            tv_Department.DataBindings.Add(bind);
-        }
-
-
         private void OnClosed(object sender, EventArgs eventArgs)
         {
             entityDataSource_Org?.DbContext?.Dispose();
@@ -82,19 +73,18 @@ namespace TestDbApp
             if (inExc?.InnerException != null)
             {
                 msgError = inExc.InnerException.Message;
-
             }
             else
             {
                 msgError = args.Exception.Message;
             }
-            MessageBox.Show(this, msgError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, msgError, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             args.Handled = true;
         }
 
         private void EntityDataSourceOrgOnSavingChanges(object sender, CancelEventArgs cancelEventArgs)
         {
-            var dialogRes = MessageBox.Show(this, "Сохранить данные?", "Сохранение",
+            var dialogRes = MessageBox.Show(this, @"Сохранить данные?", @"Сохранение",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
             if (dialogRes != DialogResult.Yes)
             {
@@ -214,13 +204,13 @@ namespace TestDbApp
 
         private static TreeNode GetTreeNode(Department dep, IEnumerable<Department> list)
         {
-            Guid.TryParse(dep.DepartmentId.ToString(), out Guid nodeID);
+            Guid.TryParse(dep.DepartmentId.ToString(), out Guid nodeId);
             var node = new TreeNode
                        {
                            Text = Convert.ToString(dep.Name),
                            Tag = dep
                        };
-            var res = list.Where(department => department.ParentDepartmentID == nodeID);
+            var res = list.Where(department => department.ParentDepartmentID == nodeId);
             foreach (var item in res)
             {
                 var chNode = GetTreeNode(item, list);
