@@ -4,13 +4,11 @@ using System.ComponentModel;
 namespace TestDbApp.EntityFrameworkBinding
 {
     /// <summary>
-    /// Exposes all the EntitySets in a EntityDataSource as a list of PropertyDescriptor objects.
+    /// Предоставляет все EntitySets в EntityDataSource в виде списка объектов PropertyDescriptor.
     /// </summary>
     /// <remarks>
-    /// This is required for showing the available EntitySets in the drop down that
-    /// appears when editing the "DataMember" property of a complex bound control.
-    /// 
-    /// Reflected from DataViewManagerListItemTypeDescriptor
+    /// Это необходимо для отображения доступных EntitySet в раскрывающемся списке, который
+    ///  появляется при редактировании свойства DataMember сложного связанного элемента управления.
     /// </remarks>
     internal class EntitySetTypeDescriptor : ICustomTypeDescriptor
     {
@@ -25,8 +23,7 @@ namespace TestDbApp.EntityFrameworkBinding
         {
             _pdc = null;
         }
-
-        //----------------------------------------------------------------------------
+        
         #region ICustomTypeDescriptor Implements
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
@@ -57,13 +54,7 @@ namespace TestDbApp.EntityFrameworkBinding
         #endregion
     }
 
-    /// <summary>
-    /// Custom PropertyDescriptor used by the EntitySetTypeDescriptor (above)
-    /// to expose EntitySets as properties.
-    /// </summary>
-    /// <remarks>
-    /// Reflected from DataTablePropertyDescriptor
-    /// </remarks>
+   
     internal class EntitySetPropertyDescriptor : PropertyDescriptor
     {
         private readonly EntitySet _view;
