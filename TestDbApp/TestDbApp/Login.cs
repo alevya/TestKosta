@@ -59,8 +59,8 @@ namespace TestDbApp
 
         private void ChbSspiCheckStateChanged(object sender, EventArgs e)
         {
-            l_password.Visible = tb_password.Visible = !chb_SSPI.Checked;
-            l_user.Visible = tb_user.Visible = !chb_SSPI.Checked;
+            l_password.Visible = tb_password.Enabled = !chb_SSPI.Checked;
+            l_user.Visible = tb_user.Enabled = !chb_SSPI.Checked;
         }
 
         private async void OkClick(object sender, EventArgs e)
@@ -84,8 +84,6 @@ namespace TestDbApp
                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-
 
         #endregion
 
