@@ -71,6 +71,7 @@ namespace TestDbApp.EntityFrameworkBinding
                 return _query;
             }
         }
+
         /// <summary>
         /// Получает список объектов в наборе, которые не были удалены или отсоединены.
         /// </summary>
@@ -97,6 +98,7 @@ namespace TestDbApp.EntityFrameworkBinding
                 }
             }
         }
+
         /// <summary>
         /// Отменяет любые ожидающие изменения в этом объекте.
         /// </summary>

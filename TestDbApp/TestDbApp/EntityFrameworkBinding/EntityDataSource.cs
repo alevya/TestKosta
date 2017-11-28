@@ -428,7 +428,7 @@ namespace TestDbApp.EntityFrameworkBinding
         }
 
         /// <summary>
-        /// Установка карты данных для столбцов элемента управления DataGridView.
+        /// Установка карты данных для столбцов элемента управления DataGridView.</summary>
         /// 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetAutoLookup(Control grid, bool autoLookups)
