@@ -18,10 +18,13 @@ namespace TestDbApp
         {
             InitializeComponent();
             Load += OnLoad;
+            Closing += OnClosing;
             Closed += OnClosed;
             _conString = nameOrConnectionString;
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
         }
+
+        
 
         #region Events
 
@@ -37,6 +40,7 @@ namespace TestDbApp
 
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
+            entityDataSource_Org.SavedChanges += EntityDataSourceOrgOnSavedChanges;
 
             await Task.Run(() => entityDataSource_Org.EntitySets["Departments"].Query.Load());
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
@@ -62,6 +66,29 @@ namespace TestDbApp
             Cursor = DefaultCursor;
         }
 
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            if (entityDataSource_Org?.DbContext == null)
+                return;
+            var isModified = entityDataSource_Org.DbContext.ChangeTracker
+                .Entries().Any(e => e.State == EntityState.Modified);
+            if (!isModified) return;
+
+            var dialogRes = MessageBox.Show(this, @"Есть несохраненные данные. Сохранить?", @"Выход",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            switch (dialogRes)
+            {
+                case DialogResult.Yes:
+                    entityDataSource_Org.SaveChanges();
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    cancelEventArgs.Cancel = true;
+                    break;
+            }
+        }
+
         private void OnClosed(object sender, EventArgs eventArgs)
         {
             entityDataSource_Org?.DbContext?.Dispose();
@@ -85,14 +112,14 @@ namespace TestDbApp
 
         private void EntityDataSourceOrgOnSavingChanges(object sender, CancelEventArgs cancelEventArgs)
         {
-            var dialogRes = MessageBox.Show(this, @"Сохранить данные?", @"Сохранение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-            if (dialogRes != DialogResult.Yes)
-            {
-                cancelEventArgs.Cancel = true;
-                BtnCancel_Click(sender, EventArgs.Empty);
-            }
-           
+            var isModified = entityDataSource_Org.DbContext.ChangeTracker
+                .Entries().Any(e => e.State == EntityState.Modified);
+            cancelEventArgs.Cancel = !isModified;
+        }
+
+        private void EntityDataSourceOrgOnSavedChanges(object sender, EventArgs eventArgs)
+        {
+            
         }
 
         /// <summary>
@@ -102,8 +129,9 @@ namespace TestDbApp
         /// <param name="e"></param>
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            entityDataSource_Org.SaveChanges();
-            TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
+            var countSaved = entityDataSource_Org.SaveChanges();
+            if(countSaved != 0)
+                TvDepartmentOnAfterSelect(null, new TreeViewEventArgs(tv_Department.SelectedNode));
         }
 
         /// <summary>
