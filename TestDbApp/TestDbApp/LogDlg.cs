@@ -29,7 +29,7 @@ namespace TestDbApp
         private static string _showEntityValidationError(DbEntityValidationException dbEnityExc)
         {
             if (!dbEnityExc.EntityValidationErrors.Any())
-                return String.Empty;
+                return string.Empty;
             var errorsMsg = new StringBuilder();
             foreach (var eve in dbEnityExc.EntityValidationErrors)
             {
