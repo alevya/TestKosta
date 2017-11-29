@@ -30,7 +30,7 @@ namespace TestDbApp
         {
             dgv_EmployeeToDepartment.AutoGenerateColumns = false;
             Cursor = Cursors.WaitCursor;
-            //Создание компонента для 
+            //Создание компонента для привязки к источнику данных
             entityDataSource_Org = new EntityDataSource(components)
             {
                 NameOrConnectionString = _conString,
@@ -99,6 +99,11 @@ namespace TestDbApp
             entityDataSource_Org?.DbContext?.Dispose();
         }
 
+        /// <summary>
+        /// Обработчик ошибок при загрузке или сохранении в базу данных 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
         {
             string msgError;
@@ -182,6 +187,11 @@ namespace TestDbApp
 
         #region Methods
 
+        /// <summary>
+        /// Получение списка сотрудников по отделу
+        /// </summary>
+        /// <param name="employees"></param>
+        /// <param name="dep"></param>
         private static void GetEmployees(List<Employee> employees, Department dep)
         {
             employees.AddRange(dep.Employees);
@@ -191,6 +201,10 @@ namespace TestDbApp
             }
         }
 
+        /// <summary>
+        /// Привязка элементов управления к источнику данных 
+        /// </summary>
+        /// <param name="dataSource"></param>
         private void BindingEmployeeDetails(ICollection dataSource)
         {
             dgv_EmployeeToDepartment.DataSource = dataSource;
@@ -215,6 +229,9 @@ namespace TestDbApp
             cb_DepartmentToEmployee.DataBindings.Add(bindDepToEmpl);
         }
 
+        /// <summary>
+        /// Формирование дерева отделов 
+        /// </summary>
         private void PopulateTreeView()
         {
             var list = tv_Department.Tag as IEnumerable<Department>;
