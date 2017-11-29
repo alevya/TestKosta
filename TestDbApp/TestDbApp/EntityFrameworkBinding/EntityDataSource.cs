@@ -9,17 +9,30 @@ using System.Windows.Forms;
 
 namespace TestDbApp.EntityFrameworkBinding
 {
+    /// <summary>
+    /// Компонент DataSource, который инкапсулирует EntityFramework DbContext
+    /// </summary>
+    /// <remarks>
+    /// Для целей привязки компонент EntityDataSource соответствует DataSet и
+    /// EntitySets соответствуют содержащимся таблицам данных.
+    /// </remarks>
     public partial class EntityDataSource : Component, IListSource, IExtenderProvider
     {
         private DbContext _ctx;
         private readonly EntitySetCollection _entSets = new EntitySetCollection();
-        private Type _ctxType; 
+        private Type _ctxType;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр <see cref="EntityDataSource"/>.
+        /// </summary>
         public EntityDataSource()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр <see cref="EntityDataSource"/>.
+        /// </summary>
         public EntityDataSource(IContainer container)
         {
             container.Add(this);

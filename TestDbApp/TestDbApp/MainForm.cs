@@ -24,23 +24,20 @@ namespace TestDbApp
             tv_Department.AfterSelect += TvDepartmentOnAfterSelect;
         }
 
-        
-
         #region Events
 
         private async void OnLoad(object sender, EventArgs eventArgs)
         {
             dgv_EmployeeToDepartment.AutoGenerateColumns = false;
             Cursor = Cursors.WaitCursor;
+            //Создание компонента для 
             entityDataSource_Org = new EntityDataSource(components)
             {
                 NameOrConnectionString = _conString,
                 DbContextType = typeof(TestDbContext)
             };
-
             entityDataSource_Org.DataError += EntityDataSourceOrgOnDataError;
             entityDataSource_Org.SavingChanges += EntityDataSourceOrgOnSavingChanges;
-            entityDataSource_Org.SavedChanges += EntityDataSourceOrgOnSavedChanges;
 
             await Task.Run(() => entityDataSource_Org.EntitySets["Departments"].Query.Load());
             var bind = new Binding("Tag", entityDataSource_Org, "Departments");
@@ -66,6 +63,14 @@ namespace TestDbApp
             Cursor = DefaultCursor;
         }
 
+        /// <summary>
+        /// Обработчик перед закрытием формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="cancelEventArgs"></param>
+        /// <remarks>
+        /// Проверяется наличие несохраненных данных
+        /// </remarks>
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
         {
             if (entityDataSource_Org?.DbContext == null)
@@ -88,7 +93,7 @@ namespace TestDbApp
                     break;
             }
         }
-
+  
         private void OnClosed(object sender, EventArgs eventArgs)
         {
             entityDataSource_Org?.DbContext?.Dispose();
@@ -115,11 +120,6 @@ namespace TestDbApp
             var isModified = entityDataSource_Org.DbContext.ChangeTracker
                 .Entries().Any(e => e.State == EntityState.Modified);
             cancelEventArgs.Cancel = !isModified;
-        }
-
-        private void EntityDataSourceOrgOnSavedChanges(object sender, EventArgs eventArgs)
-        {
-            
         }
 
         /// <summary>
