@@ -90,6 +90,12 @@
     </Compile>
     <Compile Include="EntityFrameworkBinding\EntityEnumerable.cs" />
     <Compile Include="EntityFrameworkBinding\EntitySetTypeDescriptor.cs" />
+    <Compile Include="LogDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogDlg.Designer.cs">
+      <DependentUpon>LogDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Common\EditControl.resx">
       <DependentUpon>EditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogDlg.resx">
+      <DependentUpon>LogDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

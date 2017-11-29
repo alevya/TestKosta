@@ -106,17 +106,19 @@ namespace TestDbApp
         /// <param name="args"></param>
         private void EntityDataSourceOrgOnDataError(object sender, DataErrorEventArgs args)
         {
-            string msgError;
-            var inExc = args.Exception.InnerException;
-            if (inExc?.InnerException != null)
-            {
-                msgError = inExc.InnerException.Message;
-            }
-            else
-            {
-                msgError = args.Exception.Message;
-            }
-            MessageBox.Show(this, msgError, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //string msgError;
+            //var inExc = args.Exception.InnerException;
+            //if (inExc?.InnerException != null)
+            //{
+            //    msgError = inExc.InnerException.Message;
+            //}
+            //else
+            //{
+            //    msgError = args.Exception.Message;
+            //}
+            //MessageBox.Show(this, msgError, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            var logDlg = new LogDlg(args.Exception);
+            logDlg.ShowDialog(this);
             args.Handled = true;
         }
 
